@@ -297,7 +297,7 @@ static void DrawMetatile(s32 metatileLayerType, const u16 *tiles, u16 offset)
         gOverworldTilemapBuffer_Bg2[offset + 0x20] = tiles[2];
         gOverworldTilemapBuffer_Bg2[offset + 0x21] = tiles[3];
 
-        // Draw metatile's top layer to the top background layer, which covers object event sprites.
+        // Draw metatile's top layer to the top background layer.
         gOverworldTilemapBuffer_Bg1[offset] = tiles[4];
         gOverworldTilemapBuffer_Bg1[offset + 1] = tiles[5];
         gOverworldTilemapBuffer_Bg1[offset + 0x20] = tiles[6];

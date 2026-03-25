@@ -66,6 +66,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "isometric_render.h"
 
 struct CableClubPlayer
 {
@@ -1458,7 +1459,8 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
 
 void CB1_Overworld(void)
 {
-    if (gMain.callback2 == CB2_Overworld)
+    if (gMain.callback2 == CB2_Overworld
+     || gMain.callback2 == CB2_IsometricOverworld)
         DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
 }
 
@@ -1483,12 +1485,87 @@ void CB2_OverworldBasic(void)
 
 void CB2_Overworld(void)
 {
-    bool32 fading = (gPaletteFade.active != 0);
+    bool32 fading;
+
+    // On the first frame after a map load, redirect to the isometric renderer
+    // for the three target maps. CB2_IsometricOverworld will remain active
+    // for the rest of the stay on that map; CB2_Overworld is only called again
+    // after the next map load (which will then fall through to normal rendering
+    // if the new map is not in the isometric set).
+    if (IsometricRender_IsIsoMap(gSaveBlock1Ptr->mapLayoutId))
+    {
+        IsometricRender_Init();
+        SetMainCallback2(CB2_IsometricOverworld);
+        return;
+    }
+
+    // Arriving here means we just left an iso map (or were never on one).
+    // Tear down the HBlank shear so normal rendering is clean.
+    IsometricRender_Shutdown();
+
+    fading = (gPaletteFade.active != 0);
     if (fading)
         SetVBlankCallback(NULL);
     OverworldBasic();
     if (fading)
         SetFieldVBlankCallback();
+}
+
+// After BuildOamBuffer() fills gMain.oamBuffer, shift each sprite's X to
+// match the per-scanline background shear so sprites stay on their tiles.
+//
+// The BG at screen row y is scrolled by baseCamX + (80-y)/2, so the tile
+// that normally sits at screenX appears at screenX - (80-y)/2.  To keep the
+// sprite over that tile we apply the same offset: sprite.x += (y-80)/2.
+static void IsoApplySpriteShear(void)
+{
+    u8 i;
+    for (i = 0; i < 128; i++)
+    {
+        struct OamData *oam = &gMain.oamBuffer[i];
+        s32 sy, shear_scale, xShift;
+
+        sy = (oam->y >= 192) ? (s32)oam->y - 256 : (s32)oam->y;
+        if (sy >= 160 || sy < -64)
+            continue;
+
+        // Perspective shear matching isometric_render.c:
+        // HORIZON_DIST=100, SHEAR_SCALE=40, CENTER_DEPTH=180
+        // Negated: BG HOFS positive = content shifts left, so sprite must shift left too.
+        shear_scale = 25;
+        xShift = shear_scale - (180 * shear_scale) / (130 + sy);
+        oam->x = (u32)((s32)oam->x + xShift) & 0x1FF;
+    }
+}
+
+// CB2_IsometricOverworld is defined here (not in isometric_render.c) so it
+// can call the file-local OverworldBasic(), which handles camera updates,
+// tile streaming, NPC movement, and sprite building unmodified.
+void CB2_IsometricOverworld(void)
+{
+    bool32 fading;
+
+    // If the player has walked to a non-iso map, hand back to CB2_Overworld.
+    if (!IsometricRender_IsIsoMap(gSaveBlock1Ptr->mapLayoutId))
+    {
+        IsometricRender_Shutdown();
+        SetMainCallback2(CB2_Overworld);
+        return;
+    }
+
+    fading = (gPaletteFade.active != 0);
+    if (fading)
+        SetVBlankCallback(NULL);
+    OverworldBasic();
+    if (fading)
+        SetFieldVBlankCallback();
+
+    // Shift each sprite's X to match the per-scanline BG shear.
+    IsoApplySpriteShear();
+
+    // Cache the camera scroll set by OverworldBasic() so the HBlank callback
+    // can apply the scanline shear relative to the correct camera position.
+    IsometricRender_UpdateScroll();
 }
 
 void SetMainCallback1(MainCallback cb)

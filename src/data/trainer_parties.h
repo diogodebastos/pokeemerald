@@ -12434,3 +12434,75 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayLinkPlaceholder[] = {
     .species = SPECIES_KYOGRE,
     }
 };
+
+// Route 201 Trainers
+
+static const struct TrainerMonNoItemDefaultMoves sParty_Route201Marcus[] = {
+    {
+    .iv = 0,
+    .lvl = 5,
+    .species = SPECIES_POOCHYENA,
+    },
+    {
+    .iv = 0,
+    .lvl = 5,
+    .species = SPECIES_ZIGZAGOON,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_Route201Luna[] = {
+    {
+    .iv = 0,
+    .lvl = 6,
+    .species = SPECIES_LOTAD,
+    },
+    {
+    .iv = 0,
+    .lvl = 5,
+    .species = SPECIES_SHROOMISH,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_Route201Derek[] = {
+    {
+    .iv = 0,
+    .lvl = 4,
+    .species = SPECIES_WURMPLE,
+    },
+    {
+    .iv = 0,
+    .lvl = 4,
+    .species = SPECIES_WURMPLE,
+    },
+    {
+    .iv = 0,
+    .lvl = 5,
+    .species = SPECIES_SILCOON,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_Route201Kai[] = {
+    {
+    .iv = 0,
+    .lvl = 6,
+    .species = SPECIES_TAILLOW,
+    },
+    {
+    .iv = 0,
+    .lvl = 5,
+    .species = SPECIES_SEEDOT,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_Route201Mira[] = {
+    {
+    .iv = 0,
+    .lvl = 6,
+    .species = SPECIES_ODDISH,
+    },
+    {
+    .iv = 0,
+    .lvl = 6,
+    .species = SPECIES_SKITTY,
+    }
+};

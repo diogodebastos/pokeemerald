@@ -2,6 +2,14 @@ Route102_EventScript_ItemPotion::
 	finditem ITEM_POTION
 	end
 
+Route201_EventScript_ItemSuperPotion::
+	finditem ITEM_SUPER_POTION
+	end
+
+Route201_EventScript_ItemGreatBall::
+	finditem ITEM_GREAT_BALL
+	end
+
 Route103_EventScript_ItemGuardSpec::
 	finditem ITEM_GUARD_SPEC
 	end

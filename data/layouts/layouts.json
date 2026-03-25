@@ -502,6 +502,16 @@
       "blockdata_filepath": "data/layouts/Route134/map.bin"
     },
     {
+      "id": "LAYOUT_ROUTE201",
+      "name": "Route201_Layout",
+      "width": 40,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Route201/border.bin",
+      "blockdata_filepath": "data/layouts/Route201/map.bin"
+    },
+    {
       "id": "LAYOUT_UNDERWATER_ROUTE126",
       "name": "Underwater_Route126_Layout",
       "width": 80,

@@ -3931,6 +3931,10 @@ u8 IsMonDisobedient(void)
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
         return 0;
 
+    // Always obey if the Pokémon is Mew and the OT is the player (e.g., starter Mew)
+    if (gBattleMons[gBattlerAttacker].species == SPECIES_MEW && !IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
+        return 0;
+
     if (IsBattlerModernFatefulEncounter(gBattlerAttacker)) // only false if illegal Mew or Deoxys
     {
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(gBattlerAttacker) == 2)

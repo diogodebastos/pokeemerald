@@ -10260,4 +10260,66 @@ const struct Trainer gTrainers[] = {
         .aiFlags = 0,
         .party = NO_ITEM_DEFAULT_MOVES(sParty_MayLinkPlaceholder),
     },
+
+    // Route 201 Trainers
+
+    [TRAINER_ROUTE201_MARCUS] =
+    {
+        .trainerClass = TRAINER_CLASS_YOUNGSTER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .trainerPic = TRAINER_PIC_YOUNGSTER,
+        .trainerName = _("MARCUS"),
+        .items = {},
+        .doubleBattle = FALSE,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Route201Marcus),
+    },
+
+    [TRAINER_ROUTE201_LUNA] =
+    {
+        .trainerClass = TRAINER_CLASS_LASS,
+        .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
+        .trainerPic = TRAINER_PIC_LASS,
+        .trainerName = _("LUNA"),
+        .items = {},
+        .doubleBattle = FALSE,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Route201Luna),
+    },
+
+    [TRAINER_ROUTE201_DEREK] =
+    {
+        .trainerClass = TRAINER_CLASS_BUG_CATCHER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER,
+        .trainerName = _("DEREK"),
+        .items = {},
+        .doubleBattle = FALSE,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Route201Derek),
+    },
+
+    [TRAINER_ROUTE201_KAI] =
+    {
+        .trainerClass = TRAINER_CLASS_YOUNGSTER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .trainerPic = TRAINER_PIC_YOUNGSTER,
+        .trainerName = _("KAI"),
+        .items = {},
+        .doubleBattle = FALSE,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Route201Kai),
+    },
+
+    [TRAINER_ROUTE201_MIRA] =
+    {
+        .trainerClass = TRAINER_CLASS_LASS,
+        .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
+        .trainerPic = TRAINER_PIC_LASS,
+        .trainerName = _("MIRA"),
+        .items = {},
+        .doubleBattle = FALSE,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Route201Mira),
+    },
 };
