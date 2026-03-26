@@ -102,3 +102,8 @@ Route124_EventScript_Isabella::
 Route124_Text_HuntersHouse:
 	.string "HUNTER'S HOUSE$"
 
+
+Route124_EventScript_FrontierMalory::
+	trainerbattle_single TRAINER_FRONTIER_MALORY, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end

@@ -321,7 +321,7 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Route118_EventScript_Greta",
-      "flag": "0"
+      "flag": "FLAG_HIDE_BATTLE_ROYALE_TRAINERS"
     }
   ],
   "warp_events": [

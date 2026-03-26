@@ -426,3 +426,8 @@ MossdeepCity_Text_SootopolisNewGymLeader:
 	.string "People tell me the new LEADER once\n"
 	.string "mentored WALLACE.$"
 
+
+MossdeepCity_EventScript_FrontierCarrie::
+	trainerbattle_single TRAINER_FRONTIER_CARRIE, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end

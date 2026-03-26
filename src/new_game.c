@@ -17,6 +17,7 @@
 #include "rtc.h"
 #include "easy_chat.h"
 #include "event_data.h"
+#include "constants/flags.h"
 #include "money.h"
 #include "trainer_hill.h"
 #include "tv.h"
@@ -165,6 +166,7 @@ void NewGameInitData(void)
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
+    FlagSet(FLAG_HIDE_BATTLE_ROYALE_TRAINERS);
     ClearTVShowData();
     ResetGabbyAndTy();
     ClearSecretBases();

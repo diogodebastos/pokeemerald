@@ -76,3 +76,8 @@ Route127_EventScript_RematchKoji::
 	msgbox Route127_Text_KojiPostRematch, MSGBOX_AUTOCLOSE
 	end
 
+
+Route127_EventScript_FrontierClare::
+	trainerbattle_single TRAINER_FRONTIER_CLARE, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end

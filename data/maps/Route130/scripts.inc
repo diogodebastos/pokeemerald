@@ -48,3 +48,8 @@ Route130_EventScript_Santiago::
 	msgbox Route130_Text_SantiagoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
+Route130_EventScript_FrontierBryon::
+	trainerbattle_single TRAINER_FRONTIER_BRYON, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end
