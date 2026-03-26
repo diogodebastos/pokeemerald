@@ -35,3 +35,8 @@ EverGrandeCity_Text_CitySign:
 	.string "“The paradise of flowers, the sea,\n"
 	.string "and POKéMON.”$"
 
+
+EverGrandeCity_EventScript_FrontierRaul::
+	trainerbattle_single TRAINER_FRONTIER_RAUL, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end

@@ -861,7 +861,47 @@
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT                      855
-#define MAX_TRAINERS_COUNT                  864
+#define TRAINER_FRONTIER_LEON               855
+#define TRAINER_FRONTIER_AVA                856
+#define TRAINER_FRONTIER_NELSON             857
+#define TRAINER_FRONTIER_HUGO               858
+#define TRAINER_FRONTIER_BRYCE              859
+#define TRAINER_FRONTIER_OSCAR              860
+#define TRAINER_FRONTIER_MIRIAM             861
+#define TRAINER_FRONTIER_STELLA             862
+#define TRAINER_FRONTIER_MADDOX             863
+#define TRAINER_FRONTIER_SHANIA             864
+#define TRAINER_FRONTIER_TYLER              865
+#define TRAINER_FRONTIER_CARRIE             866
+#define TRAINER_FRONTIER_CHAZ               867
+#define TRAINER_FRONTIER_DORINE             868
+#define TRAINER_FRONTIER_RAUL               869
+#define TRAINER_FRONTIER_JAXON              870
+#define TRAINER_FRONTIER_EMILEE             871
+#define TRAINER_FRONTIER_ARMANDO            872
+#define TRAINER_FRONTIER_JOSIE              873
+#define TRAINER_FRONTIER_PEDRO              874
+#define TRAINER_FRONTIER_ELAINE             875
+#define TRAINER_FRONTIER_GAVIN              876
+#define TRAINER_FRONTIER_TODD               877
+#define TRAINER_FRONTIER_RUTH               878
+#define TRAINER_FRONTIER_MELODY             879
+#define TRAINER_FRONTIER_SKYLER             880
+#define TRAINER_FRONTIER_ERICK              881
+#define TRAINER_FRONTIER_JOYCE              882
+#define TRAINER_FRONTIER_MALORY             883
+#define TRAINER_FRONTIER_ESTHER             884
+#define TRAINER_FRONTIER_WILSON             885
+#define TRAINER_FRONTIER_CLARE              886
+#define TRAINER_FRONTIER_TESS               887
+#define TRAINER_FRONTIER_VINCE              888
+#define TRAINER_FRONTIER_BRYON              889
+#define TRAINER_FRONTIER_GILLIAN            890
+#define TRAINER_FRONTIER_DAVIN              891
+#define TRAINER_FRONTIER_TREVON             892
+#define TRAINER_FRONTIER_MATEO              893
+
+#define TRAINERS_COUNT                      894
+#define MAX_TRAINERS_COUNT                  900
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

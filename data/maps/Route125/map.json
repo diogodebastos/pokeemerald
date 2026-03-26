@@ -159,6 +159,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route125_EventScript_ItemBigPearl",
       "flag": "FLAG_ITEM_ROUTE_125_BIG_PEARL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
+      "x": 20,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "Route125_EventScript_FrontierEsther",
+      "flag": "FLAG_HIDE_BATTLE_ROYALE_TRAINERS"
     }
   ],
   "warp_events": [

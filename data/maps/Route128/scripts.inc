@@ -300,3 +300,8 @@ Route128_Text_StevenImGoingToSootopolis:
 	.string "Okay.\n"
 	.string "I'm going to SOOTOPOLIS.$"
 
+
+Route128_EventScript_FrontierTess::
+	trainerbattle_single TRAINER_FRONTIER_TESS, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end

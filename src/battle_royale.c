@@ -13,6 +13,7 @@
 #include "constants/characters.h"
 #include "constants/opponents.h"
 #include "constants/rematches.h"
+#include "constants/flags.h"
 #include "constants/vars.h"
 
 static void Task_BattleRoyaleHud(u8 taskId);
@@ -49,7 +50,7 @@ static bool32 IsRematchVariant(u16 trainerId)
 static bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
 {
     if (trainerId == TRAINER_NONE
-     || trainerId >= TRAINER_RED)
+     || trainerId >= TRAINERS_COUNT)
         return FALSE;
 
     /* Exclude rematch variants (_2 through _5) — they have no
@@ -115,6 +116,11 @@ static bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
     case TRAINER_MAY_LILYCOVE_TORCHIC:
     /* Steven */
     case TRAINER_STEVEN:
+    /* Placeholder / unused trainer IDs */
+    case TRAINER_RED:
+    case TRAINER_LEAF:
+    case TRAINER_BRENDAN_PLACEHOLDER:
+    case TRAINER_MAY_PLACEHOLDER:
     /* Unused / roaming trainers with no fixed overworld placement */
     case TRAINER_GRUNT_UNUSED:
     case TRAINER_GABBY_AND_TY_1:
@@ -166,12 +172,14 @@ void ActivateBattleRoyaleMode(void)
     VarSet(VAR_BATTLE_ROYALE_MODE, 1);
     VarSet(VAR_BATTLE_ROYALE_TOTAL, total);
     VarSet(VAR_BATTLE_ROYALE_REMAINING, total - defeated);
+    FlagClear(FLAG_HIDE_BATTLE_ROYALE_TRAINERS);
     ShowBattleRoyaleHud();
 }
 
 void DeactivateBattleRoyaleMode(void)
 {
     VarSet(VAR_BATTLE_ROYALE_MODE, 0);
+    FlagSet(FLAG_HIDE_BATTLE_ROYALE_TRAINERS);
     RemoveBattleRoyaleHud();
 }
 
