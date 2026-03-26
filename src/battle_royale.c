@@ -34,6 +34,68 @@ static bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
     if (trainerId == TRAINER_NONE
      || trainerId >= TRAINER_RED)
         return FALSE;
+
+    /* Exclude event-scripted trainers whose map presence is story-gated.
+     * These trainers disappear after their story event, so clearing their
+     * trainer flag won't make them reappear. */
+    switch (trainerId)
+    {
+    /* Team Aqua admins/leader */
+    case TRAINER_MATT:
+    case TRAINER_SHELLY_WEATHER_INSTITUTE:
+    case TRAINER_SHELLY_SEAFLOOR_CAVERN:
+    case TRAINER_ARCHIE:
+    /* Team Magma admins/leader */
+    case TRAINER_TABITHA_MOSSDEEP:
+    case TRAINER_TABITHA_MT_CHIMNEY:
+    case TRAINER_TABITHA_MAGMA_HIDEOUT:
+    case TRAINER_MAXIE_MAGMA_HIDEOUT:
+    case TRAINER_MAXIE_MT_CHIMNEY:
+    case TRAINER_MAXIE_MOSSDEEP:
+    /* Wally */
+    case TRAINER_WALLY_VR_1:
+    case TRAINER_WALLY_MAUVILLE:
+    case TRAINER_WALLY_VR_2:
+    case TRAINER_WALLY_VR_3:
+    case TRAINER_WALLY_VR_4:
+    case TRAINER_WALLY_VR_5:
+    /* Brendan */
+    case TRAINER_BRENDAN_ROUTE_103_MUDKIP:
+    case TRAINER_BRENDAN_ROUTE_110_MUDKIP:
+    case TRAINER_BRENDAN_ROUTE_119_MUDKIP:
+    case TRAINER_BRENDAN_ROUTE_103_TREECKO:
+    case TRAINER_BRENDAN_ROUTE_110_TREECKO:
+    case TRAINER_BRENDAN_ROUTE_119_TREECKO:
+    case TRAINER_BRENDAN_ROUTE_103_TORCHIC:
+    case TRAINER_BRENDAN_ROUTE_110_TORCHIC:
+    case TRAINER_BRENDAN_ROUTE_119_TORCHIC:
+    case TRAINER_BRENDAN_RUSTBORO_TREECKO:
+    case TRAINER_BRENDAN_RUSTBORO_MUDKIP:
+    case TRAINER_BRENDAN_RUSTBORO_TORCHIC:
+    case TRAINER_BRENDAN_LILYCOVE_MUDKIP:
+    case TRAINER_BRENDAN_LILYCOVE_TREECKO:
+    case TRAINER_BRENDAN_LILYCOVE_TORCHIC:
+    /* May */
+    case TRAINER_MAY_ROUTE_103_MUDKIP:
+    case TRAINER_MAY_ROUTE_110_MUDKIP:
+    case TRAINER_MAY_ROUTE_119_MUDKIP:
+    case TRAINER_MAY_ROUTE_103_TREECKO:
+    case TRAINER_MAY_ROUTE_110_TREECKO:
+    case TRAINER_MAY_ROUTE_119_TREECKO:
+    case TRAINER_MAY_ROUTE_103_TORCHIC:
+    case TRAINER_MAY_ROUTE_110_TORCHIC:
+    case TRAINER_MAY_ROUTE_119_TORCHIC:
+    case TRAINER_MAY_RUSTBORO_MUDKIP:
+    case TRAINER_MAY_RUSTBORO_TREECKO:
+    case TRAINER_MAY_RUSTBORO_TORCHIC:
+    case TRAINER_MAY_LILYCOVE_MUDKIP:
+    case TRAINER_MAY_LILYCOVE_TREECKO:
+    case TRAINER_MAY_LILYCOVE_TORCHIC:
+    /* Steven */
+    case TRAINER_STEVEN:
+        return FALSE;
+    }
+
     return TRUE;
 }
 
