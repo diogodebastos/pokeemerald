@@ -92,6 +92,11 @@ Route104_Text_DadPokenavCall:
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
 
+Route105_EventScript_Dudley::
+	trainerbattle_single TRAINER_DUDLEY, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end
+
 Route104_Text_RegisteredDadInPokenav:
 	.string "Registered DAD NORMAN\n"
 	.string "in the POKéNAV.$"
