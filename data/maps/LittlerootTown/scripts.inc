@@ -892,6 +892,16 @@ LittlerootTown_EventScript_SetReceivedRunningShoes::
 	release
 	end
 
+LittlerootTown_Text_BattleRoyaleIntro:
+	.string "MOM: One more thing, {PLAYER}!\p"
+	.string "Are you up for a BATTLE ROYALE\n"
+	.string "challenge?\p"
+	.string "Defeat every TRAINER in HOENN without\n"
+	.string "losing once!\p"
+	.string "If you lose, all TRAINERS come back\n"
+	.string "and you start over from here.\p"
+	.string "Want to try?$"
+
 LittlerootTown_EventScript_GiveRunningShoes::
 	msgbox LittlerootTown_Text_WearTheseRunningShoes, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
@@ -900,6 +910,15 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	setflag FLAG_RECEIVED_RUNNING_SHOES
 	msgbox LittlerootTown_Text_ExplainRunningShoes, MSGBOX_DEFAULT
 	msgbox LittlerootTown_Text_ComeHomeIfAnythingHappens, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_BattleRoyaleIntro, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, LittlerootTown_EventScript_StartBattleRoyale
+	closemessage
+	delay 30
+	return
+
+LittlerootTown_EventScript_StartBattleRoyale::
+	special ActivateBattleRoyaleMode
+	msgbox PlayersHouse_1F_Text_MomBattleRoyaleStarted, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	return
