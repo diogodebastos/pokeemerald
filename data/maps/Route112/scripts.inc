@@ -106,6 +106,11 @@ Route112_EventScript_Shayla::
 	msgbox Route112_Text_ShaylaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+Route112_EventScript_Mike::
+	trainerbattle_single TRAINER_MIKE_1, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end
+
 Route112_Text_LeaderGoingToAwakenThing:
 	.string "Hey, man, is our leader really going\n"
 	.string "to awaken that thing?$"

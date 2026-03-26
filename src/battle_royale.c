@@ -12,6 +12,7 @@
 #include "window.h"
 #include "constants/characters.h"
 #include "constants/opponents.h"
+#include "constants/rematches.h"
 #include "constants/vars.h"
 
 static void Task_BattleRoyaleHud(u8 taskId);
@@ -29,10 +30,31 @@ static const u8 sText_Complete[] = _("COMPLETE!");
 #define HUD_HEIGHT 3
 #define HUD_LEFT   19
 
+static bool32 IsRematchVariant(u16 trainerId)
+{
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
+    {
+        for (j = 1; j < REMATCHES_COUNT; j++)
+        {
+            if (gRematchTable[i].trainerIds[j] == trainerId)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 static bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
 {
     if (trainerId == TRAINER_NONE
      || trainerId >= TRAINER_RED)
+        return FALSE;
+
+    /* Exclude rematch variants (_2 through _5) — they have no
+     * overworld placement and are only used by the Match Call system. */
+    if (IsRematchVariant(trainerId))
         return FALSE;
 
     /* Exclude event-scripted trainers whose map presence is story-gated.
@@ -93,6 +115,12 @@ static bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
     case TRAINER_MAY_LILYCOVE_TORCHIC:
     /* Steven */
     case TRAINER_STEVEN:
+    /* Unused / roaming trainers with no fixed overworld placement */
+    case TRAINER_GRUNT_UNUSED:
+    case TRAINER_GABBY_AND_TY_1:
+    case TRAINER_GABBY_AND_TY_6:
+    case TRAINER_AMY_AND_LIV_6:
+    case TRAINER_CINDY_6:
         return FALSE;
     }
 
