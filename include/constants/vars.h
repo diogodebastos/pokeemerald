@@ -264,10 +264,10 @@
 #define VAR_ROXANNE_CALL_STEP_COUNTER                    0x40F4
 #define VAR_SCOTT_BF_CALL_STEP_COUNTER                   0x40F5
 #define VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER             0x40F6
-#define VAR_UNUSED_0x40F7                                0x40F7 // Unused Var
-#define VAR_UNUSED_0x40F8                                0x40F8 // Unused Var
-#define VAR_UNUSED_0x40F9                                0x40F9 // Unused Var
-#define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
+#define VAR_BATTLE_ROYALE_MODE                           0x40F7 // 0=off, 1=active, 2=completed
+#define VAR_BATTLE_ROYALE_REMAINING                      0x40F8 // trainers left to beat
+#define VAR_BATTLE_ROYALE_TOTAL                          0x40F9 // total eligible trainers
+#define VAR_BATTLE_ROYALE_DEATHS                         0x40FA // number of resets
 #define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
 #define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
 #define VAR_UNUSED_0x40FD                                0x40FD // Unused Var

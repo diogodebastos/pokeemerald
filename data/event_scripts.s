@@ -686,6 +686,7 @@ EventScript_BackupMrBrineyLocation::
 	return
 
 	.include "data/scripts/surf.inc"
+	.include "data/scripts/battle_royale.inc"
 	.include "data/scripts/rival_graphics.inc"
 	.include "data/scripts/set_gym_trainers.inc"
 
