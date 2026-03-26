@@ -1,0 +1,283 @@
+#include "global.h"
+#include "battle_royale.h"
+#include "battle_setup.h"
+#include "bg.h"
+#include "event_data.h"
+#include "gpu_regs.h"
+#include "menu.h"
+#include "script.h"
+#include "string_util.h"
+#include "task.h"
+#include "text.h"
+#include "window.h"
+#include "constants/characters.h"
+#include "constants/opponents.h"
+#include "constants/vars.h"
+
+static void Task_BattleRoyaleHud(u8 taskId);
+static void DrawBattleRoyaleHud(void);
+static void CreateBattleRoyaleHudWindow(void);
+
+static EWRAM_DATA u8 sBattleRoyaleHudWindowId = WINDOW_NONE;
+static EWRAM_DATA bool8 sBattleRoyaleJustCompleted = FALSE;
+
+static const u8 sText_Left[] = _("LEFT: ");
+static const u8 sText_Deaths[] = _("DIES: ");
+static const u8 sText_Complete[] = _("COMPLETE!");
+
+#define HUD_WIDTH  9
+#define HUD_HEIGHT 3
+#define HUD_LEFT   19
+
+static bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
+{
+    if (trainerId == TRAINER_NONE
+     || trainerId >= TRAINER_RED)
+        return FALSE;
+    return TRUE;
+}
+
+static u16 CountTotalEligibleTrainers(void)
+{
+    u16 count = 0;
+    u16 i;
+
+    for (i = 1; i < TRAINERS_COUNT; i++)
+    {
+        if (IsTrainerEligibleForBattleRoyale(i))
+            count++;
+    }
+    return count;
+}
+
+static u16 CountDefeatedEligibleTrainers(void)
+{
+    u16 count = 0;
+    u16 i;
+
+    for (i = 1; i < TRAINERS_COUNT; i++)
+    {
+        if (IsTrainerEligibleForBattleRoyale(i) && HasTrainerBeenFought(i))
+            count++;
+    }
+    return count;
+}
+
+bool32 IsBattleRoyaleModeActive(void)
+{
+    return VarGet(VAR_BATTLE_ROYALE_MODE) == 1;
+}
+
+void ActivateBattleRoyaleMode(void)
+{
+    u16 total = CountTotalEligibleTrainers();
+    u16 defeated = CountDefeatedEligibleTrainers();
+
+    VarSet(VAR_BATTLE_ROYALE_MODE, 1);
+    VarSet(VAR_BATTLE_ROYALE_TOTAL, total);
+    VarSet(VAR_BATTLE_ROYALE_REMAINING, total - defeated);
+    ShowBattleRoyaleHud();
+}
+
+void DeactivateBattleRoyaleMode(void)
+{
+    VarSet(VAR_BATTLE_ROYALE_MODE, 0);
+    RemoveBattleRoyaleHud();
+}
+
+void BattleRoyale_ResetAllTrainerFlags(void)
+{
+    u16 i;
+
+    for (i = 1; i < TRAINERS_COUNT; i++)
+        ClearTrainerFlag(i);
+}
+
+void BattleRoyale_OnTrainerDefeated(u16 trainerIdA, u16 trainerIdB)
+{
+    u16 remaining;
+
+    if (!IsBattleRoyaleModeActive())
+        return;
+
+    remaining = VarGet(VAR_BATTLE_ROYALE_REMAINING);
+
+    if (IsTrainerEligibleForBattleRoyale(trainerIdA) && remaining > 0)
+        remaining--;
+    if (trainerIdB != 0 && IsTrainerEligibleForBattleRoyale(trainerIdB) && remaining > 0)
+        remaining--;
+
+    VarSet(VAR_BATTLE_ROYALE_REMAINING, remaining);
+
+    if (remaining == 0)
+    {
+        VarSet(VAR_BATTLE_ROYALE_MODE, 2);
+        sBattleRoyaleJustCompleted = TRUE;
+    }
+}
+
+// HUD
+
+static void DrawBattleRoyaleHud(void)
+{
+    u8 text[32];
+    u8 *ptr;
+    u16 remaining = VarGet(VAR_BATTLE_ROYALE_REMAINING);
+    u16 total = VarGet(VAR_BATTLE_ROYALE_TOTAL);
+    u16 deaths = VarGet(VAR_BATTLE_ROYALE_DEATHS);
+    u16 mode = VarGet(VAR_BATTLE_ROYALE_MODE);
+
+    if (sBattleRoyaleHudWindowId == WINDOW_NONE)
+        return;
+
+    DrawDialogueFrame(sBattleRoyaleHudWindowId, FALSE);
+
+    if (mode == 2)
+    {
+        AddTextPrinterParameterized(sBattleRoyaleHudWindowId, FONT_SMALL, sText_Complete, 2, 1, TEXT_SKIP_DRAW, NULL);
+    }
+    else
+    {
+        ptr = StringCopy(text, sText_Left);
+        ptr = ConvertIntToDecimalStringN(ptr, remaining, STR_CONV_MODE_LEFT_ALIGN, 3);
+        *ptr++ = CHAR_SLASH;
+        ptr = ConvertIntToDecimalStringN(ptr, total, STR_CONV_MODE_LEFT_ALIGN, 3);
+        *ptr = EOS;
+        AddTextPrinterParameterized(sBattleRoyaleHudWindowId, FONT_SMALL, text, 2, 1, TEXT_SKIP_DRAW, NULL);
+    }
+
+    ptr = StringCopy(text, sText_Deaths);
+    ptr = ConvertIntToDecimalStringN(ptr, deaths, STR_CONV_MODE_LEFT_ALIGN, 4);
+    *ptr = EOS;
+    AddTextPrinterParameterized(sBattleRoyaleHudWindowId, FONT_SMALL, text, 2, 13, TEXT_SKIP_DRAW, NULL);
+
+    CopyWindowToVram(sBattleRoyaleHudWindowId, COPYWIN_FULL);
+}
+
+// data[4] tracks whether the HUD is currently hidden due to script/dialogue
+#define tHidden data[4]
+
+static void Task_BattleRoyaleHud(u8 taskId)
+{
+    u16 remaining = VarGet(VAR_BATTLE_ROYALE_REMAINING);
+    u16 deaths = VarGet(VAR_BATTLE_ROYALE_DEATHS);
+    u16 mode = VarGet(VAR_BATTLE_ROYALE_MODE);
+    u16 bg0vofs = GetGpuReg(REG_OFFSET_BG0VOFS);
+    bool8 shouldHide = ArePlayerFieldControlsLocked()
+                    || ScriptContext_IsEnabled()
+                    || GetMapNamePopUpWindowId() != WINDOW_NONE;
+
+    if (mode == 0)
+    {
+        RemoveBattleRoyaleHud();
+        return;
+    }
+
+    // Hide HUD when dialogue/script/map popup is active
+    if (shouldHide)
+    {
+        if (!gTasks[taskId].tHidden)
+        {
+            gTasks[taskId].tHidden = TRUE;
+            if (sBattleRoyaleHudWindowId != WINDOW_NONE)
+            {
+                ClearDialogWindowAndFrameToTransparent(sBattleRoyaleHudWindowId, FALSE);
+                ScheduleBgCopyTilemapToVram(0);
+            }
+        }
+        return;
+    }
+
+    // Script just ended — restore HUD
+    if (gTasks[taskId].tHidden)
+    {
+        gTasks[taskId].tHidden = FALSE;
+        gTasks[taskId].data[0] = 0xFFFF; // Force redraw
+        gTasks[taskId].data[3] = -1;     // Force reposition
+    }
+
+    // Reposition window if BG0 scroll changed
+    if (gTasks[taskId].data[3] != (s16)bg0vofs)
+    {
+        gTasks[taskId].data[3] = bg0vofs;
+        CreateBattleRoyaleHudWindow();
+        gTasks[taskId].data[0] = 0xFFFF; // Force redraw
+    }
+
+    if (gTasks[taskId].data[0] != remaining
+     || gTasks[taskId].data[1] != deaths
+     || gTasks[taskId].data[2] != mode)
+    {
+        gTasks[taskId].data[0] = remaining;
+        gTasks[taskId].data[1] = deaths;
+        gTasks[taskId].data[2] = mode;
+        DrawBattleRoyaleHud();
+    }
+
+    if (sBattleRoyaleJustCompleted && !shouldHide)
+    {
+        sBattleRoyaleJustCompleted = FALSE;
+        ScriptContext_SetupScript(EventScript_BattleRoyaleVictory);
+    }
+}
+
+static void CreateBattleRoyaleHudWindow(void)
+{
+    struct WindowTemplate template;
+    u16 bg0vofs = GetGpuReg(REG_OFFSET_BG0VOFS);
+    u8 topRow = (bg0vofs / 8) % 32;
+
+    template.bg = 0;
+    template.tilemapLeft = HUD_LEFT;
+    template.tilemapTop = topRow;
+    template.width = HUD_WIDTH;
+    template.height = HUD_HEIGHT;
+    template.paletteNum = 15;
+    template.baseBlock = 0x0A0;
+
+    if (sBattleRoyaleHudWindowId != WINDOW_NONE)
+    {
+        ClearDialogWindowAndFrameToTransparent(sBattleRoyaleHudWindowId, FALSE);
+        RemoveWindow(sBattleRoyaleHudWindowId);
+    }
+    sBattleRoyaleHudWindowId = AddWindow(&template);
+}
+
+void ShowBattleRoyaleHud(void)
+{
+    u16 mode = VarGet(VAR_BATTLE_ROYALE_MODE);
+
+    if (mode == 0 || FuncIsActiveTask(Task_BattleRoyaleHud))
+        return;
+
+    // Discard stale window ID from before the map transition.
+    // InitWindows resets all window slots, so the old ID may now
+    // refer to the standard textbox (window 0). Calling RemoveWindow
+    // with it would destroy the textbox and let the HUD take slot 0,
+    // causing all msgbox text to render in the HUD's small top-right window.
+    sBattleRoyaleHudWindowId = WINDOW_NONE;
+
+    CreateBattleRoyaleHudWindow();
+
+    {
+        u8 taskId = CreateTask(Task_BattleRoyaleHud, 90);
+        gTasks[taskId].data[0] = 0xFFFF; // Force initial draw
+        gTasks[taskId].data[1] = 0xFFFF;
+        gTasks[taskId].data[2] = 0xFFFF;
+        gTasks[taskId].data[3] = -1;     // Last known BG0VOFS
+    }
+}
+
+void RemoveBattleRoyaleHud(void)
+{
+    if (FuncIsActiveTask(Task_BattleRoyaleHud))
+        DestroyTask(FindTaskIdByFunc(Task_BattleRoyaleHud));
+
+    if (sBattleRoyaleHudWindowId != WINDOW_NONE)
+    {
+        ClearWindowTilemap(sBattleRoyaleHudWindowId);
+        CopyWindowToVram(sBattleRoyaleHudWindowId, COPYWIN_MAP);
+        RemoveWindow(sBattleRoyaleHudWindowId);
+        sBattleRoyaleHudWindowId = WINDOW_NONE;
+    }
+}

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
+#include "battle_royale.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "bg.h"
@@ -60,6 +61,7 @@
 #include "wild_encounter.h"
 #include "frontier_util.h"
 #include "constants/abilities.h"
+#include "constants/heal_locations.h"
 #include "constants/layouts.h"
 #include "constants/map_types.h"
 #include "constants/region_map_sections.h"
@@ -358,10 +360,25 @@ static void (*const sMovementStatusHandler[])(struct LinkPlayerObjectEvent *, st
 void DoWhiteOut(void)
 {
     RunScriptImmediately(EventScript_WhiteOut);
-    SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
+
+    if (IsBattleRoyaleModeActive())
+    {
+        BattleRoyale_ResetAllTrainerFlags();
+        VarSet(VAR_BATTLE_ROYALE_REMAINING, VarGet(VAR_BATTLE_ROYALE_TOTAL));
+        VarSet(VAR_BATTLE_ROYALE_DEATHS, VarGet(VAR_BATTLE_ROYALE_DEATHS) + 1);
+        if (gSaveBlock2Ptr->playerGender == MALE)
+            SetWarpDestinationToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);
+        else
+            SetWarpDestinationToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F);
+    }
+    else
+    {
+        SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
+        SetWarpDestinationToLastHealLocation();
+    }
+
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
-    SetWarpDestinationToLastHealLocation();
     WarpIntoMap();
 }
 
@@ -1526,6 +1543,7 @@ static bool8 RunFieldCallback(void)
         gFieldCallback = NULL;
     }
 
+    ShowBattleRoyaleHud();
     return TRUE;
 }
 

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_royale.h"
 #include "battle_setup.h"
 #include "battle_transition.h"
 #include "main.h"
@@ -1344,6 +1345,7 @@ static void CB2_EndTrainerBattle(void)
         {
             RegisterTrainerInMatchCall();
             SetBattledTrainersFlags();
+            BattleRoyale_OnTrainerDefeated(gTrainerBattleOpponent_A, gTrainerBattleOpponent_B);
         }
     }
 }
@@ -1363,6 +1365,7 @@ static void CB2_EndRematchBattle(void)
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         RegisterTrainerInMatchCall();
         SetBattledTrainersFlags();
+        BattleRoyale_OnTrainerDefeated(gTrainerBattleOpponent_A, gTrainerBattleOpponent_B);
         HandleRematchVarsOnBattleEnd();
     }
 }
