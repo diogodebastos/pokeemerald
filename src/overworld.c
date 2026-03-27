@@ -363,8 +363,11 @@ void DoWhiteOut(void)
 
     if (IsBattleRoyaleModeActive())
     {
+        // Normal/Hard mode: reset all defeated trainers on faint// Normal/Hard mode: reset all defeated trainers on faint
+        /*
         BattleRoyale_ResetAllTrainerFlags();
         VarSet(VAR_BATTLE_ROYALE_REMAINING, VarGet(VAR_BATTLE_ROYALE_TOTAL));
+        */
         VarSet(VAR_BATTLE_ROYALE_DEATHS, VarGet(VAR_BATTLE_ROYALE_DEATHS) + 1);
         if (gSaveBlock2Ptr->playerGender == MALE)
             SetWarpDestinationToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);

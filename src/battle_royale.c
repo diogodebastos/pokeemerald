@@ -183,6 +183,7 @@ void DeactivateBattleRoyaleMode(void)
     RemoveBattleRoyaleHud();
 }
 
+// Normal/Hard mode: reset all defeated trainers on faint
 void BattleRoyale_ResetAllTrainerFlags(void)
 {
     u16 i;
@@ -190,6 +191,7 @@ void BattleRoyale_ResetAllTrainerFlags(void)
     for (i = 1; i < TRAINERS_COUNT; i++)
         ClearTrainerFlag(i);
 }
+// In current mode, defeated trainers remain defeated after fainting.
 
 void BattleRoyale_OnTrainerDefeated(u16 trainerIdA, u16 trainerIdB)
 {
