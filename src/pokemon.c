@@ -4706,6 +4706,20 @@ void CopyPlayerPartyMonToBattleData(u8 battler, u8 partyIndex)
     ClearTemporarySpeciesSpriteData(battler, FALSE);
 }
 
+static const u8 *GetEvoItemEffect(u16 item)
+{
+    switch (item)
+    {
+    case ITEM_METAL_COAT:    return gItemEffect_MetalCoat;
+    case ITEM_KINGS_ROCK:    return gItemEffect_KingsRock;
+    case ITEM_DRAGON_SCALE:  return gItemEffect_DragonScale;
+    case ITEM_UP_GRADE:      return gItemEffect_UpGrade;
+    case ITEM_DEEP_SEA_TOOTH: return gItemEffect_DeepSeaTooth;
+    case ITEM_DEEP_SEA_SCALE: return gItemEffect_DeepSeaScale;
+    default:                 return NULL;
+    }
+}
+
 bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex)
 {
     return PokemonUseItemEffects(mon, item, partyIndex, moveIndex, FALSE);
@@ -4795,23 +4809,26 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
     // Skip using the item if it won't do anything
     if (!ITEM_HAS_EFFECT(item))
-        return TRUE;
-    if (gItemEffectTable[item - ITEM_POTION] == NULL && item != ITEM_ENIGMA_BERRY)
-        return TRUE;
-
-    // Get item effect
-    if (item == ITEM_ENIGMA_BERRY)
+    {
+        itemEffect = GetEvoItemEffect(item);
+        if (itemEffect == NULL)
+            return TRUE;
+    }
+    else if (item == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
             itemEffect = gEnigmaBerries[gActiveBattler].itemEffect;
         else
             itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     }
-    else
+    else if (gItemEffectTable[item - ITEM_POTION] != NULL)
     {
         itemEffect = gItemEffectTable[item - ITEM_POTION];
     }
-
+    else
+    {
+        return TRUE;
+    }
     // Do item effect
     for (i = 0; i < ITEM_EFFECT_ARG_START; i++)
     {

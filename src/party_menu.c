@@ -5253,7 +5253,19 @@ u8 GetItemEffectType(u16 item)
     u32 statusCure;
 
     if (!ITEM_HAS_EFFECT(item))
-        return ITEM_EFFECT_NONE;
+    {
+        switch (item)
+        {
+        case ITEM_METAL_COAT:     itemEffect = gItemEffect_MetalCoat; break;
+        case ITEM_KINGS_ROCK:     itemEffect = gItemEffect_KingsRock; break;
+        case ITEM_DRAGON_SCALE:   itemEffect = gItemEffect_DragonScale; break;
+        case ITEM_UP_GRADE:       itemEffect = gItemEffect_UpGrade; break;
+        case ITEM_DEEP_SEA_TOOTH: itemEffect = gItemEffect_DeepSeaTooth; break;
+        case ITEM_DEEP_SEA_SCALE: itemEffect = gItemEffect_DeepSeaScale; break;
+        default:                  return ITEM_EFFECT_NONE;
+        }
+        goto check_effects;
+    }
 
     // Read the item's effect properties.
     if (item == ITEM_ENIGMA_BERRY)
@@ -5261,6 +5273,7 @@ u8 GetItemEffectType(u16 item)
     else
         itemEffect = gItemEffectTable[item - ITEM_POTION];
 
+check_effects:
     if ((itemEffect[0] & (ITEM0_DIRE_HIT | ITEM0_X_ATTACK)) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & ITEM3_GUARD_SPEC))
         return ITEM_EFFECT_X_ITEM;
     else if (itemEffect[0] & ITEM0_SACRED_ASH)
