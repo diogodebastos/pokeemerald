@@ -123,8 +123,8 @@ static bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
     /* Steven */
     case TRAINER_STEVEN:
     /* Placeholder / unused trainer IDs */
-    case TRAINER_RED:
-    case TRAINER_LEAF:
+    // case TRAINER_RED:
+    // case TRAINER_LEAF:
     case TRAINER_BRENDAN_PLACEHOLDER:
     case TRAINER_MAY_PLACEHOLDER:
     /* Unused / roaming trainers with no fixed overworld placement */

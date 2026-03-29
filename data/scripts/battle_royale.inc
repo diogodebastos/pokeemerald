@@ -39,3 +39,24 @@ BattleRoyale_Text_BrandonPostBattle:
 	.string "You have bested the PYRAMID KING.\p"
 	.string "I look forward to our next\n"
 	.string "encounter!$"
+
+LittlerootTown_Text_RedIntro:
+	.string "...$"
+
+LittlerootTown_Text_RedDefeated:
+	.string "...$"
+
+LittlerootTown_Text_RedPostBattle:
+	.string "... ... ...$"
+
+LittlerootTown_Text_LeafIntro:
+	.string "I raised these POKéMON from\n"
+	.string "JOHTO all by myself!\p"
+	.string "Think you can handle them?$"
+
+LittlerootTown_Text_LeafDefeated:
+	.string "No way! My partners...$"
+
+LittlerootTown_Text_LeafPostBattle:
+	.string "You're really something.\p"
+	.string "RED was right about you.$"

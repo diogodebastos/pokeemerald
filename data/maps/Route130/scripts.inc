@@ -53,3 +53,8 @@ Route130_EventScript_FrontierBryon::
 	trainerbattle_single TRAINER_FRONTIER_BRYON, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
 	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
 	end
+
+Route130_EventScript_Leaf::
+	trainerbattle_single TRAINER_LEAF, LittlerootTown_Text_LeafIntro, LittlerootTown_Text_LeafDefeated
+	msgbox LittlerootTown_Text_LeafPostBattle, MSGBOX_AUTOCLOSE
+	end
