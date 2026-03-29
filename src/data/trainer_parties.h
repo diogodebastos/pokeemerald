@@ -9021,6 +9021,179 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayLilycoveTorchic[] = {
     }
 };
 
+/* Ever Grande City rival parties - fully evolved, level 40s */
+
+/* Player picked Mudkip -> rival has Treecko line (Sceptile) */
+static const struct TrainerMonNoItemDefaultMoves sParty_BrendanEvergrandeMudkip[] = {
+    {
+    .iv = 200,
+    .lvl = 42,
+    .species = SPECIES_ABSOL,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_MAGCARGO,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_PELIPPER,
+    },
+    {
+    .iv = 200,
+    .lvl = 44,
+    .species = SPECIES_BRELOOM,
+    },
+    {
+    .iv = 250,
+    .lvl = 45,
+    .species = SPECIES_SCEPTILE,
+    }
+};
+
+/* Player picked Treecko -> rival has Torchic line (Blaziken) */
+static const struct TrainerMonNoItemDefaultMoves sParty_BrendanEvergrandeTreecko[] = {
+    {
+    .iv = 200,
+    .lvl = 42,
+    .species = SPECIES_ABSOL,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_PELIPPER,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_LUDICOLO,
+    },
+    {
+    .iv = 200,
+    .lvl = 44,
+    .species = SPECIES_BRELOOM,
+    },
+    {
+    .iv = 250,
+    .lvl = 45,
+    .species = SPECIES_BLAZIKEN,
+    }
+};
+
+/* Player picked Torchic -> rival has Mudkip line (Swampert) */
+static const struct TrainerMonNoItemDefaultMoves sParty_BrendanEvergrandeTorchic[] = {
+    {
+    .iv = 200,
+    .lvl = 42,
+    .species = SPECIES_ABSOL,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_LUDICOLO,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_MAGCARGO,
+    },
+    {
+    .iv = 200,
+    .lvl = 44,
+    .species = SPECIES_BRELOOM,
+    },
+    {
+    .iv = 250,
+    .lvl = 45,
+    .species = SPECIES_SWAMPERT,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_MayEvergrandeMudkip[] = {
+    {
+    .iv = 200,
+    .lvl = 42,
+    .species = SPECIES_ABSOL,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_MAGCARGO,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_PELIPPER,
+    },
+    {
+    .iv = 200,
+    .lvl = 44,
+    .species = SPECIES_BRELOOM,
+    },
+    {
+    .iv = 250,
+    .lvl = 45,
+    .species = SPECIES_SCEPTILE,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_MayEvergrandeTreecko[] = {
+    {
+    .iv = 200,
+    .lvl = 42,
+    .species = SPECIES_ABSOL,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_PELIPPER,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_LUDICOLO,
+    },
+    {
+    .iv = 200,
+    .lvl = 44,
+    .species = SPECIES_BRELOOM,
+    },
+    {
+    .iv = 250,
+    .lvl = 45,
+    .species = SPECIES_BLAZIKEN,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_MayEvergrandeTorchic[] = {
+    {
+    .iv = 200,
+    .lvl = 42,
+    .species = SPECIES_ABSOL,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_LUDICOLO,
+    },
+    {
+    .iv = 200,
+    .lvl = 43,
+    .species = SPECIES_MAGCARGO,
+    },
+    {
+    .iv = 200,
+    .lvl = 44,
+    .species = SPECIES_BRELOOM,
+    },
+    {
+    .iv = 250,
+    .lvl = 45,
+    .species = SPECIES_SWAMPERT,
+    }
+};
+
 static const struct TrainerMonNoItemDefaultMoves sParty_Jonah[] = {
     {
     .iv = 0,
