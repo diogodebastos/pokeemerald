@@ -909,5 +909,6 @@
 
 #define TRAINERS_COUNT                      900
 #define MAX_TRAINERS_COUNT                  900
+#define TRAINER_BATTLE_ROYALE_COUNT         500
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

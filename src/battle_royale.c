@@ -172,7 +172,8 @@ bool32 IsBattleRoyaleModeActive(void)
 
 void ActivateBattleRoyaleMode(void)
 {
-    u16 total = CountTotalEligibleTrainers();
+    // u16 total = CountTotalEligibleTrainers();
+    u16 total = TRAINER_BATTLE_ROYALE_COUNT;
     u16 defeated = CountDefeatedEligibleTrainers();
 
     VarSet(VAR_BATTLE_ROYALE_MODE, 1);
