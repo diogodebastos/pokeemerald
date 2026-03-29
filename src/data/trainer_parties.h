@@ -12946,19 +12946,93 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Everett[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Red[] = {
+static const struct TrainerMonItemCustomMoves sParty_Red[] = {
     {
-    .iv = 0,
-    .lvl = 5,
-    .species = SPECIES_CHARMANDER,
+        .iv = 255,
+        .lvl = 88,
+        .species = SPECIES_PIKACHU,
+        .heldItem = ITEM_LIGHT_BALL,
+        .moves = {MOVE_THUNDERBOLT, MOVE_IRON_TAIL, MOVE_QUICK_ATTACK, MOVE_THUNDER}
+    },
+    {
+        .iv = 255,
+        .lvl = 80,
+        .species = SPECIES_LAPRAS,
+        .heldItem = ITEM_SHELL_BELL,
+        .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_THUNDERBOLT, MOVE_PSYCHIC}
+    },
+    {
+        .iv = 255,
+        .lvl = 82,
+        .species = SPECIES_SNORLAX,
+        .heldItem = ITEM_LEFTOVERS,
+        .moves = {MOVE_REST, MOVE_SLEEP_TALK, MOVE_BODY_SLAM, MOVE_EARTHQUAKE}
+    },
+    {
+        .iv = 255,
+        .lvl = 84,
+        .species = SPECIES_VENUSAUR,
+        .heldItem = ITEM_QUICK_CLAW,
+        .moves = {MOVE_SOLAR_BEAM, MOVE_SLUDGE_BOMB, MOVE_SLEEP_POWDER, MOVE_EARTHQUAKE}
+    },
+    {
+        .iv = 255,
+        .lvl = 84,
+        .species = SPECIES_CHARIZARD,
+        .heldItem = ITEM_LUM_BERRY,
+        .moves = {MOVE_FLAMETHROWER, MOVE_DRAGON_CLAW, MOVE_EARTHQUAKE, MOVE_AERIAL_ACE}
+    },
+    {
+        .iv = 255,
+        .lvl = 84,
+        .species = SPECIES_BLASTOISE,
+        .heldItem = ITEM_SCOPE_LENS,
+        .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_EARTHQUAKE, MOVE_MIRROR_COAT}
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Leaf[] = {
+static const struct TrainerMonItemCustomMoves sParty_Leaf[] = {
     {
-    .iv = 0,
-    .lvl = 5,
-    .species = SPECIES_BULBASAUR,
+        .iv = 255,
+        .lvl = 80,
+        .species = SPECIES_MEGANIUM,
+        .heldItem = ITEM_LEFTOVERS,
+        .moves = {MOVE_GIGA_DRAIN, MOVE_LEECH_SEED, MOVE_LIGHT_SCREEN, MOVE_EARTHQUAKE}
+    },
+    {
+        .iv = 255,
+        .lvl = 80,
+        .species = SPECIES_TYPHLOSION,
+        .heldItem = ITEM_LUM_BERRY,
+        .moves = {MOVE_FLAMETHROWER, MOVE_THUNDER_PUNCH, MOVE_EARTHQUAKE, MOVE_SHADOW_BALL}
+    },
+    {
+        .iv = 255,
+        .lvl = 80,
+        .species = SPECIES_FERALIGATR,
+        .heldItem = ITEM_SCOPE_LENS,
+        .moves = {MOVE_SURF, MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_CRUNCH}
+    },
+    {
+        .iv = 255,
+        .lvl = 82,
+        .species = SPECIES_ESPEON,
+        .heldItem = ITEM_LUM_BERRY,
+        .moves = {MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_MORNING_SUN, MOVE_SHADOW_BALL}
+    },
+    {
+        .iv = 255,
+        .lvl = 82,
+        .species = SPECIES_DRAGONITE,
+        .heldItem = ITEM_SHELL_BELL,
+        .moves = {MOVE_OUTRAGE, MOVE_EARTHQUAKE, MOVE_FIRE_PUNCH, MOVE_THUNDER_PUNCH}
+    },
+    {
+        .iv = 255,
+        .lvl = 82,
+        .species = SPECIES_STARMIE,
+        .heldItem = ITEM_QUICK_CLAW,
+        .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_RECOVER}
     }
 };
 
