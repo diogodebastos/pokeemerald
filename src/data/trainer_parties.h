@@ -11964,240 +11964,279 @@ static const struct TrainerMonNoItemCustomMoves sParty_Brandon[] = {
 
 /* Battle Frontier overworld trainers - Cities/Towns */
 
+/* Oldale Town (lvl ~5, between Routes 101/103) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierLeon[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_METAGROSS, .moves = {MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_PSYCHIC, MOVE_SHADOW_BALL}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_TYRANITAR, .moves = {MOVE_ROCK_SLIDE, MOVE_CRUNCH, MOVE_EARTHQUAKE, MOVE_DRAGON_DANCE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SALAMENCE, .moves = {MOVE_DRAGON_CLAW, MOVE_AERIAL_ACE, MOVE_FLAMETHROWER, MOVE_BRICK_BREAK}},
+    {.iv = 25, .lvl = 5, .species = SPECIES_BELDUM, .moves = {MOVE_TAKE_DOWN, MOVE_NONE, MOVE_NONE, MOVE_NONE}},
+    {.iv = 25, .lvl = 5, .species = SPECIES_LARVITAR, .moves = {MOVE_BITE, MOVE_LEER, MOVE_NONE, MOVE_NONE}},
+    {.iv = 25, .lvl = 5, .species = SPECIES_BAGON, .moves = {MOVE_RAGE, MOVE_LEER, MOVE_NONE, MOVE_NONE}},
 };
 
+/* Petalburg City (lvl ~7, early game) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierAva[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_GARDEVOIR, .moves = {MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_CALM_MIND, MOVE_HYPNOSIS}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_BLAZIKEN, .moves = {MOVE_SKY_UPPERCUT, MOVE_BLAZE_KICK, MOVE_ROCK_SLIDE, MOVE_SWORDS_DANCE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_WALREIN, .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_TOXIC}},
+    {.iv = 25, .lvl = 7, .species = SPECIES_RALTS, .moves = {MOVE_GROWL, MOVE_CONFUSION, MOVE_NONE, MOVE_NONE}},
+    {.iv = 25, .lvl = 7, .species = SPECIES_TORCHIC, .moves = {MOVE_SCRATCH, MOVE_GROWL, MOVE_FOCUS_ENERGY, MOVE_EMBER}},
+    {.iv = 25, .lvl = 7, .species = SPECIES_SPHEAL, .moves = {MOVE_DEFENSE_CURL, MOVE_POWDER_SNOW, MOVE_GROWL, MOVE_WATER_GUN}},
 };
 
+/* Rustboro City (lvl ~15, 1st gym) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierNelson[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_DRAGONITE, .moves = {MOVE_DRAGON_CLAW, MOVE_AERIAL_ACE, MOVE_EARTHQUAKE, MOVE_THUNDER_WAVE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_KINGDRA, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_DRAGON_DANCE, MOVE_RETURN}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_FLYGON, .moves = {MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_FLAMETHROWER, MOVE_CRUNCH}},
+    {.iv = 50, .lvl = 15, .species = SPECIES_DRATINI, .moves = {MOVE_WRAP, MOVE_LEER, MOVE_THUNDER_WAVE, MOVE_TWISTER}},
+    {.iv = 50, .lvl = 15, .species = SPECIES_HORSEA, .moves = {MOVE_BUBBLE, MOVE_SMOKESCREEN, MOVE_LEER, MOVE_WATER_GUN}},
+    {.iv = 50, .lvl = 15, .species = SPECIES_TRAPINCH, .moves = {MOVE_BITE, MOVE_SAND_ATTACK, MOVE_FAINT_ATTACK, MOVE_NONE}},
 };
 
+/* Dewford Town (lvl ~17, 2nd gym) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierHugo[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_MACHAMP, .moves = {MOVE_CROSS_CHOP, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_BULK_UP}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_HARIYAMA, .moves = {MOVE_VITAL_THROW, MOVE_ROCK_TOMB, MOVE_EARTHQUAKE, MOVE_FAKE_OUT}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_BRELOOM, .moves = {MOVE_SKY_UPPERCUT, MOVE_MACH_PUNCH, MOVE_SPORE, MOVE_SLUDGE_BOMB}},
+    {.iv = 50, .lvl = 17, .species = SPECIES_MACHOP, .moves = {MOVE_LOW_KICK, MOVE_LEER, MOVE_FOCUS_ENERGY, MOVE_KARATE_CHOP}},
+    {.iv = 50, .lvl = 17, .species = SPECIES_MAKUHITA, .moves = {MOVE_TACKLE, MOVE_FOCUS_ENERGY, MOVE_SAND_ATTACK, MOVE_ARM_THRUST}},
+    {.iv = 50, .lvl = 17, .species = SPECIES_SHROOMISH, .moves = {MOVE_ABSORB, MOVE_TACKLE, MOVE_STUN_SPORE, MOVE_LEECH_SEED}},
 };
 
+/* Slateport City (lvl ~18, post-Brawly) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierBryce[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_MILOTIC, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_TOXIC}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_ALAKAZAM, .moves = {MOVE_PSYCHIC, MOVE_THUNDER_PUNCH, MOVE_FIRE_PUNCH, MOVE_CALM_MIND}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_BLISSEY, .moves = {MOVE_SEISMIC_TOSS, MOVE_SOFT_BOILED, MOVE_TOXIC, MOVE_AROMATHERAPY}},
+    {.iv = 50, .lvl = 18, .species = SPECIES_STARYU, .moves = {MOVE_TACKLE, MOVE_HARDEN, MOVE_WATER_GUN, MOVE_RAPID_SPIN}},
+    {.iv = 50, .lvl = 18, .species = SPECIES_KADABRA, .moves = {MOVE_TELEPORT, MOVE_KINESIS, MOVE_CONFUSION, MOVE_DISABLE}},
+    {.iv = 50, .lvl = 18, .species = SPECIES_CHANSEY, .moves = {MOVE_POUND, MOVE_GROWL, MOVE_TAIL_WHIP, MOVE_DOUBLE_SLAP}},
 };
 
+/* Mauville City (lvl ~22, 3rd gym) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierOscar[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_METAGROSS, .moves = {MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_PSYCHIC, MOVE_ROCK_SLIDE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_STARMIE, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_PSYCHIC}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_HERACROSS, .moves = {MOVE_MEGAHORN, MOVE_BRICK_BREAK, MOVE_ROCK_SLIDE, MOVE_SWORDS_DANCE}},
+    {.iv = 75, .lvl = 22, .species = SPECIES_METANG, .moves = {MOVE_TAKE_DOWN, MOVE_CONFUSION, MOVE_METAL_CLAW, MOVE_NONE}},
+    {.iv = 75, .lvl = 22, .species = SPECIES_STARYU, .moves = {MOVE_TACKLE, MOVE_HARDEN, MOVE_WATER_GUN, MOVE_RAPID_SPIN}},
+    {.iv = 75, .lvl = 22, .species = SPECIES_HERACROSS, .moves = {MOVE_TACKLE, MOVE_LEER, MOVE_HORN_ATTACK, MOVE_ENDURE}},
 };
 
+/* Verdanturf Town (lvl ~16, side area off Route 117) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierMiriam[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_LATIAS, .moves = {MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_CALM_MIND}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SUICUNE, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_CALM_MIND, MOVE_ROAR}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_GENGAR, .moves = {MOVE_SHADOW_BALL, MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_HYPNOSIS}},
+    {.iv = 50, .lvl = 16, .species = SPECIES_RALTS, .moves = {MOVE_GROWL, MOVE_CONFUSION, MOVE_DOUBLE_TEAM, MOVE_TELEPORT}},
+    {.iv = 50, .lvl = 16, .species = SPECIES_MARILL, .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_WATER_GUN, MOVE_ROLLOUT}},
+    {.iv = 50, .lvl = 16, .species = SPECIES_GASTLY, .moves = {MOVE_LICK, MOVE_SPITE, MOVE_MEAN_LOOK, MOVE_CURSE}},
 };
 
+/* Fallarbor Town (lvl ~17, post Route 113) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierStella[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_ESPEON, .moves = {MOVE_PSYCHIC, MOVE_SHADOW_BALL, MOVE_CALM_MIND, MOVE_MORNING_SUN}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_STARMIE, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_RECOVER}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_JYNX, .moves = {MOVE_ICE_BEAM, MOVE_PSYCHIC, MOVE_LOVELY_KISS, MOVE_FAKE_OUT}},
+    {.iv = 50, .lvl = 17, .species = SPECIES_EEVEE, .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_SAND_ATTACK, MOVE_QUICK_ATTACK}},
+    {.iv = 50, .lvl = 17, .species = SPECIES_STARYU, .moves = {MOVE_TACKLE, MOVE_HARDEN, MOVE_WATER_GUN, MOVE_RAPID_SPIN}},
+    {.iv = 50, .lvl = 17, .species = SPECIES_SMOOCHUM, .moves = {MOVE_POUND, MOVE_LICK, MOVE_SWEET_KISS, MOVE_POWDER_SNOW}},
 };
 
+/* Lavaridge Town (lvl ~28, 4th gym) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierMaddox[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_BLAZIKEN, .moves = {MOVE_BLAZE_KICK, MOVE_SKY_UPPERCUT, MOVE_ROCK_SLIDE, MOVE_SWORDS_DANCE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_CAMERUPT, .moves = {MOVE_EARTHQUAKE, MOVE_FLAMETHROWER, MOVE_ROCK_SLIDE, MOVE_EXPLOSION}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_TORKOAL, .moves = {MOVE_FLAMETHROWER, MOVE_BODY_SLAM, MOVE_EXPLOSION, MOVE_YAWN}},
+    {.iv = 100, .lvl = 28, .species = SPECIES_COMBUSKEN, .moves = {MOVE_EMBER, MOVE_DOUBLE_KICK, MOVE_SAND_ATTACK, MOVE_PECK}},
+    {.iv = 100, .lvl = 28, .species = SPECIES_NUMEL, .moves = {MOVE_EMBER, MOVE_MAGNITUDE, MOVE_FOCUS_ENERGY, MOVE_TAKE_DOWN}},
+    {.iv = 100, .lvl = 28, .species = SPECIES_TORKOAL, .moves = {MOVE_EMBER, MOVE_SMOG, MOVE_CURSE, MOVE_BODY_SLAM}},
 };
 
+/* Fortree City (lvl ~31, 5th gym) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierShania[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_SKARMORY, .moves = {MOVE_DRILL_PECK, MOVE_STEEL_WING, MOVE_SPIKES, MOVE_WHIRLWIND}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SWELLOW, .moves = {MOVE_AERIAL_ACE, MOVE_RETURN, MOVE_STEEL_WING, MOVE_ENDEAVOR}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_ALTARIA, .moves = {MOVE_DRAGON_DANCE, MOVE_AERIAL_ACE, MOVE_EARTHQUAKE, MOVE_FLAMETHROWER}},
+    {.iv = 125, .lvl = 31, .species = SPECIES_SKARMORY, .moves = {MOVE_SWIFT, MOVE_AGILITY, MOVE_FURY_ATTACK, MOVE_SAND_ATTACK}},
+    {.iv = 125, .lvl = 31, .species = SPECIES_SWELLOW, .moves = {MOVE_PECK, MOVE_FOCUS_ENERGY, MOVE_QUICK_ATTACK, MOVE_WING_ATTACK}},
+    {.iv = 125, .lvl = 31, .species = SPECIES_SWABLU, .moves = {MOVE_PECK, MOVE_GROWL, MOVE_ASTONISH, MOVE_SING}},
 };
 
+/* Lilycove City (lvl ~33, post-Fortree) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierTyler[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_LATIOS, .moves = {MOVE_PSYCHIC, MOVE_DRAGON_CLAW, MOVE_THUNDERBOLT, MOVE_CALM_MIND}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_METAGROSS, .moves = {MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_SHADOW_BALL, MOVE_EXPLOSION}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SLAKING, .moves = {MOVE_RETURN, MOVE_EARTHQUAKE, MOVE_SHADOW_BALL, MOVE_YAWN}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_SHELGON, .moves = {MOVE_DRAGON_CLAW, MOVE_FLAMETHROWER, MOVE_BRICK_BREAK, MOVE_PROTECT}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_METANG, .moves = {MOVE_TAKE_DOWN, MOVE_CONFUSION, MOVE_METAL_CLAW, MOVE_SCARY_FACE}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_VIGOROTH, .moves = {MOVE_SLASH, MOVE_COUNTER, MOVE_ENCORE, MOVE_FOCUS_ENERGY}},
 };
 
+/* Mossdeep City (lvl ~42, 7th gym) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierCarrie[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_STARMIE, .moves = {MOVE_SURF, MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_ICE_BEAM}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_DUSCLOPS, .moves = {MOVE_SHADOW_BALL, MOVE_EARTHQUAKE, MOVE_TOXIC, MOVE_WILL_O_WISP}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SABLEYE, .moves = {MOVE_SHADOW_BALL, MOVE_BRICK_BREAK, MOVE_TOXIC, MOVE_RECOVER}},
+    {.iv = 200, .lvl = 42, .species = SPECIES_STARYU, .moves = {MOVE_SURF, MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_RECOVER}},
+    {.iv = 200, .lvl = 42, .species = SPECIES_DUSCLOPS, .moves = {MOVE_SHADOW_BALL, MOVE_CONFUSE_RAY, MOVE_WILL_O_WISP, MOVE_TOXIC}},
+    {.iv = 200, .lvl = 42, .species = SPECIES_SABLEYE, .moves = {MOVE_SHADOW_BALL, MOVE_BRICK_BREAK, MOVE_TOXIC, MOVE_NIGHT_SHADE}},
 };
 
+/* Sootopolis City (lvl ~44, 8th gym) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierChaz[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_MANECTRIC, .moves = {MOVE_THUNDERBOLT, MOVE_FLAMETHROWER, MOVE_CRUNCH, MOVE_THUNDER_WAVE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_ELECTRODE, .moves = {MOVE_THUNDERBOLT, MOVE_EXPLOSION, MOVE_RAIN_DANCE, MOVE_THUNDER}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_MAGNETON, .moves = {MOVE_THUNDERBOLT, MOVE_THUNDER_WAVE, MOVE_HIDDEN_POWER, MOVE_EXPLOSION}},
+    {.iv = 200, .lvl = 44, .species = SPECIES_MANECTRIC, .moves = {MOVE_THUNDERBOLT, MOVE_FLAMETHROWER, MOVE_CRUNCH, MOVE_THUNDER_WAVE}},
+    {.iv = 200, .lvl = 44, .species = SPECIES_ELECTRODE, .moves = {MOVE_THUNDERBOLT, MOVE_EXPLOSION, MOVE_RAIN_DANCE, MOVE_THUNDER}},
+    {.iv = 200, .lvl = 44, .species = SPECIES_MAGNETON, .moves = {MOVE_THUNDERBOLT, MOVE_THUNDER_WAVE, MOVE_HIDDEN_POWER, MOVE_EXPLOSION}},
 };
 
+/* Pacifidlog Town (lvl ~33, water route town) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierDorine[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_WAILORD, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_EARTHQUAKE, MOVE_REST}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_KINGDRA, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_DRAGON_DANCE, MOVE_RETURN}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_LUDICOLO, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_GIGA_DRAIN, MOVE_RAIN_DANCE}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_WAILMER, .moves = {MOVE_SURF, MOVE_ROLLOUT, MOVE_WHIRLPOOL, MOVE_REST}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_SEADRA, .moves = {MOVE_SURF, MOVE_SMOKESCREEN, MOVE_TWISTER, MOVE_AGILITY}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_LOMBRE, .moves = {MOVE_SURF, MOVE_ABSORB, MOVE_NATURE_POWER, MOVE_FAKE_OUT}},
 };
 
+/* Ever Grande City (lvl ~48, Victory Road/E4) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierRaul[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_METAGROSS, .moves = {MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_PSYCHIC, MOVE_EXPLOSION}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SALAMENCE, .moves = {MOVE_DRAGON_CLAW, MOVE_FLAMETHROWER, MOVE_BRICK_BREAK, MOVE_DRAGON_DANCE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SWAMPERT, .moves = {MOVE_EARTHQUAKE, MOVE_SURF, MOVE_ICE_BEAM, MOVE_COUNTER}},
+    {.iv = 200, .lvl = 48, .species = SPECIES_METAGROSS, .moves = {MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_PSYCHIC, MOVE_EXPLOSION}},
+    {.iv = 200, .lvl = 48, .species = SPECIES_SHELGON, .moves = {MOVE_DRAGON_CLAW, MOVE_FLAMETHROWER, MOVE_BRICK_BREAK, MOVE_PROTECT}},
+    {.iv = 200, .lvl = 48, .species = SPECIES_SWAMPERT, .moves = {MOVE_EARTHQUAKE, MOVE_SURF, MOVE_ICE_BEAM, MOVE_COUNTER}},
 };
 
 /* Battle Frontier overworld trainers - Routes */
 
+/* Route 101 (wild lvl 2-5) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierJaxon[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_AGGRON, .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_IRON_TAIL, MOVE_DOUBLE_EDGE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_ZANGOOSE, .moves = {MOVE_RETURN, MOVE_SHADOW_BALL, MOVE_BRICK_BREAK, MOVE_SWORDS_DANCE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_ABSOL, .moves = {MOVE_SHADOW_BALL, MOVE_AERIAL_ACE, MOVE_SWORDS_DANCE, MOVE_RETURN}},
+    {.iv = 25, .lvl = 5, .species = SPECIES_ARON, .moves = {MOVE_TACKLE, MOVE_HARDEN, MOVE_MUD_SLAP, MOVE_NONE}},
+    {.iv = 25, .lvl = 5, .species = SPECIES_ZANGOOSE, .moves = {MOVE_SCRATCH, MOVE_LEER, MOVE_NONE, MOVE_NONE}},
+    {.iv = 25, .lvl = 5, .species = SPECIES_ABSOL, .moves = {MOVE_SCRATCH, MOVE_LEER, MOVE_NONE, MOVE_NONE}},
 };
 
+/* Route 102 (wild lvl 3-5) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierEmilee[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_GARDEVOIR, .moves = {MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_CALM_MIND, MOVE_WILL_O_WISP}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_DELCATTY, .moves = {MOVE_RETURN, MOVE_SHADOW_BALL, MOVE_THUNDER_WAVE, MOVE_SING}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_MEDICHAM, .moves = {MOVE_HI_JUMP_KICK, MOVE_PSYCHIC, MOVE_ROCK_SLIDE, MOVE_FAKE_OUT}},
+    {.iv = 25, .lvl = 6, .species = SPECIES_RALTS, .moves = {MOVE_GROWL, MOVE_CONFUSION, MOVE_NONE, MOVE_NONE}},
+    {.iv = 25, .lvl = 6, .species = SPECIES_SKITTY, .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_ATTRACT, MOVE_SING}},
+    {.iv = 25, .lvl = 6, .species = SPECIES_MEDITITE, .moves = {MOVE_BIDE, MOVE_MEDITATE, MOVE_NONE, MOVE_NONE}},
 };
 
+/* Route 103 (wild lvl 2-5) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierArmando[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_CLAYDOL, .moves = {MOVE_EARTHQUAKE, MOVE_PSYCHIC, MOVE_ICE_BEAM, MOVE_EXPLOSION}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_ARMALDO, .moves = {MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_AERIAL_ACE, MOVE_SWORDS_DANCE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_CRADILY, .moves = {MOVE_GIGA_DRAIN, MOVE_ANCIENT_POWER, MOVE_TOXIC, MOVE_RECOVER}},
+    {.iv = 25, .lvl = 6, .species = SPECIES_BALTOY, .moves = {MOVE_CONFUSION, MOVE_HARDEN, MOVE_NONE, MOVE_NONE}},
+    {.iv = 25, .lvl = 6, .species = SPECIES_ANORITH, .moves = {MOVE_SCRATCH, MOVE_HARDEN, MOVE_NONE, MOVE_NONE}},
+    {.iv = 25, .lvl = 6, .species = SPECIES_LILEEP, .moves = {MOVE_ASTONISH, MOVE_CONSTRICT, MOVE_NONE, MOVE_NONE}},
 };
 
+/* Route 104 (wild lvl 3-5) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierJosie[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_SCEPTILE, .moves = {MOVE_LEAF_BLADE, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_CRUNCH}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_LUDICOLO, .moves = {MOVE_SURF, MOVE_GIGA_DRAIN, MOVE_ICE_BEAM, MOVE_RAIN_DANCE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_BRELOOM, .moves = {MOVE_SKY_UPPERCUT, MOVE_MACH_PUNCH, MOVE_SPORE, MOVE_SLUDGE_BOMB}},
+    {.iv = 25, .lvl = 6, .species = SPECIES_TREECKO, .moves = {MOVE_POUND, MOVE_LEER, MOVE_ABSORB, MOVE_NONE}},
+    {.iv = 25, .lvl = 6, .species = SPECIES_LOTAD, .moves = {MOVE_ASTONISH, MOVE_GROWL, MOVE_ABSORB, MOVE_NONE}},
+    {.iv = 25, .lvl = 6, .species = SPECIES_SHROOMISH, .moves = {MOVE_ABSORB, MOVE_TACKLE, MOVE_STUN_SPORE, MOVE_NONE}},
 };
 
+/* Route 106 (water route, near Dewford, ~lvl 14) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierPedro[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_GYARADOS, .moves = {MOVE_EARTHQUAKE, MOVE_RETURN, MOVE_DRAGON_DANCE, MOVE_SURF}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_TENTACRUEL, .moves = {MOVE_SURF, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_BARRIER}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SHARPEDO, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM}},
+    {.iv = 50, .lvl = 14, .species = SPECIES_TENTACOOL, .moves = {MOVE_POISON_STING, MOVE_SUPERSONIC, MOVE_CONSTRICT, MOVE_ACID}},
+    {.iv = 50, .lvl = 14, .species = SPECIES_CARVANHA, .moves = {MOVE_LEER, MOVE_BITE, MOVE_RAGE, MOVE_FOCUS_ENERGY}},
+    {.iv = 50, .lvl = 14, .species = SPECIES_WINGULL, .moves = {MOVE_GROWL, MOVE_WATER_GUN, MOVE_SUPERSONIC, MOVE_WING_ATTACK}},
 };
 
+/* Route 108 (water route, post-Brawly, ~lvl 16) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierElaine[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_MILOTIC, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_TOXIC}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_STARMIE, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_PSYCHIC}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_LAPRAS, .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_THUNDERBOLT, MOVE_SING}},
+    {.iv = 50, .lvl = 16, .species = SPECIES_STARYU, .moves = {MOVE_TACKLE, MOVE_HARDEN, MOVE_WATER_GUN, MOVE_RAPID_SPIN}},
+    {.iv = 50, .lvl = 16, .species = SPECIES_MARILL, .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_WATER_GUN, MOVE_ROLLOUT}},
+    {.iv = 50, .lvl = 16, .species = SPECIES_SPHEAL, .moves = {MOVE_DEFENSE_CURL, MOVE_POWDER_SNOW, MOVE_GROWL, MOVE_WATER_GUN}},
 };
 
+/* Route 109 (water route, near Slateport, ~lvl 16) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierGavin[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_KINGDRA, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_DRAGON_DANCE, MOVE_RETURN}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_WAILORD, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_EARTHQUAKE, MOVE_REST}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_CRAWDAUNT, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_BRICK_BREAK, MOVE_SWORDS_DANCE}},
+    {.iv = 50, .lvl = 16, .species = SPECIES_HORSEA, .moves = {MOVE_BUBBLE, MOVE_SMOKESCREEN, MOVE_LEER, MOVE_WATER_GUN}},
+    {.iv = 50, .lvl = 16, .species = SPECIES_WAILMER, .moves = {MOVE_SPLASH, MOVE_GROWL, MOVE_WATER_GUN, MOVE_ROLLOUT}},
+    {.iv = 50, .lvl = 16, .species = SPECIES_CORPHISH, .moves = {MOVE_BUBBLE, MOVE_HARDEN, MOVE_VICE_GRIP, MOVE_LEER}},
 };
 
+/* Route 113 (wild lvl 14-16) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierTodd[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_NINJASK, .moves = {MOVE_AERIAL_ACE, MOVE_SWORDS_DANCE, MOVE_BATON_PASS, MOVE_SILVER_WIND}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_CROBAT, .moves = {MOVE_SLUDGE_BOMB, MOVE_AERIAL_ACE, MOVE_SHADOW_BALL, MOVE_CONFUSE_RAY}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SHEDINJA, .moves = {MOVE_SHADOW_BALL, MOVE_RETURN, MOVE_TOXIC, MOVE_CONFUSE_RAY}},
+    {.iv = 75, .lvl = 17, .species = SPECIES_NINCADA, .moves = {MOVE_SCRATCH, MOVE_HARDEN, MOVE_LEECH_LIFE, MOVE_SAND_ATTACK}},
+    {.iv = 75, .lvl = 17, .species = SPECIES_ZUBAT, .moves = {MOVE_LEECH_LIFE, MOVE_SUPERSONIC, MOVE_ASTONISH, MOVE_BITE}},
+    {.iv = 75, .lvl = 17, .species = SPECIES_SHUPPET, .moves = {MOVE_KNOCK_OFF, MOVE_SCREECH, MOVE_NIGHT_SHADE, MOVE_CURSE}},
 };
 
+/* Route 114 (wild lvl 15-18) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierRuth[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_SWAMPERT, .moves = {MOVE_EARTHQUAKE, MOVE_SURF, MOVE_ICE_BEAM, MOVE_COUNTER}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_FLYGON, .moves = {MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_FLAMETHROWER, MOVE_CRUNCH}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_DONPHAN, .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_RAPID_SPIN, MOVE_COUNTER}},
+    {.iv = 75, .lvl = 18, .species = SPECIES_MARSHTOMP, .moves = {MOVE_TACKLE, MOVE_GROWL, MOVE_MUD_SLAP, MOVE_WATER_GUN}},
+    {.iv = 75, .lvl = 18, .species = SPECIES_TRAPINCH, .moves = {MOVE_BITE, MOVE_SAND_ATTACK, MOVE_FAINT_ATTACK, MOVE_NONE}},
+    {.iv = 75, .lvl = 18, .species = SPECIES_PHANPY, .moves = {MOVE_TACKLE, MOVE_GROWL, MOVE_DEFENSE_CURL, MOVE_FLAIL}},
 };
 
+/* Route 115 (wild lvl 23-26) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierMelody[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_BLAZIKEN, .moves = {MOVE_SKY_UPPERCUT, MOVE_BLAZE_KICK, MOVE_ROCK_SLIDE, MOVE_SWORDS_DANCE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_MEDICHAM, .moves = {MOVE_HI_JUMP_KICK, MOVE_PSYCHIC, MOVE_ROCK_SLIDE, MOVE_BULK_UP}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_HARIYAMA, .moves = {MOVE_CROSS_CHOP, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_FAKE_OUT}},
+    {.iv = 100, .lvl = 25, .species = SPECIES_COMBUSKEN, .moves = {MOVE_SCRATCH, MOVE_FOCUS_ENERGY, MOVE_EMBER, MOVE_DOUBLE_KICK}},
+    {.iv = 100, .lvl = 25, .species = SPECIES_MEDITITE, .moves = {MOVE_BIDE, MOVE_MEDITATE, MOVE_CONFUSION, MOVE_DETECT}},
+    {.iv = 100, .lvl = 25, .species = SPECIES_HARIYAMA, .moves = {MOVE_ARM_THRUST, MOVE_SAND_ATTACK, MOVE_VITAL_THROW, MOVE_FAKE_OUT}},
 };
 
+/* Route 116 (wild lvl 5-8) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierSkyler[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_HERACROSS, .moves = {MOVE_MEGAHORN, MOVE_BRICK_BREAK, MOVE_ROCK_SLIDE, MOVE_SWORDS_DANCE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_PINSIR, .moves = {MOVE_SWORDS_DANCE, MOVE_RETURN, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_ARMALDO, .moves = {MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_AERIAL_ACE, MOVE_SWORDS_DANCE}},
+    {.iv = 30, .lvl = 8, .species = SPECIES_HERACROSS, .moves = {MOVE_TACKLE, MOVE_LEER, MOVE_HORN_ATTACK, MOVE_NONE}},
+    {.iv = 30, .lvl = 8, .species = SPECIES_PINSIR, .moves = {MOVE_VICE_GRIP, MOVE_FOCUS_ENERGY, MOVE_NONE, MOVE_NONE}},
+    {.iv = 30, .lvl = 8, .species = SPECIES_ANORITH, .moves = {MOVE_SCRATCH, MOVE_HARDEN, MOVE_NONE, MOVE_NONE}},
 };
 
+/* Route 117 (wild lvl 13-14) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierErick[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_BLISSEY, .moves = {MOVE_SEISMIC_TOSS, MOVE_SOFT_BOILED, MOVE_TOXIC, MOVE_AROMATHERAPY}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SKARMORY, .moves = {MOVE_DRILL_PECK, MOVE_STEEL_WING, MOVE_SPIKES, MOVE_WHIRLWIND}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_UMBREON, .moves = {MOVE_TOXIC, MOVE_CONFUSE_RAY, MOVE_FAINT_ATTACK, MOVE_MOONLIGHT}},
+    {.iv = 60, .lvl = 15, .species = SPECIES_CHANSEY, .moves = {MOVE_POUND, MOVE_GROWL, MOVE_TAIL_WHIP, MOVE_DOUBLE_SLAP}},
+    {.iv = 60, .lvl = 15, .species = SPECIES_SKARMORY, .moves = {MOVE_LEER, MOVE_PECK, MOVE_SAND_ATTACK, MOVE_SWIFT}},
+    {.iv = 60, .lvl = 15, .species = SPECIES_EEVEE, .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_SAND_ATTACK, MOVE_QUICK_ATTACK}},
 };
 
+/* Route 122 (water route, post-Fortree, ~lvl 28) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierJoyce[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_LANTURN, .moves = {MOVE_THUNDERBOLT, MOVE_SURF, MOVE_ICE_BEAM, MOVE_THUNDER_WAVE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_CORSOLA, .moves = {MOVE_SURF, MOVE_ROCK_SLIDE, MOVE_TOXIC, MOVE_RECOVER}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_AZUMARILL, .moves = {MOVE_SURF, MOVE_RETURN, MOVE_BRICK_BREAK, MOVE_RAIN_DANCE}},
+    {.iv = 100, .lvl = 28, .species = SPECIES_LANTURN, .moves = {MOVE_SURF, MOVE_SPARK, MOVE_CONFUSE_RAY, MOVE_THUNDER_WAVE}},
+    {.iv = 100, .lvl = 28, .species = SPECIES_CORSOLA, .moves = {MOVE_ROCK_SLIDE, MOVE_BUBBLE_BEAM, MOVE_RECOVER, MOVE_TOXIC}},
+    {.iv = 100, .lvl = 28, .species = SPECIES_AZUMARILL, .moves = {MOVE_SURF, MOVE_RETURN, MOVE_ROLLOUT, MOVE_RAIN_DANCE}},
 };
 
+/* Route 124 (water route, near Mossdeep, ~lvl 32) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierMalory[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_STARMIE, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_RECOVER}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_GYARADOS, .moves = {MOVE_EARTHQUAKE, MOVE_RETURN, MOVE_DRAGON_DANCE, MOVE_SURF}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_TENTACRUEL, .moves = {MOVE_SURF, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_TOXIC}},
+    {.iv = 120, .lvl = 32, .species = SPECIES_STARYU, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_RECOVER, MOVE_RAPID_SPIN}},
+    {.iv = 120, .lvl = 32, .species = SPECIES_GYARADOS, .moves = {MOVE_SURF, MOVE_BITE, MOVE_DRAGON_DANCE, MOVE_RETURN}},
+    {.iv = 120, .lvl = 32, .species = SPECIES_TENTACRUEL, .moves = {MOVE_SURF, MOVE_SLUDGE_BOMB, MOVE_ACID, MOVE_BARRIER}},
 };
 
+/* Route 125 (water route, near Mossdeep, ~lvl 32) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierEsther[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_LAPRAS, .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_THUNDERBOLT, MOVE_SING}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_KINGDRA, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_DRAGON_DANCE, MOVE_RETURN}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_WALREIN, .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_REST}},
+    {.iv = 120, .lvl = 32, .species = SPECIES_LAPRAS, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_BODY_SLAM, MOVE_SING}},
+    {.iv = 120, .lvl = 32, .species = SPECIES_SEADRA, .moves = {MOVE_SURF, MOVE_SMOKESCREEN, MOVE_TWISTER, MOVE_AGILITY}},
+    {.iv = 120, .lvl = 32, .species = SPECIES_SEALEO, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_ENCORE, MOVE_BODY_SLAM}},
 };
 
+/* Route 126 (water route, ~lvl 33) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierWilson[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_SHARPEDO, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_CRAWDAUNT, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_BRICK_BREAK, MOVE_SWORDS_DANCE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_LUDICOLO, .moves = {MOVE_SURF, MOVE_GIGA_DRAIN, MOVE_ICE_BEAM, MOVE_RAIN_DANCE}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_SHARPEDO, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_SCARY_FACE, MOVE_SLASH}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_CRAWDAUNT, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_KNOCK_OFF, MOVE_TAUNT}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_LOMBRE, .moves = {MOVE_SURF, MOVE_ABSORB, MOVE_NATURE_POWER, MOVE_FAKE_OUT}},
 };
 
+/* Route 127 (water route, ~lvl 33) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierClare[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_MILOTIC, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_TOXIC}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_WAILORD, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_EARTHQUAKE, MOVE_REST}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_CORSOLA, .moves = {MOVE_SURF, MOVE_ROCK_SLIDE, MOVE_TOXIC, MOVE_RECOVER}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_STARYU, .moves = {MOVE_SURF, MOVE_RECOVER, MOVE_RAPID_SPIN, MOVE_SWIFT}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_WAILMER, .moves = {MOVE_SURF, MOVE_ROLLOUT, MOVE_WHIRLPOOL, MOVE_REST}},
+    {.iv = 125, .lvl = 33, .species = SPECIES_CORSOLA, .moves = {MOVE_ROCK_SLIDE, MOVE_BUBBLE_BEAM, MOVE_RECOVER, MOVE_TOXIC}},
 };
 
+/* Route 128 (water route, near Ever Grande, ~lvl 35) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierTess[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_GYARADOS, .moves = {MOVE_EARTHQUAKE, MOVE_RETURN, MOVE_DRAGON_DANCE, MOVE_SURF}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_STARMIE, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_RECOVER}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SHARPEDO, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_GYARADOS, .moves = {MOVE_SURF, MOVE_BITE, MOVE_DRAGON_DANCE, MOVE_RETURN}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_STARYU, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_RECOVER}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_SHARPEDO, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_SCARY_FACE, MOVE_SLASH}},
 };
 
+/* Route 129 (water route, ~lvl 35) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierVince[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_WALREIN, .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_REST}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_KINGDRA, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_DRAGON_DANCE, MOVE_RETURN}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_TENTACRUEL, .moves = {MOVE_SURF, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_BARRIER}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_SEALEO, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_BODY_SLAM, MOVE_REST}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_SEADRA, .moves = {MOVE_SURF, MOVE_SMOKESCREEN, MOVE_TWISTER, MOVE_AGILITY}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_TENTACRUEL, .moves = {MOVE_SURF, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_BARRIER}},
 };
 
+/* Route 130 (water route, ~lvl 35) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierBryon[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_SWAMPERT, .moves = {MOVE_EARTHQUAKE, MOVE_SURF, MOVE_ICE_BEAM, MOVE_COUNTER}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_MILOTIC, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_TOXIC}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_LUDICOLO, .moves = {MOVE_SURF, MOVE_GIGA_DRAIN, MOVE_ICE_BEAM, MOVE_RAIN_DANCE}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_MARSHTOMP, .moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_MUD_SHOT, MOVE_PROTECT}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_STARYU, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_RAPID_SPIN}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_LOMBRE, .moves = {MOVE_SURF, MOVE_ABSORB, MOVE_NATURE_POWER, MOVE_RAIN_DANCE}},
 };
 
+/* Route 131 (water route, ~lvl 35) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierGillian[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_LANTURN, .moves = {MOVE_THUNDERBOLT, MOVE_SURF, MOVE_ICE_BEAM, MOVE_THUNDER_WAVE}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_STARMIE, .moves = {MOVE_SURF, MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_ICE_BEAM}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_AZUMARILL, .moves = {MOVE_SURF, MOVE_RETURN, MOVE_BRICK_BREAK, MOVE_RAIN_DANCE}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_LANTURN, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_THUNDER_WAVE}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_STARYU, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_RECOVER, MOVE_RAPID_SPIN}},
+    {.iv = 150, .lvl = 35, .species = SPECIES_AZUMARILL, .moves = {MOVE_SURF, MOVE_RETURN, MOVE_BRICK_BREAK, MOVE_RAIN_DANCE}},
 };
 
+/* Route 132 (water route, ~lvl 36) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierDavin[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_GYARADOS, .moves = {MOVE_EARTHQUAKE, MOVE_RETURN, MOVE_DRAGON_DANCE, MOVE_SURF}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_SHARPEDO, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_CRAWDAUNT, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_BRICK_BREAK, MOVE_SWORDS_DANCE}},
+    {.iv = 150, .lvl = 36, .species = SPECIES_GYARADOS, .moves = {MOVE_SURF, MOVE_RETURN, MOVE_DRAGON_DANCE, MOVE_BITE}},
+    {.iv = 150, .lvl = 36, .species = SPECIES_SHARPEDO, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_SCARY_FACE, MOVE_SLASH}},
+    {.iv = 150, .lvl = 36, .species = SPECIES_CRAWDAUNT, .moves = {MOVE_CRUNCH, MOVE_SURF, MOVE_KNOCK_OFF, MOVE_SWORDS_DANCE}},
 };
 
+/* Route 133 (water route, ~lvl 36) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierTrevon[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_KINGDRA, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_DRAGON_DANCE, MOVE_RETURN}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_TENTACRUEL, .moves = {MOVE_SURF, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_TOXIC}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_WALREIN, .moves = {MOVE_ICE_BEAM, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_REST}},
+    {.iv = 150, .lvl = 36, .species = SPECIES_SEADRA, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_SMOKESCREEN, MOVE_TWISTER}},
+    {.iv = 150, .lvl = 36, .species = SPECIES_TENTACRUEL, .moves = {MOVE_SURF, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_TOXIC}},
+    {.iv = 150, .lvl = 36, .species = SPECIES_SEALEO, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_BODY_SLAM, MOVE_REST}},
 };
 
+/* Route 134 (water route, ~lvl 36) */
 static const struct TrainerMonNoItemCustomMoves sParty_FrontierMateo[] = {
-    {.iv = 255, .lvl = 50, .species = SPECIES_MILOTIC, .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_TOXIC}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_STARMIE, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_PSYCHIC}},
-    {.iv = 255, .lvl = 50, .species = SPECIES_GYARADOS, .moves = {MOVE_EARTHQUAKE, MOVE_RETURN, MOVE_DRAGON_DANCE, MOVE_SURF}},
+    {.iv = 150, .lvl = 36, .species = SPECIES_CORSOLA, .moves = {MOVE_SURF, MOVE_ROCK_SLIDE, MOVE_RECOVER, MOVE_TOXIC}},
+    {.iv = 150, .lvl = 36, .species = SPECIES_STARYU, .moves = {MOVE_SURF, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_RECOVER}},
+    {.iv = 150, .lvl = 36, .species = SPECIES_GYARADOS, .moves = {MOVE_SURF, MOVE_RETURN, MOVE_DRAGON_DANCE, MOVE_BITE}},
 };
 
 static const struct TrainerMonNoItemDefaultMoves sParty_Andres2[] = {
