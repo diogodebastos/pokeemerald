@@ -1,6 +1,7 @@
 #ifndef GUARD_BATTLE_ROYALE_H
 #define GUARD_BATTLE_ROYALE_H
 
+bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId);
 void ActivateBattleRoyaleMode(void);
 void DeactivateBattleRoyaleMode(void);
 bool32 IsBattleRoyaleModeActive(void);

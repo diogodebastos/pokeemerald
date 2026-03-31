@@ -40,6 +40,8 @@
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
+#include "battle_royale.h"
+#include "battle_royale_tracker.h"
 #include "trainer_card.h"
 #include "window.h"
 #include "union_room.h"
@@ -62,7 +64,8 @@ enum
     MENU_ACTION_PLAYER_LINK,
     MENU_ACTION_REST_FRONTIER,
     MENU_ACTION_RETIRE_FRONTIER,
-    MENU_ACTION_PYRAMID_BAG
+    MENU_ACTION_PYRAMID_BAG,
+    MENU_ACTION_TRACKER
 };
 
 // Save status
@@ -82,7 +85,7 @@ EWRAM_DATA static u8 sSafariBallsWindowId = 0;
 EWRAM_DATA static u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
-EWRAM_DATA static u8 sCurrentStartMenuActions[9] = {0};
+EWRAM_DATA static u8 sCurrentStartMenuActions[10] = {0};
 EWRAM_DATA static s8 sInitStartMenuData[2] = {0};
 
 EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
@@ -98,6 +101,7 @@ static bool8 StartMenuPokeNavCallback(void);
 static bool8 StartMenuPlayerNameCallback(void);
 static bool8 StartMenuSaveCallback(void);
 static bool8 StartMenuOptionCallback(void);
+static bool8 StartMenuTrackerCallback(void);
 static bool8 StartMenuExitCallback(void);
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkModePlayerNameCallback(void);
@@ -179,6 +183,8 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
     .baseBlock = 0x8
 };
 
+static const u8 sText_MenuTracker[] = _("TRACKER");
+
 static const struct MenuAction sStartMenuItems[] =
 {
     [MENU_ACTION_POKEDEX]         = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
@@ -193,7 +199,8 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PLAYER_LINK]     = {gText_MenuPlayer,  {.u8_void = StartMenuLinkModePlayerNameCallback}},
     [MENU_ACTION_REST_FRONTIER]   = {gText_MenuRest,    {.u8_void = StartMenuSaveCallback}},
     [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
-    [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}}
+    [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
+    [MENU_ACTION_TRACKER]         = {sText_MenuTracker, {.u8_void = StartMenuTrackerCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -331,9 +338,17 @@ static void BuildNormalStartMenu(void)
     }
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
+
+    if (IsBattleRoyaleModeActive())
+        AddStartMenuAction(MENU_ACTION_TRACKER);
+
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    
+    if (!IsBattleRoyaleModeActive())
+        AddStartMenuAction(MENU_ACTION_EXIT);
+
+    // AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
 static void BuildSafariZoneStartMenu(void)
@@ -736,6 +751,22 @@ static bool8 StartMenuOptionCallback(void)
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_InitOptionMenu); // Display option menu
+        gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool8 StartMenuTrackerCallback(void)
+{
+    if (!gPaletteFade.active)
+    {
+        PlayRainStoppingSoundEffect();
+        RemoveExtraStartMenuWindows();
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(CB2_InitBattleRoyaleTracker);
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
 
         return TRUE;
