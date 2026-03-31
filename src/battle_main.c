@@ -1965,13 +1965,23 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     s32 i, j;
     u8 monsCount;
     bool8 isFrontierTrainer;
+    bool8 isGymLeader;
+    bool8 isE4Trainer;
+    bool8 isChampion;
+    bool8 isStrongerTrainer;
     s32 playerMaxLevel;
 
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
 
     isFrontierTrainer = (trainerNum >= TRAINER_FRONTIER_LEON && trainerNum <= TRAINER_FRONTIER_MATEO);
-    if (isFrontierTrainer)
+    isGymLeader = (trainerNum >= TRAINER_ROXANNE_1 && trainerNum <= TRAINER_JUAN_1);
+    isE4Trainer = (trainerNum >= TRAINER_SIDNEY && trainerNum <= TRAINER_DRAKE);
+    isChampion = (trainerNum == TRAINER_WALLACE || trainerNum == TRAINER_STEVEN);
+
+    isStrongerTrainer = isFrontierTrainer || isGymLeader || isE4Trainer || isChampion;
+
+    if (isStrongerTrainer)
         playerMaxLevel = GetHighestLevelInPlayerParty();
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
@@ -2011,13 +2021,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case 0:
             {
                 const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
+                s32 monLevel;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                monLevel = isStrongerTrainer ? playerMaxLevel : partyData[i].lvl;
+                CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
             }
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
@@ -2030,7 +2042,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                monLevel = isFrontierTrainer ? playerMaxLevel : partyData[i].lvl;
+                monLevel = isStrongerTrainer ? playerMaxLevel : partyData[i].lvl;
                 CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
@@ -2043,13 +2055,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
+                s32 monLevel;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                monLevel = isStrongerTrainer ? playerMaxLevel : partyData[i].lvl;
+                CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
@@ -2057,13 +2071,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
+                s32 monLevel;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                monLevel = isStrongerTrainer ? playerMaxLevel : partyData[i].lvl;
+                CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
