@@ -47,7 +47,7 @@ static bool32 IsRematchVariant(u16 trainerId)
     return FALSE;
 }
 
-static bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
+bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
 {
     if (trainerId == TRAINER_NONE
      || trainerId >= TRAINERS_COUNT)
