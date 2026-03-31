@@ -1964,9 +1964,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 fixedIV;
     s32 i, j;
     u8 monsCount;
+    bool8 isFrontierTrainer;
+    s32 playerMaxLevel;
 
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
+
+    isFrontierTrainer = (trainerNum >= TRAINER_FRONTIER_LEON && trainerNum <= TRAINER_FRONTIER_MATEO);
+    if (isFrontierTrainer)
+        playerMaxLevel = GetHighestLevelInPlayerParty();
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
@@ -2017,13 +2023,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
                 const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
+                s32 monLevel;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                monLevel = isFrontierTrainer ? playerMaxLevel : partyData[i].lvl;
+                CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
