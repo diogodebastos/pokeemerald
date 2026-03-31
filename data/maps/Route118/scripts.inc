@@ -302,3 +302,8 @@ Route118_EventScript_Greta::
 	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+Route118_EventScript_Dudley::
+	trainerbattle_single TRAINER_DUDLEY, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end
+

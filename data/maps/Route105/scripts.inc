@@ -97,6 +97,11 @@ Route105_EventScript_Dudley::
 	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+Route105_EventScript_Greta::
+	trainerbattle_single TRAINER_GRETA, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end
+
 Route104_Text_RegisteredDadInPokenav:
 	.string "Registered DAD NORMAN\n"
 	.string "in the POKéNAV.$"

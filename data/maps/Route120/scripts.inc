@@ -432,3 +432,8 @@ Route120_EventScript_Anabel::
 	trainerbattle_single TRAINER_ANABEL, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
 	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
 	end
+
+Route120_EventScript_Spenser::
+	trainerbattle_single TRAINER_SPENSER, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
+	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	end

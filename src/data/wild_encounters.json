@@ -911,14 +911,14 @@
             "encounter_rate": 20,
             "mons": [
               {
-                "min_level": 10,
-                "max_level": 15,
-                "species": "SPECIES_GEODUDE"
+                "min_level": 15,
+                "max_level": 25,
+                "species": "SPECIES_ANORITH"
               },
               {
-                "min_level": 5,
-                "max_level": 10,
-                "species": "SPECIES_GEODUDE"
+                "min_level": 15,
+                "max_level": 25,
+                "species": "SPECIES_LILEEP"
               },
               {
                 "min_level": 15,
@@ -3295,9 +3295,9 @@
             "encounter_rate": 10,
             "mons": [
               {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_VOLTORB"
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_JOLTEON"
               },
               {
                 "min_level": 24,
@@ -6821,9 +6821,9 @@
             "encounter_rate": 10,
             "mons": [
               {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_JOLTEON"
+                "min_level": 24,
+                "max_level": 24,
+                "species": "SPECIES_VOLTORB"
               },
               {
                 "min_level": 24,
