@@ -7,6 +7,7 @@ EventScript_RepelWoreOff::
 	bufferitemname STR_VAR_1, VAR_0x8004
 	msgbox Text_UseAnotherRepel, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, EventScript_UseAnotherRepel
+	closemessage
 EventScript_RepelWoreOff_End:
 	end
 

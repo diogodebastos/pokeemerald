@@ -9027,6 +9027,11 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayLilycoveTorchic[] = {
 static const struct TrainerMonNoItemDefaultMoves sParty_BrendanEvergrandeMudkip[] = {
     {
     .iv = 200,
+    .lvl = 41,
+    .species = SPECIES_TROPIUS,
+    },
+    {
+    .iv = 200,
     .lvl = 42,
     .species = SPECIES_ABSOL,
     },
@@ -9054,6 +9059,11 @@ static const struct TrainerMonNoItemDefaultMoves sParty_BrendanEvergrandeMudkip[
 
 /* Player picked Treecko -> rival has Torchic line (Blaziken) */
 static const struct TrainerMonNoItemDefaultMoves sParty_BrendanEvergrandeTreecko[] = {
+    {
+    .iv = 200,
+    .lvl = 41,
+    .species = SPECIES_TROPIUS,
+    },
     {
     .iv = 200,
     .lvl = 42,
@@ -9085,6 +9095,11 @@ static const struct TrainerMonNoItemDefaultMoves sParty_BrendanEvergrandeTreecko
 static const struct TrainerMonNoItemDefaultMoves sParty_BrendanEvergrandeTorchic[] = {
     {
     .iv = 200,
+    .lvl = 41,
+    .species = SPECIES_TROPIUS,
+    },
+    {
+    .iv = 200,
     .lvl = 42,
     .species = SPECIES_ABSOL,
     },
@@ -9111,6 +9126,11 @@ static const struct TrainerMonNoItemDefaultMoves sParty_BrendanEvergrandeTorchic
 };
 
 static const struct TrainerMonNoItemDefaultMoves sParty_MayEvergrandeMudkip[] = {
+    {
+    .iv = 200,
+    .lvl = 41,
+    .species = SPECIES_TROPIUS,
+    },
     {
     .iv = 200,
     .lvl = 42,
@@ -9141,6 +9161,11 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayEvergrandeMudkip[] = 
 static const struct TrainerMonNoItemDefaultMoves sParty_MayEvergrandeTreecko[] = {
     {
     .iv = 200,
+    .lvl = 41,
+    .species = SPECIES_TROPIUS,
+    },
+    {
+    .iv = 200,
     .lvl = 42,
     .species = SPECIES_ABSOL,
     },
@@ -9167,6 +9192,11 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayEvergrandeTreecko[] =
 };
 
 static const struct TrainerMonNoItemDefaultMoves sParty_MayEvergrandeTorchic[] = {
+    {
+    .iv = 200,
+    .lvl = 41,
+    .species = SPECIES_TROPIUS,
+    },
     {
     .iv = 200,
     .lvl = 42,
