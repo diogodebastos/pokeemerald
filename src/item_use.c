@@ -865,11 +865,29 @@ static void Task_UseRepel(u8 taskId)
     if (!IsSEPlaying())
     {
         VarSet(VAR_REPEL_STEP_COUNT, GetItemHoldEffectParam(gSpecialVar_ItemId));
+        VarSet(VAR_LAST_REPEL_ITEM_ID, gSpecialVar_ItemId);
         RemoveUsedItem();
         if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
             DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
+    }
+}
+
+void Special_UseRepelFromBag(void)
+{
+    u16 itemId = VarGet(VAR_LAST_REPEL_ITEM_ID);
+
+    if (itemId != ITEM_NONE && CheckBagHasItem(itemId, 1))
+    {
+        RemoveBagItem(itemId, 1);
+        VarSet(VAR_REPEL_STEP_COUNT, GetItemHoldEffectParam(itemId));
+        PlaySE(SE_REPEL);
+        gSpecialVar_Result = TRUE;
+    }
+    else
+    {
+        gSpecialVar_Result = FALSE;
     }
 }
 

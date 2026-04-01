@@ -537,3 +537,4 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special ActivateBattleRoyaleMode
 	def_special DeactivateBattleRoyaleMode
+	def_special Special_UseRepelFromBag
