@@ -17,9 +17,11 @@
 #include "tv.h"
 #include "wild_encounter.h"
 #include "constants/abilities.h"
+#include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
+#include "constants/species.h"
 #include "constants/weather.h"
 
 extern const u8 EventScript_RepelWoreOff[];
@@ -442,6 +444,31 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
         break;
     case WILD_AREA_ROCKS:
         wildMonIndex = ChooseWildMonIndex_WaterRock();
+        break;
+    }
+
+    /* Rare Pokemon only appear in the wild after defeating the Elite Four */
+    switch (wildMonInfo->wildPokemon[wildMonIndex].species)
+    {
+    case SPECIES_CELEBI:
+    case SPECIES_ARTICUNO:
+    case SPECIES_ZAPDOS:
+    case SPECIES_MOLTRES:
+    case SPECIES_RAIKOU:
+    case SPECIES_ENTEI:
+    case SPECIES_SUICUNE:
+    case SPECIES_MEWTWO:
+    case SPECIES_MAGMAR:
+    case SPECIES_ELECTABUZZ:
+    case SPECIES_JYNX:
+    case SPECIES_MR_MIME:
+    case SPECIES_SNORLAX:
+    case SPECIES_TYROGUE:
+    case SPECIES_CHANSEY:
+    case SPECIES_TOGEPI:
+    case SPECIES_PORYGON:
+        if (!FlagGet(FLAG_SYS_GAME_CLEAR))
+            wildMonIndex = 0;
         break;
     }
 
