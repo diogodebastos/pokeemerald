@@ -271,6 +271,7 @@ static void Task_PrintSkillsPage(u8);
 static void PrintHeldItemName(void);
 static void PrintSkillsPageText(void);
 static void PrintRibbonCount(void);
+static const u8 *GetNatureStatColor(u8 nature, u8 statIndex);
 static void BufferLeftColumnStats(void);
 static void PrintLeftColumnStats(void);
 static void BufferRightColumnStats(void);
@@ -653,7 +654,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 7,
         .width = 6,
         .height = 6,
-        .paletteNum = 6,
+        .paletteNum = 7,
         .baseBlock = 489,
     },
     [PSS_DATA_WINDOW_SKILLS_STATS_RIGHT] = {
@@ -662,7 +663,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 7,
         .width = 3,
         .height = 6,
-        .paletteNum = 6,
+        .paletteNum = 7,
         .baseBlock = 525,
     },
     [PSS_DATA_WINDOW_EXP] = {
@@ -742,6 +743,10 @@ static const TaskFunc sTextPrinterTasks[] =
     [PSS_PAGE_BATTLE_MOVES] = Task_PrintBattleMoves,
     [PSS_PAGE_CONTEST_MOVES] = Task_PrintContestMoves
 };
+
+static const u8 sNatureStatDefaultColor[] = {0, 1, 2};
+static const u8 sNatureStatUpColor[] = {0, 9, 10};   /* green fg, dark green shadow (palette 7) */
+static const u8 sNatureStatDownColor[] = {0, 13, 14}; /* red fg, dark red shadow (palette 7) */
 
 static const u8 sMemoNatureTextColor[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
 static const u8 sMemoMiscTextColor[] = _("{COLOR WHITE}{SHADOW DARK_GRAY}"); // This is also affected by palettes, apparently
@@ -3388,52 +3393,69 @@ static void PrintRibbonCount(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_RIBBON_COUNT), text, x, 1, 0, 0);
 }
 
+static const u8 *GetNatureStatColor(u8 nature, u8 statIndex)
+{
+    if (gNatureStatTable[nature][statIndex] > 0)
+        return sNatureStatUpColor;
+    else if (gNatureStatTable[nature][statIndex] < 0)
+        return sNatureStatDownColor;
+    return sNatureStatDefaultColor;
+}
+
 static void BufferLeftColumnStats(void)
 {
-    u8 *currentHPString = Alloc(8);
-    u8 *maxHPString = Alloc(8);
-    u8 *attackString = Alloc(8);
-    u8 *defenseString = Alloc(8);
-
-    ConvertIntToDecimalStringN(currentHPString, sMonSummaryScreen->summary.currentHP, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(maxHPString, sMonSummaryScreen->summary.maxHP, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(attackString, sMonSummaryScreen->summary.atk, STR_CONV_MODE_RIGHT_ALIGN, 7);
-    ConvertIntToDecimalStringN(defenseString, sMonSummaryScreen->summary.def, STR_CONV_MODE_RIGHT_ALIGN, 7);
-
-    DynamicPlaceholderTextUtil_Reset();
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, currentHPString);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, maxHPString);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, attackString);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, defenseString);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftColumnLayout);
-
-    Free(currentHPString);
-    Free(maxHPString);
-    Free(attackString);
-    Free(defenseString);
+    /* HP string: "curHP/maxHP" */
+    ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.currentHP, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, sMonSummaryScreen->summary.maxHP, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    StringCopy(gStringVar4, gStringVar1);
+    StringAppend(gStringVar4, gText_Slash);
+    StringAppend(gStringVar4, gStringVar2);
 }
 
 static void PrintLeftColumnStats(void)
 {
-    PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_STATS_LEFT), gStringVar4, 4, 1, 0, 0);
+    u8 windowId;
+    u8 nature;
+
+    windowId = AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_STATS_LEFT);
+    nature = sMonSummaryScreen->summary.nature;
+
+    /* HP (not affected by nature) */
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 4, 1, 0, 0, sNatureStatDefaultColor, 0, gStringVar4);
+
+    /* Attack */
+    ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.atk, STR_CONV_MODE_RIGHT_ALIGN, 7);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 4, 17, 0, 0, GetNatureStatColor(nature, STAT_ATK - 1), 0, gStringVar1);
+
+    /* Defense */
+    ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.def, STR_CONV_MODE_RIGHT_ALIGN, 7);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 4, 33, 0, 0, GetNatureStatColor(nature, STAT_DEF - 1), 0, gStringVar1);
 }
 
 static void BufferRightColumnStats(void)
 {
-    ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.spatk, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar2, sMonSummaryScreen->summary.spdef, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar3, sMonSummaryScreen->summary.speed, STR_CONV_MODE_RIGHT_ALIGN, 3);
-
-    DynamicPlaceholderTextUtil_Reset();
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar2);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar3);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
+    /* No-op; formatting done in PrintRightColumnStats */
 }
 
 static void PrintRightColumnStats(void)
 {
-    PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_STATS_RIGHT), gStringVar4, 2, 1, 0, 0);
+    u8 windowId;
+    u8 nature;
+
+    windowId = AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_STATS_RIGHT);
+    nature = sMonSummaryScreen->summary.nature;
+
+    /* Sp. Attack */
+    ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.spatk, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 2, 1, 0, 0, GetNatureStatColor(nature, STAT_SPATK - 1), 0, gStringVar1);
+
+    /* Sp. Defense */
+    ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.spdef, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 2, 17, 0, 0, GetNatureStatColor(nature, STAT_SPDEF - 1), 0, gStringVar1);
+
+    /* Speed */
+    ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.speed, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, 2, 33, 0, 0, GetNatureStatColor(nature, STAT_SPEED - 1), 0, gStringVar1);
 }
 
 static void PrintExpPointsNextLevel(void)
