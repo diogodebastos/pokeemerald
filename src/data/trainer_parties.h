@@ -1250,7 +1250,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Julie[] = {
     {
     .iv = 100,
     .lvl = 42,
-    .species = SPECIES_POLIWAG,
+    .species = SPECIES_POLIWRATH,
     },
     {
     .iv = 100,
@@ -6442,7 +6442,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Leonard[] = {
     {
     .iv = 0,
     .lvl = 43,
-    .species = SPECIES_PSYDUCK,
+    .species = SPECIES_POLIWRATH,
     }
 };
 
@@ -11649,7 +11649,7 @@ static const struct TrainerMonItemCustomMoves sParty_Juan3[] = {
     {
     .iv = 255,
     .lvl = 50,
-    .species = SPECIES_POLIWHIRL,
+    .species = SPECIES_POLIWRATH,
     .heldItem = ITEM_NONE,
     .moves = {MOVE_HYPNOSIS, MOVE_RAIN_DANCE, MOVE_PROTECT, MOVE_HYDRO_PUMP}
     },
@@ -11701,7 +11701,7 @@ static const struct TrainerMonItemCustomMoves sParty_Juan4[] = {
     {
     .iv = 255,
     .lvl = 56,
-    .species = SPECIES_POLIWHIRL,
+    .species = SPECIES_POLIWRATH,
     .heldItem = ITEM_NONE,
     .moves = {MOVE_HYPNOSIS, MOVE_RAIN_DANCE, MOVE_PROTECT, MOVE_HYDRO_PUMP}
     },
