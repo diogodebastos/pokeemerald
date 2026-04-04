@@ -1711,3 +1711,70 @@ SootopolisCity_EventScript_FrontierChaz::
 	trainerbattle_single TRAINER_FRONTIER_CHAZ, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
 	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
 	end
+
+SootopolisCity_EventScript_NatureChanger::
+	lock
+	faceplayer
+	msgbox SootopolisCity_Text_NatureChangerIntro, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SootopolisCity_EventScript_NatureChangerDecline
+	goto SootopolisCity_EventScript_NatureChangerChooseMon
+
+SootopolisCity_EventScript_NatureChangerChooseMon::
+	msgbox SootopolisCity_Text_NatureChangerWhichMon, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, SootopolisCity_EventScript_NatureChangerDecline
+	special IsSelectedMonEgg
+	goto_if_eq VAR_RESULT, TRUE, SootopolisCity_EventScript_NatureChangerEgg
+	msgbox SootopolisCity_Text_NatureChangerChooseNature, MSGBOX_DEFAULT
+	special ShowNatureChanger
+	waitstate
+	goto_if_eq VAR_0x8005, NUM_NATURES, SootopolisCity_EventScript_NatureChangerChooseMon
+	special BufferNatureChangerMonAndNature
+	msgbox SootopolisCity_Text_NatureChangerConfirm, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SootopolisCity_EventScript_NatureChangerChooseMon
+	special ChangeMonNature
+	playfanfare MUS_MOVE_DELETED
+	waitfanfare
+	msgbox SootopolisCity_Text_NatureChangerDone, MSGBOX_DEFAULT
+	release
+	end
+
+SootopolisCity_EventScript_NatureChangerEgg::
+	msgbox SootopolisCity_Text_NatureChangerCantEgg, MSGBOX_DEFAULT
+	release
+	end
+
+SootopolisCity_EventScript_NatureChangerDecline::
+	msgbox SootopolisCity_Text_NatureChangerBye, MSGBOX_DEFAULT
+	release
+	end
+
+SootopolisCity_Text_NatureChangerIntro:
+	.string "I've spent years studying POKéMON\n"
+	.string "temperaments.\p"
+	.string "I can adjust a POKéMON's nature\n"
+	.string "if you'd like.\p"
+	.string "Want me to give it a try?$"
+
+SootopolisCity_Text_NatureChangerWhichMon:
+	.string "Which POKéMON should I work with?$"
+
+SootopolisCity_Text_NatureChangerChooseNature:
+	.string "What nature would you like?$"
+
+SootopolisCity_Text_NatureChangerConfirm:
+	.string "Change {STR_VAR_1}'s nature\n"
+	.string "to {STR_VAR_2}?$"
+
+SootopolisCity_Text_NatureChangerDone:
+	.string "Done! {STR_VAR_1}'s nature has\n"
+	.string "been changed to {STR_VAR_2}!$"
+
+SootopolisCity_Text_NatureChangerCantEgg:
+	.string "I can't work with an EGG.\n"
+	.string "Come back when it hatches!$"
+
+SootopolisCity_Text_NatureChangerBye:
+	.string "Come back if you change your mind\n"
+	.string "about your POKéMON's nature!$"
