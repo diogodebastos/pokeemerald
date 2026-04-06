@@ -184,6 +184,7 @@ void CB2_InitBattleRoyaleTracker(void)
         break;
     case 5:
         LoadPalette(sTrackerBg_Pal, BG_PLTT_ID(0), sizeof(sTrackerBg_Pal));
+        LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
