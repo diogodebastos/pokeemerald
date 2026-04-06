@@ -9,6 +9,7 @@ EventScript_RepelWoreOff::
 	goto_if_eq VAR_RESULT, YES, EventScript_UseAnotherRepel
 	closemessage
 EventScript_RepelWoreOff_End:
+	closemessage
 	end
 
 EventScript_UseAnotherRepel:
