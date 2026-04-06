@@ -965,6 +965,18 @@ u8 GetLeadMonFriendshipScore(void)
     return FRIENDSHIP_NONE;
 }
 
+void MaximizePartyFriendship(void)
+{
+    u8 i;
+    u8 friendship = MAX_FRIENDSHIP;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
+            SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &friendship);
+    }
+}
+
 static void CB2_FieldShowRegionMap(void)
 {
     FieldInitRegionMap(CB2_ReturnToFieldContinueScriptPlayMapMusic);
