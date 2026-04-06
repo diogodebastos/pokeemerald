@@ -504,3 +504,46 @@ BattleFrontier_ReceptionGate_Text_BattlePointsInfo:
 	.string "for prizes at the EXCHANGE SERVICE\l"
 	.string "CORNER.$"
 
+BattleFrontier_ReceptionGate_EventScript_EventIslandSailor::
+	lock
+	faceplayer
+	goto_if_set FLAG_ENABLED_EVENT_ISLAND_SHIPS, BattleFrontier_ReceptionGate_EventScript_EventIslandSailorRepeat
+	msgbox BattleFrontier_ReceptionGate_Text_EventIslandSailorFirst, MSGBOX_DEFAULT
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
+	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
+	setflag FLAG_ENABLED_EVENT_ISLAND_SHIPS
+	msgbox BattleFrontier_ReceptionGate_Text_EventIslandSailorDone, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_ReceptionGate_EventScript_EventIslandSailorRepeat::
+	msgbox BattleFrontier_ReceptionGate_Text_EventIslandSailorRepeat, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_ReceptionGate_Text_EventIslandSailorFirst:
+	.string "Ahoy! I've sailed to islands most\n"
+	.string "people have never even heard of.\p"
+	.string "There are secret islands out there\n"
+	.string "that only special tickets can take\l"
+	.string "you to.\p"
+	.string "Tell you what, I'll have a word with\n"
+	.string "the crew at LILYCOVE HARBOR.\p"
+	.string "If you've got the right ticket, they'll\n"
+	.string "let you board.$"
+
+BattleFrontier_ReceptionGate_Text_EventIslandSailorDone:
+	.string "It's all set up! Head to LILYCOVE\n"
+	.string "HARBOR and show them your tickets.\p"
+	.string "SOUTHERN ISLAND, NAVEL ROCK,\n"
+	.string "BIRTH ISLAND, FARAWAY ISLAND…\p"
+	.string "There are rare POKéMON waiting\n"
+	.string "for you out there!$"
+
+BattleFrontier_ReceptionGate_Text_EventIslandSailorRepeat:
+	.string "Have you sailed to those islands\n"
+	.string "yet? Just show your tickets at\l"
+	.string "LILYCOVE HARBOR.$"
+
