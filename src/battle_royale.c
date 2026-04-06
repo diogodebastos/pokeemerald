@@ -5,10 +5,12 @@
 #include "event_data.h"
 #include "gpu_regs.h"
 #include "menu.h"
+#include "palette.h"
 #include "script.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "text_window.h"
 #include "window.h"
 #include "constants/characters.h"
 #include "constants/opponents.h"
@@ -237,6 +239,7 @@ static void DrawBattleRoyaleHud(void)
     if (sBattleRoyaleHudWindowId == WINDOW_NONE)
         return;
 
+    LoadMessageBoxGfx(sBattleRoyaleHudWindowId, 0x200, BG_PLTT_ID(15));
     DrawDialogueFrame(sBattleRoyaleHudWindowId, FALSE);
 
     if (mode == 2)
