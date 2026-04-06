@@ -13,7 +13,7 @@ struct Item
     u16 itemId;
     u16 price;
     u8 holdEffect;
-    u8 holdEffectParam;
+    u16 holdEffectParam;
     const u8 *description;
     u8 importance;
     bool8 registrability; // unused
@@ -66,7 +66,7 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count);
 const u8 *GetItemName(u16 itemId);
 u16 GetItemPrice(u16 itemId);
 u8 GetItemHoldEffect(u16 itemId);
-u8 GetItemHoldEffectParam(u16 itemId);
+u16 GetItemHoldEffectParam(u16 itemId);
 const u8 *GetItemDescription(u16 itemId);
 u8 GetItemImportance(u16 itemId);
 u8 GetItemPocket(u16 itemId);
