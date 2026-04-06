@@ -273,18 +273,28 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     u8 max;
     u8 range;
     u8 rand;
+    u16 totalLevel;
+    u8 partyCount;
+    u8 i;
+    u16 avgLevel;
 
-    // Make sure minimum level is less than maximum level
-    if (wildPokemon->maxLevel >= wildPokemon->minLevel)
+    // Compute average level of alive, non-egg party members
+    totalLevel = 0;
+    partyCount = 0;
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        min = wildPokemon->minLevel;
-        max = wildPokemon->maxLevel;
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            totalLevel += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            partyCount++;
+        }
     }
-    else
-    {
-        min = wildPokemon->maxLevel;
-        max = wildPokemon->minLevel;
-    }
+    avgLevel = (partyCount > 0) ? (totalLevel / partyCount) : 5;
+
+    // Scale wild level to average party level +-5, clamped to [1, MAX_LEVEL]
+    min = (avgLevel > 5) ? (u8)(avgLevel - 5) : 1;
+    max = (avgLevel + 5 <= MAX_LEVEL) ? (u8)(avgLevel + 5) : MAX_LEVEL;
+
     range = max - min + 1;
     rand = Random() % range;
 
@@ -900,25 +910,11 @@ bool8 UpdateRepelCounter(void)
 
 static bool8 IsWildLevelAllowedByRepel(u8 wildLevel)
 {
-    u8 i;
+    // Block all encounters while a repel is active, regardless of level
+    if (VarGet(VAR_REPEL_STEP_COUNT))
+        return FALSE;
 
-    if (!VarGet(VAR_REPEL_STEP_COUNT))
-        return TRUE;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
-        {
-            u8 ourLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-
-            if (wildLevel < ourLevel)
-                return FALSE;
-            else
-                return TRUE;
-        }
-    }
-
-    return FALSE;
+    return TRUE;
 }
 
 static bool8 IsAbilityAllowingEncounter(u8 level)
