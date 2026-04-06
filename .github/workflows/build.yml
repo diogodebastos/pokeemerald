@@ -2,8 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, battle-royale ]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -68,3 +69,9 @@ jobs:
           cwd: "./symbols"
           add: "*.sym"
           message: ${{ env.SYMBOLS_COMMIT_MSG }}
+
+      - name: Upload ROM
+        uses: actions/upload-artifact@v4
+        with:
+          name: pokeemerald
+          path: pokeemerald.gba
