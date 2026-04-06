@@ -915,6 +915,8 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .OVERHEAT = TRUE,
+        .SHADOW_BALL = TRUE,
+        .FLASH = TRUE,
     } },
 
     [SPECIES_NINETALES] = { .learnset = {
@@ -937,6 +939,9 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .OVERHEAT = TRUE,
+        .SOLAR_BEAM = TRUE,
+        .SHADOW_BALL = TRUE,
+        .FLASH = TRUE,
     } },
 
     [SPECIES_JIGGLYPUFF] = { .learnset = {
@@ -1032,6 +1037,7 @@ const union {
         .THIEF = TRUE,
         .STEEL_WING = TRUE,
         .SNATCH = TRUE,
+        .FLY = TRUE
     } },
 
     [SPECIES_GOLBAT] = { .learnset = {
@@ -1057,6 +1063,7 @@ const union {
         .THIEF = TRUE,
         .STEEL_WING = TRUE,
         .SNATCH = TRUE,
+        .FLY = TRUE
     } },
 
     [SPECIES_ODDISH] = { .learnset = {
@@ -1340,6 +1347,7 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .PSYCHIC = TRUE,
         .SURF = TRUE,
         .STRENGTH = TRUE,
         .FLASH = TRUE,
@@ -1371,6 +1379,7 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .PSYCHIC = TRUE,
         .SURF = TRUE,
         .STRENGTH = TRUE,
         .FLASH = TRUE,
@@ -1447,6 +1456,7 @@ const union {
         .SUNNY_DAY = TRUE,
         .PROTECT = TRUE,
         .FRUSTRATION = TRUE,
+        .REFLECT = TRUE,
         .IRON_TAIL = TRUE,
         .RETURN = TRUE,
         .DIG = TRUE,
@@ -1828,6 +1838,7 @@ const union {
         .ATTRACT = TRUE,
         .THIEF = TRUE,
         .CUT = TRUE,
+        .FLASH = TRUE,
         .SURF = TRUE,
         .WATERFALL = TRUE,
         .DIVE = TRUE,
@@ -1854,6 +1865,7 @@ const union {
         .ATTRACT = TRUE,
         .THIEF = TRUE,
         .CUT = TRUE,
+        .FLASH = TRUE,
         .SURF = TRUE,
         .WATERFALL = TRUE,
         .DIVE = TRUE,
@@ -2059,6 +2071,7 @@ const union {
         .SHOCK_WAVE = TRUE,
         .FACADE = TRUE,
         .SECRET_POWER = TRUE,
+        .LIGHT_SCREEN = TRUE,
         .REST = TRUE,
         .FLASH = TRUE,
     } },
@@ -2079,6 +2092,7 @@ const union {
         .SHOCK_WAVE = TRUE,
         .FACADE = TRUE,
         .SECRET_POWER = TRUE,
+        .LIGHT_SCREEN = TRUE,
         .REST = TRUE,
         .FLASH = TRUE,
     } },
@@ -3243,6 +3257,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .THIEF = TRUE,
+        .OVERHEAT = TRUE,
         .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
@@ -3334,6 +3349,7 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .FLY = TRUE,
         .SURF = TRUE,
         .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
@@ -3726,6 +3742,7 @@ const union {
         .TOXIC = TRUE,
         .HIDDEN_POWER = TRUE,
         .SUNNY_DAY = TRUE,
+        .SOLAR_BEAM = TRUE,
         .HYPER_BEAM = TRUE,
         .PROTECT = TRUE,
         .RAIN_DANCE = TRUE,
@@ -4273,6 +4290,7 @@ const union {
         .ATTRACT = TRUE,
         .THIEF = TRUE,
         .STEEL_WING = TRUE,
+        .LIGHT_SCREEN = TRUE,
         .FLY = TRUE,
         .FLASH = TRUE,
     } },
@@ -4297,6 +4315,7 @@ const union {
         .ATTRACT = TRUE,
         .THIEF = TRUE,
         .STEEL_WING = TRUE,
+        .LIGHT_SCREEN = TRUE,
         .FLY = TRUE,
         .FLASH = TRUE,
     } },
@@ -4631,6 +4650,7 @@ const union {
         .THIEF = TRUE,
         .STEEL_WING = TRUE,
         .SKILL_SWAP = TRUE,
+        .FLY = TRUE,
         .FLASH = TRUE,
     } },
 
@@ -4857,6 +4877,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .THIEF = TRUE,
+        .LIGHT_SCREEN = TRUE,
         .SURF = TRUE,
         .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
@@ -5660,11 +5681,13 @@ const union {
         .LIGHT_SCREEN = TRUE,
         .PROTECT = TRUE,
         .FRUSTRATION = TRUE,
+        .EARTHQUAKE = TRUE,
         .RETURN = TRUE,
         .DOUBLE_TEAM = TRUE,
         .REFLECT = TRUE,
         .FLAMETHROWER = TRUE,
         .FIRE_BLAST = TRUE,
+        .ROCK_TOMB = TRUE,
         .FACADE = TRUE,
         .SECRET_POWER = TRUE,
         .REST = TRUE,
@@ -5781,6 +5804,8 @@ const union {
         .SURF = TRUE,
         .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
+        .WATERFALL = TRUE,
+        .DIVE = TRUE,
     } },
 
     [SPECIES_REMORAID] = { .learnset = {
@@ -6282,6 +6307,7 @@ const union {
         .CALM_MIND = TRUE,
         .ROAR = TRUE,
         .TOXIC = TRUE,
+        .LIGHT_SCREEN = TRUE,
         .HIDDEN_POWER = TRUE,
         .SUNNY_DAY = TRUE,
         .HYPER_BEAM = TRUE,
@@ -6290,6 +6316,7 @@ const union {
         .FRUSTRATION = TRUE,
         .IRON_TAIL = TRUE,
         .THUNDERBOLT = TRUE,
+        .SHADOW_BALL = TRUE,
         .THUNDER = TRUE,
         .RETURN = TRUE,
         .DIG = TRUE,
@@ -6309,6 +6336,7 @@ const union {
     [SPECIES_ENTEI] = { .learnset = {
         .CALM_MIND = TRUE,
         .ROAR = TRUE,
+        .LIGHT_SCREEN = TRUE,
         .TOXIC = TRUE,
         .HIDDEN_POWER = TRUE,
         .SUNNY_DAY = TRUE,
@@ -6324,6 +6352,8 @@ const union {
         .REFLECT = TRUE,
         .FLAMETHROWER = TRUE,
         .SANDSTORM = TRUE,
+        .OVERHEAT = TRUE,
+        .SHADOW_BALL = TRUE,
         .FIRE_BLAST = TRUE,
         .FACADE = TRUE,
         .SECRET_POWER = TRUE,
@@ -6338,6 +6368,7 @@ const union {
         .WATER_PULSE = TRUE,
         .CALM_MIND = TRUE,
         .ROAR = TRUE,
+        .LIGHT_SCREEN = TRUE,
         .TOXIC = TRUE,
         .HAIL = TRUE,
         .HIDDEN_POWER = TRUE,
@@ -6743,6 +6774,7 @@ const union {
         .OVERHEAT = TRUE,
         .CUT = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -6769,6 +6801,7 @@ const union {
         .OVERHEAT = TRUE,
         .CUT = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -6798,6 +6831,7 @@ const union {
         .OVERHEAT = TRUE,
         .CUT = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -6960,6 +6994,7 @@ const union {
         .THIEF = TRUE,
         .CUT = TRUE,
         .SURF = TRUE,
+        .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -6992,6 +7027,7 @@ const union {
         .SURF = TRUE,
         .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
+        .WATERFALL = TRUE,
     } },
 
     [SPECIES_WURMPLE] = { .learnset = {
@@ -7020,6 +7056,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .THIEF = TRUE,
+        .FLY = TRUE,
         .FLASH = TRUE,
     } },
 
@@ -7072,7 +7109,11 @@ const union {
         .ATTRACT = TRUE,
         .THIEF = TRUE,
         .SURF = TRUE,
+        .STRENGTH = TRUE,
         .FLASH = TRUE,
+        .ROCK_SMASH = TRUE,
+        .WATERFALL = TRUE,
+        .DIVE = TRUE,
     } },
 
     [SPECIES_LOMBRE] = { .learnset = {
@@ -7154,6 +7195,8 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .CUT = TRUE,
+        .STRENGTH = TRUE,
         .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
@@ -7424,6 +7467,7 @@ const union {
         .THIEF = TRUE,
         .STEEL_WING = TRUE,
         .FLY = TRUE,
+        .SURF = TRUE,
     } },
 
     [SPECIES_PELIPPER] = { .learnset = {
@@ -7496,6 +7540,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .THIEF = TRUE,
+        .FLY = TRUE,
         .FLASH = TRUE,
     } },
 
@@ -7643,6 +7688,7 @@ const union {
         .THIEF = TRUE,
         .SKILL_SWAP = TRUE,
         .SNATCH = TRUE,
+        .PSYCHIC = TRUE,
         .CUT = TRUE,
         .STRENGTH = TRUE,
         .FLASH = TRUE,
@@ -7654,6 +7700,7 @@ const union {
         .HIDDEN_POWER = TRUE,
         .SUNNY_DAY = TRUE,
         .ICE_BEAM = TRUE,
+        .HYPER_BEAM = TRUE,
         .LIGHT_SCREEN = TRUE,
         .PROTECT = TRUE,
         .RAIN_DANCE = TRUE,
@@ -7725,6 +7772,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -7734,6 +7782,7 @@ const union {
         .SUNNY_DAY = TRUE,
         .PROTECT = TRUE,
         .FRUSTRATION = TRUE,
+        .SOLAR_BEAM = TRUE,
         .IRON_TAIL = TRUE,
         .RETURN = TRUE,
         .DOUBLE_TEAM = TRUE,
@@ -7746,6 +7795,7 @@ const union {
         .ATTRACT = TRUE,
         .OVERHEAT = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -7777,6 +7827,7 @@ const union {
         .THIEF = TRUE,
         .SNATCH = TRUE,
         .CUT = TRUE,
+        .STRENGTH = TRUE,
         .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
@@ -7950,10 +8001,12 @@ const union {
         .IRON_TAIL = TRUE,
         .RETURN = TRUE,
         .DOUBLE_TEAM = TRUE,
+        .REFLECT = TRUE,
         .FACADE = TRUE,
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .LIGHT_SCREEN = TRUE,
         .SURF = TRUE,
         .WATERFALL = TRUE,
         .DIVE = TRUE,
@@ -8033,6 +8086,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -8058,6 +8112,7 @@ const union {
         .STEEL_WING = TRUE,
         .FLY = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -8087,6 +8142,7 @@ const union {
         .STEEL_WING = TRUE,
         .FLY = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -8143,6 +8199,7 @@ const union {
         .ROAR = TRUE,
         .TOXIC = TRUE,
         .HIDDEN_POWER = TRUE,
+        .SUNNY_DAY = TRUE,
         .PROTECT = TRUE,
         .RAIN_DANCE = TRUE,
         .FRUSTRATION = TRUE,
@@ -8165,6 +8222,7 @@ const union {
         .ROAR = TRUE,
         .TOXIC = TRUE,
         .HIDDEN_POWER = TRUE,
+        .SUNNY_DAY = TRUE,
         .HYPER_BEAM = TRUE,
         .PROTECT = TRUE,
         .RAIN_DANCE = TRUE,
@@ -8177,6 +8235,7 @@ const union {
         .SHOCK_WAVE = TRUE,
         .FACADE = TRUE,
         .SECRET_POWER = TRUE,
+        .SHADOW_BALL = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
         .THIEF = TRUE,
@@ -8330,6 +8389,7 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .THIEF = TRUE,
         .CUT = TRUE,
         .FLASH = TRUE,
     } },
@@ -8352,6 +8412,7 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .THIEF = TRUE,
         .CUT = TRUE,
         .STRENGTH = TRUE,
         .FLASH = TRUE,
@@ -8428,6 +8489,7 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .SKILL_SWAP = TRUE,
+        .STRENGTH = TRUE,
         .FLASH = TRUE,
     } },
 
@@ -8457,6 +8519,8 @@ const union {
         .REST = TRUE,
         .SKILL_SWAP = TRUE,
         .OVERHEAT = TRUE,
+        .BRICK_BREAK = TRUE,
+        .STRENGTH = TRUE,
         .FLASH = TRUE,
     } },
 
@@ -8521,6 +8585,7 @@ const union {
         .PROTECT = TRUE,
         .RAIN_DANCE = TRUE,
         .FRUSTRATION = TRUE,
+        .SOLAR_BEAM = TRUE,
         .IRON_TAIL = TRUE,
         .RETURN = TRUE,
         .PSYCHIC = TRUE,
@@ -8536,6 +8601,7 @@ const union {
         .THIEF = TRUE,
         .SKILL_SWAP = TRUE,
         .SNATCH = TRUE,
+        .STRENGTH = TRUE,
         .FLASH = TRUE,
     } },
 
@@ -8605,6 +8671,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -8712,6 +8779,7 @@ const union {
         .THIEF = TRUE,
         .STEEL_WING = TRUE,
         .FLY = TRUE,
+        .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -8795,6 +8863,7 @@ const union {
         .ATTRACT = TRUE,
         .CUT = TRUE,
         .FLASH = TRUE,
+        .ROCK_SMASH = TRUE,
     } },
 
     [SPECIES_SLAKOTH] = { .learnset = {
@@ -9003,6 +9072,7 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .STRENGTH = TRUE,
     } },
 
     [SPECIES_LOUDRED] = { .learnset = {
@@ -9032,6 +9102,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .OVERHEAT = TRUE,
+        .HYPER_BEAM = TRUE,
         .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
@@ -9229,6 +9300,7 @@ const union {
         .SKILL_SWAP = TRUE,
         .SNATCH = TRUE,
         .FLASH = TRUE,
+        .ROCK_SMASH = TRUE, 
     } },
 
     [SPECIES_SEVIPER] = { .learnset = {
@@ -9289,6 +9361,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .THIEF = TRUE,
+        .CUT = TRUE,
         .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
@@ -9316,6 +9389,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .SURF = TRUE,
+        .STRENGTH = TRUE, 
         .ROCK_SMASH = TRUE,
         .WATERFALL = TRUE,
         .DIVE = TRUE,
@@ -9343,8 +9417,10 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .BULK_UP = TRUE,
         .CUT = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -9370,8 +9446,10 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .BULK_UP = TRUE,
         .CUT = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -9409,9 +9487,11 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .BULK_UP = TRUE,
         .CUT = TRUE,
         .SURF = TRUE,
         .STRENGTH = TRUE,
+        .FLASH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -9469,6 +9549,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .THIEF = TRUE,
+        .CUT = TRUE, 
         .FLASH = TRUE,
     } },
 
@@ -9497,6 +9578,8 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .THIEF = TRUE,
+        .REFLECT = TRUE,
+        .CUT = TRUE, 
         .FLASH = TRUE,
     } },
 
@@ -9513,10 +9596,12 @@ const union {
         .DOUBLE_TEAM = TRUE,
         .SLUDGE_BOMB = TRUE,
         .SANDSTORM = TRUE,
+        .ROCK_TOMB = TRUE,
         .FACADE = TRUE,
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .CUT = TRUE, 
     } },
 
     [SPECIES_CRADILY] = { .learnset = {
@@ -9539,6 +9624,7 @@ const union {
         .SECRET_POWER = TRUE,
         .REST = TRUE,
         .ATTRACT = TRUE,
+        .CUT = TRUE, 
         .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
@@ -9562,6 +9648,7 @@ const union {
         .REST = TRUE,
         .ATTRACT = TRUE,
         .CUT = TRUE,
+        .STRENGTH = TRUE,
         .ROCK_SMASH = TRUE,
     } },
 
@@ -10153,6 +10240,9 @@ const union {
         .ROCK_SMASH = TRUE,
     } },
 
+
+
+
     [SPECIES_CHIMECHO] = { .learnset = {
         .CALM_MIND = TRUE,
         .TOXIC = TRUE,
@@ -10177,6 +10267,8 @@ const union {
         .ATTRACT = TRUE,
         .SKILL_SWAP = TRUE,
         .SNATCH = TRUE,
+        .ICE_BEAM = TRUE,
+        .THUNDERBOLT = TRUE,
         .FLASH = TRUE,
     } },
 
