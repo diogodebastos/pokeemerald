@@ -10,6 +10,7 @@
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "data.h"
+#include "daycare.h"
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_specials.h"
@@ -6309,6 +6310,8 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     u8 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
+    u16 eggSpecies;
+    u16 eggMoveIdx = 0;
     int i, j, k;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -6339,6 +6342,42 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
         }
     }
 
+    /* Append egg moves (use base species for evolved mons) */
+    eggSpecies = GetEggSpecies(species);
+    for (i = 0; gEggMoves[i] != EGG_MOVES_TERMINATOR; i++)
+    {
+        if (gEggMoves[i] == eggSpecies + EGG_MOVES_SPECIES_OFFSET)
+        {
+            eggMoveIdx = i + 1;
+            break;
+        }
+    }
+
+    if (eggMoveIdx != 0)
+    {
+        for (i = 0; i < EGG_MOVES_ARRAY_COUNT; i++)
+        {
+            u16 move;
+
+            if (gEggMoves[eggMoveIdx + i] > EGG_MOVES_SPECIES_OFFSET)
+                break;
+
+            move = gEggMoves[eggMoveIdx + i];
+
+            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != move; j++)
+                ;
+
+            if (j == MAX_MON_MOVES)
+            {
+                for (k = 0; k < numMoves && moves[k] != move; k++)
+                    ;
+
+                if (k == numMoves)
+                    moves[numMoves++] = move;
+            }
+        }
+    }
+
     return numMoves;
 }
 
@@ -6356,10 +6395,12 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
 u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 {
     u16 learnedMoves[MAX_MON_MOVES];
-    u16 moves[MAX_LEVEL_UP_MOVES];
+    u16 moves[MAX_LEVEL_UP_MOVES + EGG_MOVES_ARRAY_COUNT];
     u8 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
+    u16 eggSpecies;
+    u16 eggMoveIdx = 0;
     int i, j, k;
 
     if (species == SPECIES_EGG)
@@ -6389,6 +6430,42 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 
                 if (k == numMoves)
                     moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
+            }
+        }
+    }
+
+    /* Count egg moves (use base species for evolved mons) */
+    eggSpecies = GetEggSpecies(species);
+    for (i = 0; gEggMoves[i] != EGG_MOVES_TERMINATOR; i++)
+    {
+        if (gEggMoves[i] == eggSpecies + EGG_MOVES_SPECIES_OFFSET)
+        {
+            eggMoveIdx = i + 1;
+            break;
+        }
+    }
+
+    if (eggMoveIdx != 0)
+    {
+        for (i = 0; i < EGG_MOVES_ARRAY_COUNT; i++)
+        {
+            u16 move;
+
+            if (gEggMoves[eggMoveIdx + i] > EGG_MOVES_SPECIES_OFFSET)
+                break;
+
+            move = gEggMoves[eggMoveIdx + i];
+
+            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != move; j++)
+                ;
+
+            if (j == MAX_MON_MOVES)
+            {
+                for (k = 0; k < numMoves && moves[k] != move; k++)
+                    ;
+
+                if (k == numMoves)
+                    moves[numMoves++] = move;
             }
         }
     }

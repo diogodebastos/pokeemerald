@@ -1965,6 +1965,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     s32 i, j;
     u8 monsCount;
     bool8 isFrontierTrainer;
+    bool8 isFrontierBrain;
     bool8 isGymLeader;
     bool8 isE4Trainer;
     bool8 isChampion;
@@ -1975,14 +1976,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         return 0;
 
     isFrontierTrainer = (trainerNum >= TRAINER_FRONTIER_LEON && trainerNum <= TRAINER_FRONTIER_MATEO);
+    isFrontierBrain = (trainerNum >= TRAINER_ANABEL && trainerNum <= TRAINER_BRANDON);
     isGymLeader = (trainerNum >= TRAINER_ROXANNE_1 && trainerNum <= TRAINER_JUAN_1);
     isE4Trainer = (trainerNum >= TRAINER_SIDNEY && trainerNum <= TRAINER_DRAKE);
     isChampion = (trainerNum == TRAINER_WALLACE || trainerNum == TRAINER_STEVEN);
 
-    isStrongerTrainer = isFrontierTrainer || isGymLeader || isE4Trainer || isChampion;
+    isStrongerTrainer = isFrontierTrainer || isFrontierBrain || isGymLeader || isE4Trainer || isChampion
+                     || trainerNum == TRAINER_RED || trainerNum == TRAINER_LEAF;
 
-    if (isStrongerTrainer)
-        playerMaxLevel = GetHighestLevelInPlayerParty();
+    playerMaxLevel = GetHighestLevelInPlayerParty();
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
@@ -2028,7 +2030,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                monLevel = isStrongerTrainer ? playerMaxLevel : partyData[i].lvl;
+                monLevel = isStrongerTrainer ? (partyData[i].lvl > playerMaxLevel ? partyData[i].lvl : playerMaxLevel) : playerMaxLevel;
                 CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
             }
@@ -2042,7 +2044,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                monLevel = isStrongerTrainer ? playerMaxLevel : partyData[i].lvl;
+                monLevel = isStrongerTrainer ? (partyData[i].lvl > playerMaxLevel ? partyData[i].lvl : playerMaxLevel) : playerMaxLevel;
                 CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
@@ -2062,7 +2064,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                monLevel = isStrongerTrainer ? playerMaxLevel : partyData[i].lvl;
+                monLevel = isStrongerTrainer ? (partyData[i].lvl > playerMaxLevel ? partyData[i].lvl : playerMaxLevel) : playerMaxLevel;
                 CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
@@ -2078,7 +2080,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                monLevel = isStrongerTrainer ? playerMaxLevel : partyData[i].lvl;
+                monLevel = isStrongerTrainer ? (partyData[i].lvl > playerMaxLevel ? partyData[i].lvl : playerMaxLevel) : playerMaxLevel;
                 CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
