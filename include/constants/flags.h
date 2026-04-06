@@ -46,7 +46,7 @@
 #define FLAG_HIDE_BATTLE_ROYALE_TRAINERS 0x20 // Set = hide BR-only trainers
 #define FLAG_MET_RIVAL_EVERGRANDE            0x21
 #define FLAG_HIDE_EVER_GRANDE_CITY_RIVAL     0x22
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
+#define FLAG_ENABLED_EVENT_ISLAND_SHIPS  0x23
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
