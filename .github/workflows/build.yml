@@ -2,8 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master, battle-royale]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,7 +14,7 @@ jobs:
       GAME_REVISION: 0
       GAME_LANGUAGE: ENGLISH
       MODERN: 0
-      COMPARE: 1
+      COMPARE: ${{ github.ref == 'refs/heads/master' && 1 || 0 }}
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -31,13 +32,13 @@ jobs:
           path: agbcc
           repository: pret/agbcc
 
-      - name: Install binutils
+      - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi libpng-dev
-        # build-essential and git are already installed
-        # gcc-arm-none-eabi is only needed for the modern build
-        # as an alternative to dkP
+          sudo apt install build-essential gcc-arm-none-eabi binutils-arm-none-eabi libpng-dev
+        # build-essential: gcc, make, and core build libraries (matches INSTALL.md)
+        # gcc-arm-none-eabi: required for the modern build as an alternative to dkP
+        # git is already pre-installed on ubuntu-latest runners
 
       - name: Install agbcc
         run: |
@@ -68,3 +69,9 @@ jobs:
           cwd: "./symbols"
           add: "*.sym"
           message: ${{ env.SYMBOLS_COMMIT_MSG }}
+
+      - name: Upload ROM
+        uses: actions/upload-artifact@v4
+        with:
+          name: pokeemerald
+          path: pokeemerald.gba
