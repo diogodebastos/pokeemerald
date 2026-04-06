@@ -541,3 +541,5 @@ gSpecials::
 	def_special ShowNatureChanger
 	def_special ChangeMonNature
 	def_special BufferNatureChangerMonAndNature
+	def_special MakeMonShiny
+	def_special BufferShinyMonName
