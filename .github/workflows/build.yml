@@ -47,6 +47,7 @@ jobs:
         working-directory: agbcc
 
       - name: Compare
+        if: ${{ github.ref == 'refs/heads/master' }}
         run: make -j${nproc} all syms
 
       - name: Modern
