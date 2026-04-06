@@ -31,4 +31,7 @@ bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio);
 void ShowDaycareLevelMenu(void);
 void ChooseSendDaycareMon(void);
 
+extern const u16 gEggMoves[];
+u16 GetEggSpecies(u16 species);
+
 #endif // GUARD_DAYCARE_H

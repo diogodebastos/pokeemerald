@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "bg.h"
 #include "contest_effect.h"
+#include "constants/daycare.h"
 #include "data.h"
 #include "event_data.h"
 #include "field_screen_effect.h"
@@ -157,7 +158,7 @@ enum {
 #define GFXTAG_UI       5525
 #define PALTAG_UI       5526
 
-#define MAX_RELEARNER_MOVES max(MAX_LEVEL_UP_MOVES, 25)
+#define MAX_RELEARNER_MOVES max(MAX_LEVEL_UP_MOVES + EGG_MOVES_ARRAY_COUNT, 25)
 
 static EWRAM_DATA struct
 {
