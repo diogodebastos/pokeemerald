@@ -181,3 +181,77 @@ SkyPillar_Top_Movement_CameraPanDown:
 SkyPillar_Top_Text_RayquazaFlewOff:
 	.string "The awakened RAYQUAZA flew off…$"
 
+SkyPillar_Top_EventScript_ShinyConverter::
+	lock
+	faceplayer
+	msgbox SkyPillar_Top_Text_ShinyIntro, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SkyPillar_Top_EventScript_ShinyDecline
+	goto SkyPillar_Top_EventScript_ShinyChooseMon
+
+SkyPillar_Top_EventScript_ShinyChooseMon::
+	msgbox SkyPillar_Top_Text_ShinyWhichMon, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, SkyPillar_Top_EventScript_ShinyDecline
+	special IsSelectedMonEgg
+	goto_if_eq VAR_RESULT, TRUE, SkyPillar_Top_EventScript_ShinyEgg
+	special BufferShinyMonName
+	msgbox SkyPillar_Top_Text_ShinyConfirm, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SkyPillar_Top_EventScript_ShinyChooseMon
+	special MakeMonShiny
+	goto_if_eq VAR_RESULT, FALSE, SkyPillar_Top_EventScript_ShinyAlready
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
+	msgbox SkyPillar_Top_Text_ShinyDone, MSGBOX_DEFAULT
+	release
+	end
+
+SkyPillar_Top_EventScript_ShinyAlready::
+	msgbox SkyPillar_Top_Text_ShinyAlready, MSGBOX_DEFAULT
+	goto SkyPillar_Top_EventScript_ShinyChooseMon
+
+SkyPillar_Top_EventScript_ShinyEgg::
+	msgbox SkyPillar_Top_Text_ShinyCantEgg, MSGBOX_DEFAULT
+	release
+	end
+
+SkyPillar_Top_EventScript_ShinyDecline::
+	msgbox SkyPillar_Top_Text_ShinyBye, MSGBOX_DEFAULT
+	release
+	end
+
+SkyPillar_Top_Text_ShinyIntro:
+	.string "The power of the SKY PILLAR resonates\n"
+	.string "through all who stand at its peak.\p"
+	.string "I can channel that energy to reveal\n"
+	.string "a POKéMON's hidden radiance.\p"
+	.string "Shall I make one of your POKéMON\n"
+	.string "shine with a special light?$"
+
+SkyPillar_Top_Text_ShinyWhichMon:
+	.string "Which POKéMON shall I transform?$"
+
+SkyPillar_Top_Text_ShinyConfirm:
+	.string "Shall I reveal the hidden radiance\n"
+	.string "within {STR_VAR_1}?$"
+
+SkyPillar_Top_Text_ShinyDone:
+	.string "{STR_VAR_1} is now bathed in a\n"
+	.string "brilliant, shimmering aura!\p"
+	.string "It will sparkle when it enters\n"
+	.string "battle. Treasure it well.$"
+
+SkyPillar_Top_Text_ShinyAlready:
+	.string "This {STR_VAR_1} already shines\n"
+	.string "with a special light.\p"
+	.string "There is nothing more I can do\n"
+	.string "for it.$"
+
+SkyPillar_Top_Text_ShinyCantEgg:
+	.string "An EGG has not yet taken form.\n"
+	.string "I cannot work with it.$"
+
+SkyPillar_Top_Text_ShinyBye:
+	.string "If you change your mind, I will\n"
+	.string "be here atop the SKY PILLAR.$"
+

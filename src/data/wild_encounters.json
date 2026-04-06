@@ -10814,59 +10814,59 @@
                 "species": "SPECIES_CATERPIE"
               },
               {
-                "min_level": 12,
-                "max_level": 12,
+                "min_level": 25,
+                "max_level": 25,
                 "species": "SPECIES_KABUTO"
-              },
-              {
-                "min_level": 8,
-                "max_level": 8,
-                "species": "SPECIES_RATTATA"
-              },
-              {
-                "min_level": 14,
-                "max_level": 14,
-                "species": "SPECIES_SPEAROW"
               },
               {
                 "min_level": 10,
                 "max_level": 10,
+                "species": "SPECIES_RATTATA"
+              },
+              {
+                "min_level": 15,
+                "max_level": 15,
+                "species": "SPECIES_SPEAROW"
+              },
+              {
+                "min_level": 15,
+                "max_level": 15,
                 "species": "SPECIES_PARAS"
               },
               {
-                "min_level": 12,
-                "max_level": 12,
+                "min_level": 15,
+                "max_level": 15,
                 "species": "SPECIES_HOPPIP"
               },
               {
-                "min_level": 16,
-                "max_level": 16,
+                "min_level": 20,
+                "max_level": 20,
                 "species": "SPECIES_SWINUB"
               },
               {
-                "min_level": 6,
-                "max_level": 6,
+                "min_level": 40,
+                "max_level": 40,
                 "species": "SPECIES_SNEASEL"
               },
               {
-                "min_level": 8,
-                "max_level": 8,
-                "species": "SPECIES_DELIBIRD"
+                "min_level": 25,
+                "max_level": 25,
+                "species": "SPECIES_OMANYTE"
               },
               {
-                "min_level": 14,
-                "max_level": 14,
+                "min_level": 30,
+                "max_level": 30,
                 "species": "SPECIES_MANTINE"
               },
               {
-                "min_level": 8,
-                "max_level": 8,
+                "min_level": 25,
+                "max_level": 25,
                 "species": "SPECIES_TANGELA"
               },
               {
-                "min_level": 14,
-                "max_level": 14,
-                "species": "SPECIES_OMANYTE"
+                "min_level": 55,
+                "max_level": 55,
+                "species": "SPECIES_DELIBIRD"
               }
             ]
           }
