@@ -323,6 +323,12 @@ static void HandleInputChooseAction(void)
             PlayerBufferExecCompleted();
         }
     }
+    else if (JOY_NEW(R_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_RUN, 0);
+        PlayerBufferExecCompleted();
+    }
     else if (JOY_NEW(START_BUTTON))
     {
         SwapHpBarsWithHpText();

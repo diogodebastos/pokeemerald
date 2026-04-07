@@ -906,9 +906,10 @@
 #define TRAINER_MAY_EVERGRANDE_MUDKIP       897
 #define TRAINER_MAY_EVERGRANDE_TREECKO      898
 #define TRAINER_MAY_EVERGRANDE_TORCHIC      899
+#define TRAINER_GRINDING_NURSE              900
 
-#define TRAINERS_COUNT                      900
-#define MAX_TRAINERS_COUNT                  900
+#define TRAINERS_COUNT                      901
+#define MAX_TRAINERS_COUNT                  901
 #define TRAINER_BATTLE_ROYALE_COUNT         500
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

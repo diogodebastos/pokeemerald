@@ -135,6 +135,8 @@ bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
     case TRAINER_GABBY_AND_TY_6:
     case TRAINER_AMY_AND_LIV_6:
     case TRAINER_CINDY_6:
+    /* Grinding NPC — always-rematchable, not a real route trainer */
+    case TRAINER_GRINDING_NURSE:
         return FALSE;
     }
 
