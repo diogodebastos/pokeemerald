@@ -536,6 +536,7 @@ gSpecials::
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
 	def_special ActivateBattleRoyaleMode
+	def_special GetHallOfFameEntries
 	def_special DeactivateBattleRoyaleMode
 	def_special Special_UseRepelFromBag
 	def_special ShowNatureChanger

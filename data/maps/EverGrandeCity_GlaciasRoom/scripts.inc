@@ -41,8 +41,23 @@ EverGrandeCity_GlaciasRoom_EventScript_Glacia::
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
+	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematch
 	msgbox EverGrandeCity_GlaciasRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_Defeat
+	goto EverGrandeCity_GlaciasRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematch::
+	msgbox EverGrandeCity_GlaciasRoom_Text_RematchIntroSpeech, MSGBOX_DEFAULT
+	special GetHallOfFameEntries
+	compare VAR_RESULT, 5
+	goto_if_ge EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematch2
+	trainerbattle_no_intro TRAINER_GLACIA_REMATCH, EverGrandeCity_GlaciasRoom_Text_Defeat
+	goto EverGrandeCity_GlaciasRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematch2::
+	trainerbattle_no_intro TRAINER_GLACIA_REMATCH_2, EverGrandeCity_GlaciasRoom_Text_Defeat
 	goto EverGrandeCity_GlaciasRoom_EventScript_Defeated
 	end
 
@@ -68,6 +83,15 @@ EverGrandeCity_GlaciasRoom_Text_IntroSpeech:
 	.string "What about you?\p"
 	.string "It would please me to no end if I could\n"
 	.string "go all out against you!$"
+
+EverGrandeCity_GlaciasRoom_Text_RematchIntroSpeech:
+	.string "So we meet again.\p"
+	.string "I have been training tirelessly\n"
+	.string "since our last encounter.\p"
+	.string "My icy techniques have been\n"
+	.string "sharpened to perfection.\p"
+	.string "I do hope you can withstand\n"
+	.string "the cold this time!$"
 
 EverGrandeCity_GlaciasRoom_Text_Defeat:
 	.string "You and your POKéMON…\n"

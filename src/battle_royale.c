@@ -5,6 +5,7 @@
 #include "event_data.h"
 #include "gpu_regs.h"
 #include "menu.h"
+#include "overworld.h"
 #include "palette.h"
 #include "script.h"
 #include "string_util.h"
@@ -13,6 +14,7 @@
 #include "text_window.h"
 #include "window.h"
 #include "constants/characters.h"
+#include "constants/game_stat.h"
 #include "constants/opponents.h"
 #include "constants/rematches.h"
 #include "constants/flags.h"
@@ -225,6 +227,11 @@ void BattleRoyale_OnTrainerDefeated(u16 trainerIdA, u16 trainerIdB)
         VarSet(VAR_BATTLE_ROYALE_MODE, 2);
         sBattleRoyaleJustCompleted = TRUE;
     }
+}
+
+void GetHallOfFameEntries(void)
+{
+    gSpecialVar_Result = GetGameStat(GAME_STAT_ENTERED_HOF);
 }
 
 // HUD

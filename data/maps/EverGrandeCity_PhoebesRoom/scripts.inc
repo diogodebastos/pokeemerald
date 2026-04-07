@@ -41,8 +41,23 @@ EverGrandeCity_PhoebesRoom_EventScript_Phoebe::
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
+	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_PhoebesRoom_EventScript_PhoebeRematch
 	msgbox EverGrandeCity_PhoebesRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_Defeat
+	goto EverGrandeCity_PhoebesRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_PhoebesRoom_EventScript_PhoebeRematch::
+	msgbox EverGrandeCity_PhoebesRoom_Text_RematchIntroSpeech, MSGBOX_DEFAULT
+	special GetHallOfFameEntries
+	compare VAR_RESULT, 5
+	goto_if_ge EverGrandeCity_PhoebesRoom_EventScript_PhoebeRematch2
+	trainerbattle_no_intro TRAINER_PHOEBE_REMATCH, EverGrandeCity_PhoebesRoom_Text_Defeat
+	goto EverGrandeCity_PhoebesRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_PhoebesRoom_EventScript_PhoebeRematch2::
+	trainerbattle_no_intro TRAINER_PHOEBE_REMATCH_2, EverGrandeCity_PhoebesRoom_Text_Defeat
 	goto EverGrandeCity_PhoebesRoom_EventScript_Defeated
 	end
 
@@ -68,6 +83,15 @@ EverGrandeCity_PhoebesRoom_Text_IntroSpeech:
 	.string "is extremely tight.\p"
 	.string "So, come on, just try and see if you can\n"
 	.string "even inflict damage on my POKéMON!$"
+
+EverGrandeCity_PhoebesRoom_Text_RematchIntroSpeech:
+	.string "Ahahaha, you came back!\p"
+	.string "The spirits have been restless\n"
+	.string "since our last battle.\p"
+	.string "My GHOST-type POKéMON and I have\n"
+	.string "grown even stronger!\p"
+	.string "Let's see if you can handle us\n"
+	.string "this time around!$"
 
 EverGrandeCity_PhoebesRoom_Text_Defeat:
 	.string "Oh, darn.\n"

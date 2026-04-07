@@ -39,8 +39,23 @@ EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace:
 
 EverGrandeCity_ChampionsRoom_EventScript_Wallace::
 	playbgm MUS_ENCOUNTER_CHAMPION, FALSE
+	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_ChampionsRoom_EventScript_WallaceRematch
 	msgbox EverGrandeCity_ChampionsRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_Defeat
+	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_WallaceRematch::
+	msgbox EverGrandeCity_ChampionsRoom_Text_RematchIntroSpeech, MSGBOX_DEFAULT
+	special GetHallOfFameEntries
+	compare VAR_RESULT, 5
+	goto_if_ge EverGrandeCity_ChampionsRoom_EventScript_WallaceRematch2
+	trainerbattle_no_intro TRAINER_WALLACE_REMATCH, EverGrandeCity_ChampionsRoom_Text_Defeat
+	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_WallaceRematch2::
+	trainerbattle_no_intro TRAINER_WALLACE_REMATCH_2, EverGrandeCity_ChampionsRoom_Text_Defeat
 	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
 	end
 
@@ -241,6 +256,14 @@ EverGrandeCity_ChampionsRoom_Text_IntroSpeech:
 	.string "Who can most elegantly dance with\n"
 	.string "their POKéMON in HOENN?\p"
 	.string "Show me right here and now!$"
+
+EverGrandeCity_ChampionsRoom_Text_RematchIntroSpeech:
+	.string "WALLACE: {PLAYER}{KUN}, welcome back.\p"
+	.string "You and your POKéMON continue to\n"
+	.string "impress me with every visit.\p"
+	.string "But as CHAMPION, I cannot simply\n"
+	.string "let you pass unchallenged.\p"
+	.string "Now, let us dance once more!$"
 
 EverGrandeCity_ChampionsRoom_Text_Defeat:
 	.string "I, the CHAMPION, fall in defeat…\p"
