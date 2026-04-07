@@ -203,3 +203,32 @@ EverGrandeCity_Text_BrendanAfterBattle:
 	.string "No regrets, though!\p"
 	.string "Now go crush the ELITE FOUR,\n"
 	.string "{PLAYER}! I'll be rooting for you!$"
+
+@ =============================================
+@ Grinding Nurse — always-rematchable EXP trainer
+@ =============================================
+
+EverGrandeCity_EventScript_GrindingNurse::
+	lock
+	faceplayer
+	cleartrainerflag TRAINER_GRINDING_NURSE
+	trainerbattle_single TRAINER_GRINDING_NURSE, EverGrandeCity_Text_NurseIntro, EverGrandeCity_Text_NurseDefeat, EverGrandeCity_EventScript_NursePostBattle
+	release
+	end
+
+EverGrandeCity_EventScript_NursePostBattle::
+	msgbox EverGrandeCity_Text_NurseReady, MSGBOX_DEFAULT
+	release
+	end
+
+EverGrandeCity_Text_NurseIntro:
+	.string "I'm here to help you train!\n"
+	.string "My BLISSEY team is ready!$"
+
+EverGrandeCity_Text_NurseDefeat:
+	.string "Great work! Your POKéMON are\n"
+	.string "getting stronger!$"
+
+EverGrandeCity_Text_NurseReady:
+	.string "Your POKéMON are looking good!\n"
+	.string "I'm ready whenever you are!$"
