@@ -137,6 +137,17 @@ bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
     case TRAINER_GABBY_AND_TY_6:
     case TRAINER_AMY_AND_LIV_6:
     case TRAINER_CINDY_6:
+    /* Elite Four / Champion rematch-only variants */
+    case TRAINER_SIDNEY_REMATCH:
+    case TRAINER_PHOEBE_REMATCH:
+    case TRAINER_GLACIA_REMATCH:
+    case TRAINER_DRAKE_REMATCH:
+    case TRAINER_WALLACE_REMATCH:
+    case TRAINER_SIDNEY_REMATCH_2:
+    case TRAINER_PHOEBE_REMATCH_2:
+    case TRAINER_GLACIA_REMATCH_2:
+    case TRAINER_DRAKE_REMATCH_2:
+    case TRAINER_WALLACE_REMATCH_2:
     /* Grinding NPC — always-rematchable, not a real route trainer */
     case TRAINER_GRINDING_NURSE:
         return FALSE;
