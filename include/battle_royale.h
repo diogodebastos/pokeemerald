@@ -9,6 +9,7 @@ void BattleRoyale_ResetAllTrainerFlags(void);
 void BattleRoyale_OnTrainerDefeated(u16 trainerIdA, u16 trainerIdB);
 void ShowBattleRoyaleHud(void);
 void RemoveBattleRoyaleHud(void);
+void GetHallOfFameEntries(void);
 
 extern const u8 EventScript_BattleRoyaleVictory[];
 

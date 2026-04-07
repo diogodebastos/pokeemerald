@@ -907,9 +907,19 @@
 #define TRAINER_MAY_EVERGRANDE_TREECKO      898
 #define TRAINER_MAY_EVERGRANDE_TORCHIC      899
 #define TRAINER_GRINDING_NURSE              900
+#define TRAINER_SIDNEY_REMATCH              901
+#define TRAINER_PHOEBE_REMATCH              902
+#define TRAINER_GLACIA_REMATCH              903
+#define TRAINER_DRAKE_REMATCH               904
+#define TRAINER_WALLACE_REMATCH             905
+#define TRAINER_SIDNEY_REMATCH_2            906
+#define TRAINER_PHOEBE_REMATCH_2            907
+#define TRAINER_GLACIA_REMATCH_2            908
+#define TRAINER_DRAKE_REMATCH_2             909
+#define TRAINER_WALLACE_REMATCH_2           910
 
-#define TRAINERS_COUNT                      901
-#define MAX_TRAINERS_COUNT                  901
+#define TRAINERS_COUNT                      911
+#define MAX_TRAINERS_COUNT                  911
 #define TRAINER_BATTLE_ROYALE_COUNT         500
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

@@ -42,8 +42,23 @@ EverGrandeCity_DrakesRoom_EventScript_Drake::
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeech
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
+	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_DrakesRoom_EventScript_DrakeRematch
 	msgbox EverGrandeCity_DrakesRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_DRAKE, EverGrandeCity_DrakesRoom_Text_Defeat
+	goto EverGrandeCity_DrakesRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_DrakesRoom_EventScript_DrakeRematch::
+	msgbox EverGrandeCity_DrakesRoom_Text_RematchIntroSpeech, MSGBOX_DEFAULT
+	special GetHallOfFameEntries
+	compare VAR_RESULT, 5
+	goto_if_ge EverGrandeCity_DrakesRoom_EventScript_DrakeRematch2
+	trainerbattle_no_intro TRAINER_DRAKE_REMATCH, EverGrandeCity_DrakesRoom_Text_Defeat
+	goto EverGrandeCity_DrakesRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_DrakesRoom_EventScript_DrakeRematch2::
+	trainerbattle_no_intro TRAINER_DRAKE_REMATCH_2, EverGrandeCity_DrakesRoom_Text_Defeat
 	goto EverGrandeCity_DrakesRoom_EventScript_Defeated
 	end
 
@@ -73,6 +88,16 @@ EverGrandeCity_DrakesRoom_Text_IntroSpeech:
 	.string "Do you know what is needed?\p"
 	.string "If you don't, then you will never\n"
 	.string "prevail over me!$"
+
+EverGrandeCity_DrakesRoom_Text_RematchIntroSpeech:
+	.string "You've returned to challenge me\n"
+	.string "once again.\p"
+	.string "I see the bond between you and\n"
+	.string "your POKéMON has only deepened.\p"
+	.string "But my DRAGON-type POKéMON have\n"
+	.string "also grown fiercer!\p"
+	.string "Show me the strength of your\n"
+	.string "virtuous heart!$"
 
 EverGrandeCity_DrakesRoom_Text_Defeat:
 	.string "Superb, it should be said.$"

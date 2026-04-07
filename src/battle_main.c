@@ -1968,6 +1968,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     bool8 isFrontierBrain;
     bool8 isGymLeader;
     bool8 isE4Trainer;
+    bool8 isE4TrainerRematch;
+    bool8 isE4TrainerRematch2;
     bool8 isChampion;
     bool8 isGrindingJoyTrainer;
     bool8 isStrongerTrainer;
@@ -1980,11 +1982,12 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     isFrontierBrain = (trainerNum >= TRAINER_ANABEL && trainerNum <= TRAINER_BRANDON);
     isGymLeader = (trainerNum >= TRAINER_ROXANNE_1 && trainerNum <= TRAINER_JUAN_1);
     isE4Trainer = (trainerNum >= TRAINER_SIDNEY && trainerNum <= TRAINER_DRAKE);
-    isChampion = (trainerNum == TRAINER_WALLACE || trainerNum == TRAINER_STEVEN);
+    isE4TrainerRematch = (trainerNum >= TRAINER_SIDNEY_REMATCH && trainerNum <= TRAINER_DRAKE_REMATCH);
+    isE4TrainerRematch2 = (trainerNum >= TRAINER_SIDNEY_REMATCH_2 && trainerNum <= TRAINER_DRAKE_REMATCH_2);
+    isChampion = (trainerNum == TRAINER_WALLACE || trainerNum == TRAINER_WALLACE_REMATCH || trainerNum == TRAINER_WALLACE_REMATCH_2 || trainerNum == TRAINER_STEVEN);
     isGrindingJoyTrainer = (trainerNum == TRAINER_GRINDING_NURSE);
 
-    isStrongerTrainer = isFrontierTrainer || isFrontierBrain || isGymLeader || isE4Trainer || isChampion
-                     || trainerNum == TRAINER_RED || trainerNum == TRAINER_LEAF || isGrindingJoyTrainer;
+    isStrongerTrainer = isFrontierTrainer || isFrontierBrain || isGymLeader || isE4Trainer || isE4TrainerRematch || isE4TrainerRematch2 || isChampion || trainerNum == TRAINER_RED || trainerNum == TRAINER_LEAF || isGrindingJoyTrainer;
 
     playerMaxLevel = GetHighestLevelInPlayerParty();
 
