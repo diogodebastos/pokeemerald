@@ -339,13 +339,13 @@ static void BuildNormalStartMenu(void)
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
 
-    if (IsBattleRoyaleModeActive())
+    if (VarGet(VAR_BATTLE_ROYALE_MODE) != 0)
         AddStartMenuAction(MENU_ACTION_TRACKER);
 
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
     
-    if (!IsBattleRoyaleModeActive())
+    if (VarGet(VAR_BATTLE_ROYALE_MODE) == 0)
         AddStartMenuAction(MENU_ACTION_EXIT);
 
     // AddStartMenuAction(MENU_ACTION_EXIT);
