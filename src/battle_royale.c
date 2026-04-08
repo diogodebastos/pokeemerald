@@ -26,6 +26,8 @@ static void CreateBattleRoyaleHudWindow(void);
 
 static EWRAM_DATA u8 sBattleRoyaleHudWindowId = WINDOW_NONE;
 static EWRAM_DATA bool8 sBattleRoyaleJustCompleted = FALSE;
+static EWRAM_DATA u8 sRematchVariantBits[(TRAINERS_COUNT + 7) / 8] = {0};
+static EWRAM_DATA bool8 sRematchCacheBuilt = FALSE;
 
 static const u8 sText_Left[] = _("LEFT: ");
 static const u8 sText_Deaths[] = _("DIES: ");
@@ -35,20 +37,30 @@ static const u8 sText_Complete[] = _("COMPLETE!");
 #define HUD_HEIGHT 3
 #define HUD_LEFT   19
 
-static bool32 IsRematchVariant(u16 trainerId)
+static void BuildRematchVariantCache(void)
 {
     s32 i;
     s32 j;
+    u16 id;
 
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
         for (j = 1; j < REMATCHES_COUNT; j++)
         {
-            if (gRematchTable[i].trainerIds[j] == trainerId)
-                return TRUE;
+            id = gRematchTable[i].trainerIds[j];
+            if (id != TRAINER_NONE && id < TRAINERS_COUNT)
+                sRematchVariantBits[id / 8] |= 1 << (id % 8);
         }
     }
-    return FALSE;
+    sRematchCacheBuilt = TRUE;
+}
+
+static bool32 IsRematchVariant(u16 trainerId)
+{
+    if (!sRematchCacheBuilt)
+        BuildRematchVariantCache();
+
+    return (sRematchVariantBits[trainerId / 8] >> (trainerId % 8)) & 1;
 }
 
 bool32 IsTrainerEligibleForBattleRoyale(u16 trainerId)
