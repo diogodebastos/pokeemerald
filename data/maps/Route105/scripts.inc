@@ -98,8 +98,8 @@ Route105_EventScript_Dudley::
 	end
 
 Route105_EventScript_Greta::
-	trainerbattle_single TRAINER_GRETA, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
-	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_GRETA, BattleRoyale_Text_GretaIntro, BattleRoyale_Text_GretaDefeated
+	msgbox BattleRoyale_Text_GretaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route104_Text_RegisteredDadInPokenav:

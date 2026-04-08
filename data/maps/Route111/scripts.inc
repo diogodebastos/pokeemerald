@@ -721,6 +721,6 @@ Route111_Text_TrainerHillSign:
 
 
 Route111_EventScript_Tucker::
-	trainerbattle_single TRAINER_TUCKER, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
-	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_TUCKER, BattleRoyale_Text_TuckerIntro, BattleRoyale_Text_TuckerDefeated
+	msgbox BattleRoyale_Text_TuckerPostBattle, MSGBOX_AUTOCLOSE
 	end

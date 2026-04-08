@@ -428,12 +428,7 @@ Route120_Text_RouteSign121:
 	.string "{RIGHT_ARROW} ROUTE 121\n"
 	.string "{LEFT_ARROW} ROUTE 120$"
 
-Route120_EventScript_Anabel::
-	trainerbattle_single TRAINER_ANABEL, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
-	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route120_EventScript_Spenser::
-	trainerbattle_single TRAINER_SPENSER, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
-	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_SPENSER, BattleRoyale_Text_SpenserIntro, BattleRoyale_Text_SpenserDefeated
+	msgbox BattleRoyale_Text_SpenserPostBattle, MSGBOX_AUTOCLOSE
 	end
