@@ -187,6 +187,6 @@ Route121_Text_SafariZoneSign:
 	.string "SAFARI ZONE$"
 
 Route121_EventScript_Lucy::
-	trainerbattle_single TRAINER_LUCY, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
-	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_LUCY, BattleRoyale_Text_LucyIntro, BattleRoyale_Text_LucyDefeated
+	msgbox BattleRoyale_Text_LucyPostBattle, MSGBOX_AUTOCLOSE
 	end

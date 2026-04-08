@@ -988,6 +988,6 @@ Route110_Text_KeepAnEyeOutForRival:
 	.string "See you again, {PLAYER}{KUN}!$"
 
 Route110_EventScript_Noland::
-	trainerbattle_single TRAINER_NOLAND, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
-	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_NOLAND, BattleRoyale_Text_NolandIntro, BattleRoyale_Text_NolandDefeated
+	msgbox BattleRoyale_Text_NolandPostBattle, MSGBOX_AUTOCLOSE
 	end

@@ -609,12 +609,7 @@ Route119_Text_TrainerTipsDecoration:
 	.string "your very own SECRET BASE exactly the\l"
 	.string "way you want.$"
 
-Route119_EventScript_Spenser::
-	trainerbattle_single TRAINER_SPENSER, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
-	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route119_EventScript_Anabel::
-	trainerbattle_single TRAINER_ANABEL, BattleRoyale_Text_GenericIntro, BattleRoyale_Text_GenericDefeated
-	msgbox BattleRoyale_Text_GenericPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_ANABEL, BattleRoyale_Text_AnabelIntro, BattleRoyale_Text_AnabelDefeated
+	msgbox BattleRoyale_Text_AnabelPostBattle, MSGBOX_AUTOCLOSE
 	end
