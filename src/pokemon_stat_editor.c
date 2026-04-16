@@ -1,11 +1,14 @@
 #include "global.h"
 #include "bg.h"
+#include "battle_main.h"
+#include "event_data.h"
 #include "gpu_regs.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
 #include "pokemon_stat_editor.h"
 #include "scanline_effect.h"
 #include "sound.h"
@@ -16,6 +19,7 @@
 #include "text.h"
 #include "text_window.h"
 #include "window.h"
+#include "constants/abilities.h"
 #include "constants/pokemon.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -31,8 +35,21 @@ enum {
 };
 
 enum {
+    CONTEST_EDITOR_COOL,
+    CONTEST_EDITOR_BEAUTY,
+    CONTEST_EDITOR_CUTE,
+    CONTEST_EDITOR_SMART,
+    CONTEST_EDITOR_TOUGH,
+    CONTEST_EDITOR_SHEEN,
+    CONTEST_EDITOR_COUNT
+};
+
+enum {
     MODE_IV,
-    MODE_EV
+    MODE_EV,
+    MODE_MISC,
+    MODE_CONTEST,
+    MODE_COUNT
 };
 
 enum {
@@ -56,12 +73,23 @@ static void DrawStatEditorTitle(u8 taskId);
 static void DrawStatEditorStats(u8 taskId);
 static void MainCB2(void);
 static void VBlankCB(void);
+void ChangeMonNature(void);
+void MakeMonShiny(void);
+void MakeMonNotShiny(void);
 
 static EWRAM_DATA u16 sEditIVs[STAT_EDITOR_COUNT] = {0};
 static EWRAM_DATA u16 sEditEVs[STAT_EDITOR_COUNT] = {0};
+static EWRAM_DATA u16 sEditLevel = 0;
+static EWRAM_DATA u16 sEditFriendship = 0;
+static EWRAM_DATA u8 sEditAbilityNum = 0;
+static EWRAM_DATA u8 sEditNature = 0;
+static EWRAM_DATA u8 sEditIsShiny = 0;
+static EWRAM_DATA u8 sEditContestStats[CONTEST_EDITOR_COUNT] = {0};
 
 static const u8 sText_ModeIVs[] = _("IVs");
 static const u8 sText_ModeEVs[] = _("EVs");
+static const u8 sText_ModeMisc[] = _("MISC");
+static const u8 sText_ModeContest[] = _("CONTEST");
 static const u8 sText_EditStats[] = _("EDIT STATS");
 static const u8 sText_HP[] = _("HP");
 static const u8 sText_Attack[] = _("ATTACK");
@@ -69,9 +97,22 @@ static const u8 sText_Defense[] = _("DEFENSE");
 static const u8 sText_Speed[] = _("SPEED");
 static const u8 sText_SpAtk[] = _("SP.ATK");
 static const u8 sText_SpDef[] = _("SP.DEF");
+static const u8 sText_Level[] = _("LEVEL");
+static const u8 sText_Happiness[] = _("HAPPINESS");
+static const u8 sText_Ability[] = _("ABILITY");
+static const u8 sText_Nature[] = _("NATURE");
+static const u8 sText_Color[] = _("COLOR");
+static const u8 sText_Normal[] = _("NORMAL");
+static const u8 sText_Shiny[] = _("SHINY");
+static const u8 sText_Cool[] = _("COOL");
+static const u8 sText_Beauty[] = _("BEAUTY");
+static const u8 sText_Cute[] = _("CUTE");
+static const u8 sText_Smart[] = _("SMART");
+static const u8 sText_Tough[] = _("TOUGH");
+static const u8 sText_Sheen[] = _("SHEEN");
 static const u8 sText_Space[] = _(" ");
 static const u8 sText_Slash[] = _("/");
-static const u8 sText_Hint[] = _("{DPAD_LEFTRIGHT} Val  L/R:IV/EV  A:OK  B:Back");
+static const u8 sText_Hint[] = _("{DPAD_LEFTRIGHT} Val SEL:Toggle L/R:Tab");
 
 static const u8 *const sStatNames[STAT_EDITOR_COUNT] = {
     [STAT_EDITOR_HP]    = sText_HP,
@@ -98,6 +139,41 @@ static const u8 sEVDataIds[STAT_EDITOR_COUNT] = {
     MON_DATA_SPEED_EV,
     MON_DATA_SPATK_EV,
     MON_DATA_SPDEF_EV,
+};
+
+static const u8 *const sContestNames[CONTEST_EDITOR_COUNT] = {
+    [CONTEST_EDITOR_COOL]   = sText_Cool,
+    [CONTEST_EDITOR_BEAUTY] = sText_Beauty,
+    [CONTEST_EDITOR_CUTE]   = sText_Cute,
+    [CONTEST_EDITOR_SMART]  = sText_Smart,
+    [CONTEST_EDITOR_TOUGH]  = sText_Tough,
+    [CONTEST_EDITOR_SHEEN]  = sText_Sheen,
+};
+
+static const u8 sContestDataIds[CONTEST_EDITOR_COUNT] = {
+    MON_DATA_COOL,
+    MON_DATA_BEAUTY,
+    MON_DATA_CUTE,
+    MON_DATA_SMART,
+    MON_DATA_TOUGH,
+    MON_DATA_SHEEN,
+};
+
+enum {
+    MISC_EDITOR_LEVEL,
+    MISC_EDITOR_HAPPINESS,
+    MISC_EDITOR_ABILITY,
+    MISC_EDITOR_NATURE,
+    MISC_EDITOR_COLOR,
+    MISC_EDITOR_COUNT
+};
+
+static const u8 *const sMiscNames[MISC_EDITOR_COUNT] = {
+    [MISC_EDITOR_LEVEL] = sText_Level,
+    [MISC_EDITOR_HAPPINESS] = sText_Happiness,
+    [MISC_EDITOR_ABILITY] = sText_Ability,
+    [MISC_EDITOR_NATURE] = sText_Nature,
+    [MISC_EDITOR_COLOR] = sText_Color,
 };
 
 static const struct WindowTemplate sStatEditorWinTemplates[] = {
@@ -171,6 +247,149 @@ static u16 GetTotalEditEVs(void)
     return total;
 }
 
+static u8 GetEntryCountForMode(u8 mode)
+{
+    if (mode == MODE_MISC)
+        return MISC_EDITOR_COUNT;
+    if (mode == MODE_CONTEST)
+        return CONTEST_EDITOR_COUNT;
+    return STAT_EDITOR_COUNT;
+}
+
+static u16 GetMiscValue(u8 cursor)
+{
+    switch (cursor)
+    {
+    case MISC_EDITOR_LEVEL:
+        return sEditLevel;
+    case MISC_EDITOR_HAPPINESS:
+        return sEditFriendship;
+    case MISC_EDITOR_ABILITY:
+        return sEditAbilityNum;
+    case MISC_EDITOR_NATURE:
+        return sEditNature;
+    case MISC_EDITOR_COLOR:
+        return sEditIsShiny;
+    default:
+        return sEditFriendship;
+    }
+}
+
+static bool8 SpeciesHasSecondAbility(u16 species)
+{
+    return gSpeciesInfo[species].abilities[1] != ABILITY_NONE
+        && gSpeciesInfo[species].abilities[1] != gSpeciesInfo[species].abilities[0];
+}
+
+static u8 GetAbilityOptionCount(u16 species)
+{
+    return SpeciesHasSecondAbility(species) ? 2 : 1;
+}
+
+static u8 GetClampedAbilityNum(u16 species, u8 abilityNum)
+{
+    if (!SpeciesHasSecondAbility(species))
+        return 0;
+
+    return (abilityNum != 0);
+}
+
+static u8 GetEditedAbility(u16 species)
+{
+    return gSpeciesInfo[species].abilities[GetClampedAbilityNum(species, sEditAbilityNum)];
+}
+
+static u8 CycleAbilityNum(u16 species, u8 abilityNum, s8 direction)
+{
+    u8 optionCount = GetAbilityOptionCount(species);
+
+    if (optionCount <= 1)
+        return 0;
+
+    if (direction > 0)
+        return (abilityNum + 1) % optionCount;
+
+    return (abilityNum == 0) ? optionCount - 1 : abilityNum - 1;
+}
+
+static bool8 IsAbilityCursor(u8 mode, u8 cursor)
+{
+    return mode == MODE_MISC && cursor == MISC_EDITOR_ABILITY;
+}
+
+static bool8 IsNatureCursor(u8 mode, u8 cursor)
+{
+    return mode == MODE_MISC && cursor == MISC_EDITOR_NATURE;
+}
+
+static bool8 IsColorCursor(u8 mode, u8 cursor)
+{
+    return mode == MODE_MISC && cursor == MISC_EDITOR_COLOR;
+}
+
+static u16 GetMiscMaxValue(u8 cursor)
+{
+    switch (cursor)
+    {
+    case MISC_EDITOR_LEVEL:
+        return MAX_LEVEL;
+    case MISC_EDITOR_HAPPINESS:
+        return MAX_FRIENDSHIP;
+    case MISC_EDITOR_ABILITY:
+        return 1;
+    case MISC_EDITOR_NATURE:
+        return NUM_NATURES - 1;
+    case MISC_EDITOR_COLOR:
+        return 1;
+    default:
+        return MAX_FRIENDSHIP;
+    }
+}
+
+static u16 GetMiscMinValue(u8 cursor)
+{
+    switch (cursor)
+    {
+    case MISC_EDITOR_LEVEL:
+        return 1;
+    case MISC_EDITOR_HAPPINESS:
+    default:
+        return 0;
+    }
+}
+
+static void SanitizeEditedValues(u16 species)
+{
+    u16 totalEVs = 0;
+    u8 i;
+
+    for (i = 0; i < STAT_EDITOR_COUNT; i++)
+    {
+        if (sEditIVs[i] > MAX_PER_STAT_IVS)
+            sEditIVs[i] = MAX_PER_STAT_IVS;
+
+        if (sEditEVs[i] > MAX_COMPETITIVE_EVS)
+            sEditEVs[i] = MAX_COMPETITIVE_EVS;
+
+        if (totalEVs + sEditEVs[i] > MAX_TOTAL_EVS)
+            sEditEVs[i] = MAX_TOTAL_EVS - totalEVs;
+
+        totalEVs += sEditEVs[i];
+    }
+
+    if (sEditLevel < 1)
+        sEditLevel = 1;
+    else if (sEditLevel > MAX_LEVEL)
+        sEditLevel = MAX_LEVEL;
+
+    if (sEditFriendship > MAX_FRIENDSHIP)
+        sEditFriendship = MAX_FRIENDSHIP;
+
+    sEditAbilityNum = GetClampedAbilityNum(species, sEditAbilityNum);
+    sEditNature %= NUM_NATURES;
+    sEditIsShiny = (sEditIsShiny != 0);
+}
+
 static void LoadMonStats(u8 slotId)
 {
     struct Pokemon *mon = &gPlayerParty[slotId];
@@ -181,6 +400,15 @@ static void LoadMonStats(u8 slotId)
         sEditIVs[i] = GetMonData(mon, sIVDataIds[i], NULL);
         sEditEVs[i] = GetMonData(mon, sEVDataIds[i], NULL);
     }
+
+    sEditLevel = GetMonData(mon, MON_DATA_LEVEL, NULL);
+    sEditFriendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
+    sEditAbilityNum = GetClampedAbilityNum(GetMonData(mon, MON_DATA_SPECIES, NULL), GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+    sEditNature = GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY, NULL));
+    sEditIsShiny = IsMonShiny(mon);
+
+    for (i = 0; i < CONTEST_EDITOR_COUNT; i++)
+        sEditContestStats[i] = GetMonData(mon, sContestDataIds[i], NULL);
 }
 
 static void ApplyMonStats(u8 slotId)
@@ -188,6 +416,8 @@ static void ApplyMonStats(u8 slotId)
     struct Pokemon *mon = &gPlayerParty[slotId];
     u8 i;
     u32 val;
+    u16 species;
+    u32 exp;
 
     for (i = 0; i < STAT_EDITOR_COUNT; i++)
     {
@@ -196,7 +426,38 @@ static void ApplyMonStats(u8 slotId)
         val = sEditEVs[i];
         SetMonData(mon, sEVDataIds[i], &val);
     }
-    CalculateMonStats(mon);
+
+    species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    SanitizeEditedValues(species);
+    exp = gExperienceTables[gSpeciesInfo[species].growthRate][sEditLevel];
+    SetMonData(mon, MON_DATA_EXP, &exp);
+
+    val = sEditFriendship;
+    SetMonData(mon, MON_DATA_FRIENDSHIP, &val);
+
+    val = sEditAbilityNum;
+    SetMonData(mon, MON_DATA_ABILITY_NUM, &val);
+
+    if (GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY, NULL)) != sEditNature)
+    {
+        gSpecialVar_0x8004 = slotId;
+        gSpecialVar_0x8005 = sEditNature;
+        ChangeMonNature();
+    }
+
+    for (i = 0; i < CONTEST_EDITOR_COUNT; i++)
+    {
+        val = sEditContestStats[i];
+        SetMonData(mon, sContestDataIds[i], &val);
+    }
+
+    gSpecialVar_0x8004 = slotId;
+    if (sEditIsShiny && !IsMonShiny(mon))
+        MakeMonShiny();
+    else if (!sEditIsShiny && IsMonShiny(mon))
+        MakeMonNotShiny();
+    else
+        CalculateMonStats(mon);
 }
 
 #define TILE_TOP_CORNER_L 0x1A2
@@ -250,7 +511,22 @@ static void DrawStatEditorTitle(u8 taskId)
     StringCopy(buf, nickname);
     AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, buf, 8, 1, TEXT_SKIP_DRAW, NULL);
 
-    modeStr = (gTasks[taskId].tMode == MODE_IV) ? sText_ModeIVs : sText_ModeEVs;
+    switch (gTasks[taskId].tMode)
+    {
+    case MODE_IV:
+        modeStr = sText_ModeIVs;
+        break;
+    case MODE_EV:
+        modeStr = sText_ModeEVs;
+        break;
+    case MODE_CONTEST:
+        modeStr = sText_ModeContest;
+        break;
+    case MODE_MISC:
+    default:
+        modeStr = sText_ModeMisc;
+        break;
+    }
 
     if (gTasks[taskId].tMode == MODE_EV)
     {
@@ -267,7 +543,7 @@ static void DrawStatEditorTitle(u8 taskId)
     }
     else
     {
-        AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, modeStr, 168, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, modeStr, 136, 1, TEXT_SKIP_DRAW, NULL);
     }
 
     CopyWindowToVram(WIN_TITLE, COPYWIN_GFX);
@@ -283,10 +559,12 @@ static void DrawStatEditorStats(u8 taskId)
     u16 maxVal;
     u8 cursor = gTasks[taskId].tCursorPos;
     u8 mode = gTasks[taskId].tMode;
+    u8 entryCount = GetEntryCountForMode(mode);
+    u16 species = GetMonData(&gPlayerParty[gTasks[taskId].tSlotId], MON_DATA_SPECIES, NULL);
 
     FillWindowPixelBuffer(WIN_STATS, PIXEL_FILL(1));
 
-    for (i = 0; i < STAT_EDITOR_COUNT; i++)
+    for (i = 0; i < entryCount; i++)
     {
         u8 y = (i * 16) + 1;
 
@@ -298,7 +576,12 @@ static void DrawStatEditorStats(u8 taskId)
         }
 
         /* Stat name */
-        AddTextPrinterParameterized(WIN_STATS, FONT_NORMAL, sStatNames[i], 12, y, TEXT_SKIP_DRAW, NULL);
+        if (mode == MODE_MISC)
+            AddTextPrinterParameterized(WIN_STATS, FONT_NORMAL, sMiscNames[i], 12, y, TEXT_SKIP_DRAW, NULL);
+        else if (mode == MODE_CONTEST)
+            AddTextPrinterParameterized(WIN_STATS, FONT_NORMAL, sContestNames[i], 12, y, TEXT_SKIP_DRAW, NULL);
+        else
+            AddTextPrinterParameterized(WIN_STATS, FONT_NORMAL, sStatNames[i], 12, y, TEXT_SKIP_DRAW, NULL);
 
         /* Value */
         if (mode == MODE_IV)
@@ -306,18 +589,43 @@ static void DrawStatEditorStats(u8 taskId)
             value = sEditIVs[i];
             maxVal = MAX_PER_STAT_IVS;
         }
-        else
+        else if (mode == MODE_EV)
         {
             value = sEditEVs[i];
             maxVal = MAX_COMPETITIVE_EVS;
         }
+        else if (mode == MODE_CONTEST)
+        {
+            value = sEditContestStats[i];
+            maxVal = 255;
+        }
+        else
+        {
+            value = GetMiscValue(i);
+            maxVal = (i == MISC_EDITOR_ABILITY) ? GetAbilityOptionCount(species) : GetMiscMaxValue(i);
+        }
 
-        ConvertIntToDecimalStringN(numBuf, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        ConvertIntToDecimalStringN(maxBuf, maxVal, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        StringCopy(lineBuf, numBuf);
-        StringAppend(lineBuf, sText_Slash);
-        StringAppend(lineBuf, maxBuf);
-        AddTextPrinterParameterized(WIN_STATS, FONT_NORMAL, lineBuf, 140, y, TEXT_SKIP_DRAW, NULL);
+        if (mode == MODE_MISC && i == MISC_EDITOR_ABILITY)
+        {
+            AddTextPrinterParameterized(WIN_STATS, FONT_NORMAL, gAbilityNames[GetEditedAbility(species)], 108, y, TEXT_SKIP_DRAW, NULL);
+        }
+        else if (mode == MODE_MISC && i == MISC_EDITOR_NATURE)
+        {
+            AddTextPrinterParameterized(WIN_STATS, FONT_NORMAL, gNatureNamePointers[sEditNature], 108, y, TEXT_SKIP_DRAW, NULL);
+        }
+        else if (mode == MODE_MISC && i == MISC_EDITOR_COLOR)
+        {
+            AddTextPrinterParameterized(WIN_STATS, FONT_NORMAL, sEditIsShiny ? sText_Shiny : sText_Normal, 108, y, TEXT_SKIP_DRAW, NULL);
+        }
+        else
+        {
+            ConvertIntToDecimalStringN(numBuf, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            ConvertIntToDecimalStringN(maxBuf, maxVal, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            StringCopy(lineBuf, numBuf);
+            StringAppend(lineBuf, sText_Slash);
+            StringAppend(lineBuf, maxBuf);
+            AddTextPrinterParameterized(WIN_STATS, FONT_NORMAL, lineBuf, 140, y, TEXT_SKIP_DRAW, NULL);
+        }
     }
 
     /* Hint line below the stats */
@@ -419,7 +727,10 @@ static void Task_StatEditorProcessInput(u8 taskId)
 {
     u8 cursor = gTasks[taskId].tCursorPos;
     u8 mode = gTasks[taskId].tMode;
+    u8 entryCount = GetEntryCountForMode(mode);
+    u16 species = GetMonData(&gPlayerParty[gTasks[taskId].tSlotId], MON_DATA_SPECIES, NULL);
     s16 value;
+    s16 minVal;
     s16 maxVal;
     bool8 changed = FALSE;
 
@@ -439,11 +750,23 @@ static void Task_StatEditorProcessInput(u8 taskId)
         return;
     }
 
-    /* Toggle IV/EV mode */
-    if (JOY_NEW(L_BUTTON) || JOY_NEW(R_BUTTON))
+    /* Toggle IV/EV/MISC/CONTEST mode */
+    if (JOY_NEW(L_BUTTON))
     {
         PlaySE(SE_SELECT);
-        gTasks[taskId].tMode = (mode == MODE_IV) ? MODE_EV : MODE_IV;
+        gTasks[taskId].tMode = (mode == MODE_IV) ? MODE_COUNT - 1 : mode - 1;
+        if (gTasks[taskId].tCursorPos >= GetEntryCountForMode(gTasks[taskId].tMode))
+            gTasks[taskId].tCursorPos = GetEntryCountForMode(gTasks[taskId].tMode) - 1;
+        DrawStatEditorTitle(taskId);
+        DrawStatEditorStats(taskId);
+        return;
+    }
+    if (JOY_NEW(R_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].tMode = (mode + 1) % MODE_COUNT;
+        if (gTasks[taskId].tCursorPos >= GetEntryCountForMode(gTasks[taskId].tMode))
+            gTasks[taskId].tCursorPos = GetEntryCountForMode(gTasks[taskId].tMode) - 1;
         DrawStatEditorTitle(taskId);
         DrawStatEditorStats(taskId);
         return;
@@ -456,7 +779,7 @@ static void Task_StatEditorProcessInput(u8 taskId)
         if (cursor > 0)
             cursor--;
         else
-            cursor = STAT_EDITOR_COUNT - 1;
+            cursor = entryCount - 1;
         gTasks[taskId].tCursorPos = cursor;
         DrawStatEditorStats(taskId);
         return;
@@ -464,7 +787,7 @@ static void Task_StatEditorProcessInput(u8 taskId)
     if (JOY_REPEAT(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        if (cursor < STAT_EDITOR_COUNT - 1)
+        if (cursor < entryCount - 1)
             cursor++;
         else
             cursor = 0;
@@ -477,45 +800,114 @@ static void Task_StatEditorProcessInput(u8 taskId)
     if (mode == MODE_IV)
     {
         value = (s16)sEditIVs[cursor];
+        minVal = 0;
         maxVal = MAX_PER_STAT_IVS;
+    }
+    else if (mode == MODE_EV)
+    {
+        value = (s16)sEditEVs[cursor];
+        minVal = 0;
+        maxVal = MAX_COMPETITIVE_EVS;
+    }
+    else if (mode == MODE_CONTEST)
+    {
+        value = (s16)sEditContestStats[cursor];
+        minVal = 0;
+        maxVal = 255;
     }
     else
     {
-        value = (s16)sEditEVs[cursor];
-        maxVal = MAX_COMPETITIVE_EVS;
+        value = (s16)GetMiscValue(cursor);
+        minVal = GetMiscMinValue(cursor);
+        if (IsAbilityCursor(mode, cursor))
+            maxVal = GetAbilityOptionCount(species);
+        else
+            maxVal = GetMiscMaxValue(cursor);
     }
 
-    if (JOY_REPEAT(DPAD_RIGHT))
+    if (JOY_NEW(SELECT_BUTTON))
     {
-        s16 step = 1;
-
-        if (JOY_HELD(R_BUTTON))
-            step = 10;
-
-        value += step;
-        if (value > maxVal)
+        if (IsAbilityCursor(mode, cursor))
+        {
+            value = CycleAbilityNum(species, sEditAbilityNum, 1);
+        }
+        else if (IsNatureCursor(mode, cursor))
+        {
+            value = (sEditNature + 1) % NUM_NATURES;
+        }
+        else if (IsColorCursor(mode, cursor))
+        {
+            value = !sEditIsShiny;
+        }
+        else if (value == minVal)
+        {
             value = maxVal;
 
-        /* EV total cap */
-        if (mode == MODE_EV)
+            if (mode == MODE_EV)
+            {
+                u16 total = GetTotalEditEVs() - sEditEVs[cursor] + (u16)value;
+                if (total > MAX_TOTAL_EVS)
+                    value = MAX_TOTAL_EVS - (GetTotalEditEVs() - sEditEVs[cursor]);
+            }
+        }
+        else
         {
-            u16 total = GetTotalEditEVs() - sEditEVs[cursor] + (u16)value;
-            if (total > MAX_TOTAL_EVS)
-                value = MAX_TOTAL_EVS - (GetTotalEditEVs() - sEditEVs[cursor]);
+            value = minVal;
+        }
+
+        changed = TRUE;
+    }
+    else if (JOY_REPEAT(DPAD_RIGHT))
+    {
+        if (IsAbilityCursor(mode, cursor))
+        {
+            value = CycleAbilityNum(species, sEditAbilityNum, 1);
+        }
+        else if (IsNatureCursor(mode, cursor))
+        {
+            value = (sEditNature + 1) % NUM_NATURES;
+        }
+        else if (IsColorCursor(mode, cursor))
+        {
+            value = !sEditIsShiny;
+        }
+        else
+        {
+            value += (mode == MODE_EV) ? 4 : 1;
+            if (value > maxVal)
+                value = maxVal;
+
+            /* EV total cap */
+            if (mode == MODE_EV)
+            {
+                u16 total = GetTotalEditEVs() - sEditEVs[cursor] + (u16)value;
+                if (total > MAX_TOTAL_EVS)
+                    value = MAX_TOTAL_EVS - (GetTotalEditEVs() - sEditEVs[cursor]);
+            }
         }
 
         changed = TRUE;
     }
     else if (JOY_REPEAT(DPAD_LEFT))
     {
-        s16 step = 1;
-
-        if (JOY_HELD(R_BUTTON))
-            step = 10;
-
-        value -= step;
-        if (value < 0)
-            value = 0;
+        if (IsAbilityCursor(mode, cursor))
+        {
+            value = CycleAbilityNum(species, sEditAbilityNum, -1);
+        }
+        else if (IsNatureCursor(mode, cursor))
+        {
+            value = (sEditNature == 0) ? NUM_NATURES - 1 : sEditNature - 1;
+        }
+        else if (IsColorCursor(mode, cursor))
+        {
+            value = !sEditIsShiny;
+        }
+        else
+        {
+            value -= (mode == MODE_EV) ? 4 : 1;
+            if (value < minVal)
+                value = minVal;
+        }
 
         changed = TRUE;
     }
@@ -525,8 +917,20 @@ static void Task_StatEditorProcessInput(u8 taskId)
         PlaySE(SE_SELECT);
         if (mode == MODE_IV)
             sEditIVs[cursor] = (u16)value;
-        else
+        else if (mode == MODE_EV)
             sEditEVs[cursor] = (u16)value;
+        else if (mode == MODE_CONTEST)
+            sEditContestStats[cursor] = (u8)value;
+        else if (cursor == MISC_EDITOR_LEVEL)
+            sEditLevel = (u16)value;
+        else if (cursor == MISC_EDITOR_HAPPINESS)
+            sEditFriendship = (u16)value;
+        else if (cursor == MISC_EDITOR_NATURE)
+            sEditNature = (u8)value;
+        else if (cursor == MISC_EDITOR_COLOR)
+            sEditIsShiny = (u8)value;
+        else
+            sEditAbilityNum = (u8)value;
         DrawStatEditorStats(taskId);
         if (mode == MODE_EV)
             DrawStatEditorTitle(taskId);
